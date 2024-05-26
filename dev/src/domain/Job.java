@@ -1,4 +1,4 @@
-package domain;
+package dev.src.domain;
 
 public class Job {
     String JobName;

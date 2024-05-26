@@ -1,14 +1,9 @@
-package services;
+package dev.src.services;
+import dev.src.domain.*;
 
-import domain.Constraint;
-import domain.EvningShift;
-import domain.MornnigShift;
-import domain.Shift;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,27 +19,27 @@ public class HRManagerShiftService {
     }
 
 
-    public Pair<Integer,List<Shift>> createweekCalenderShift(){
-
-         if(!isItTheTIMEtoAssignmenttToShifts()){
-             //להוסיף פונקציה שתעשה לנו את ההפסה שעדין לא ניתן לשבץ כי רק ימי חמישי ושישי ניתן להרכיב לוח לשבוע הבא
-             return null;
-         }
-         LocalDate today= LocalDate.now();
-         while (today.getDayOfWeek()!=SUNDAY){
-             today=today.plusDays(1);
-         }
-         for (int i=0;i<7;i++){
-             MornnigShift mornnigShift= new MornnigShift(today.plusDays(i));
-             EvningShift evningShift=new EvningShift(today.plusDays(i));
-
-
-         }
-
-
-
-
-    }
+//    public <Integer,List<Shift>> createweekCalenderShift(){
+//
+//         if(!isItTheTIMEtoAssignmenttToShifts()){
+//             //להוסיף פונקציה שתעשה לנו את ההפסה שעדין לא ניתן לשבץ כי רק ימי חמישי ושישי ניתן להרכיב לוח לשבוע הבא
+//             return null;
+//         }
+//         LocalDate today= LocalDate.now();
+//         while (today.getDayOfWeek()!=SUNDAY){
+//             today=today.plusDays(1);
+//         }
+//         for (int i=0;i<7;i++){
+//             MornnigShift mornnigShift= new MornnigShift(today.plusDays(i));
+//             EvningShift evningShift=new EvningShift(today.plusDays(i));
+//
+//
+//         }
+//
+//
+//
+//
+//    }
 
     public boolean isItTheTIMEtoAssignmenttToShifts(){
         LocalDate today= LocalDate.now();

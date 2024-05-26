@@ -1,5 +1,8 @@
+import dev.src.presentation.menus.Login_menu;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Login_menu  LM= new Login_menu();
+
     }
 }

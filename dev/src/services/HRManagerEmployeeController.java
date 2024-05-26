@@ -1,9 +1,5 @@
-package services;
-
-import domain.Employee;
-import domain.Job;
-import domain.ManagmantJob;
-import domain.Managment_Employee;
+package dev.src.services;
+import dev.src.domain.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -34,7 +30,7 @@ public class HRManagerEmployeeController {
         return newJob;
     }
 
-    public Job createManagingJob(String name){
+    public ManagmantJob createManagingJob(String name){
         if(name==null){
             return null;
         }
@@ -268,6 +264,14 @@ public class HRManagerEmployeeController {
             return this.addEmployee(empToUpdateASmaneger);
         }
         return false;
+    }
+
+    public List<Job> getEmployeejobs_temp_database() {
+        return Employeejobs_temp_database;
+    }
+
+    public List<Employee> getEmployees_temp_database() {
+        return Employees_temp_database;
     }
 }
 

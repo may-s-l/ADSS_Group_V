@@ -1,4 +1,4 @@
-package domain;
+package dev.src.domain;
 
 import java.sql.Time;
 import java.time.LocalDate;
