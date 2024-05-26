@@ -15,14 +15,15 @@ public class Login_menu {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-//            switch (choice) {
-//                case 1:
-//
-//                    System.out.print("Enter username: ");
-//                    String username = scanner.nextLine();
-//                    System.out.print("Enter password: ");
-//                    String password = scanner.nextLine();
-//                    if()
+            switch (choice) {
+                case 1:
+
+                    System.out.print("Enter username: ");
+                    String username = scanner.nextLine();
+                    System.out.print("Enter password: ");
+                    String password = scanner.nextLine();
+
+                    if()
 //
 //                    } else {
 //                        System.out.println("Invalid username or password. Please try again.");

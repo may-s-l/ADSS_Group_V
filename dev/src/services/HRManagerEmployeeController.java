@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.JarException;
 
-public class HRManagerEmployeeService {
+public class HRManagerEmployeeController {
     private List<Job> Employeejobs_temp_database;
     private List<Employee> Employees_temp_database;
 

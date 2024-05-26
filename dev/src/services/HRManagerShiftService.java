@@ -16,7 +16,6 @@ import static java.time.DayOfWeek.*;
 
 public class HRManagerShiftService {
 
-    private static int numweek = 0;
     HashMap<Integer,List<Shift>> Shifts_temp_database;
     HashMap<LocalDate,List<Constraint>> Constraint_tamp_database;
     public HRManagerShiftService() {
