@@ -1,0 +1,243 @@
+Index: dev/src/domain/Employee.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.Date;\r\n\r\npublic class Employee {\r\n\r\n    private String name;\r\n    private String bank_accuont;\r\n    private String ID;\r\n    private Job job;\r\n    private Float Salery;\r\n    private LocalDate start_date;\r\n    private LocalDate end_date;\r\n\r\n\r\n\r\n    public Employee(String name, String bank_accuont, String ID, Job job, Float salery, LocalDate start_date) {\r\n        this.name = name;\r\n        this.bank_accuont = bank_accuont;\r\n        this.ID = ID;\r\n        this.job = job;\r\n        this.Salery = salery;\r\n        this.start_date=start_date;\r\n        this.end_date=null;\r\n    }\r\n\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public String getBank_accuont() {\r\n        return bank_accuont;\r\n    }\r\n\r\n    public void setBank_accuont(String bank_accuont) {\r\n        this.bank_accuont = bank_accuont;\r\n    }\r\n\r\n    public String getID() {\r\n        return ID;\r\n    }\r\n\r\n    public void setID(String ID) {\r\n        this.ID = ID;\r\n    }\r\n\r\n    public Job getJob() {\r\n        return job;\r\n    }\r\n\r\n    public void setJob(Job job) {\r\n        this.job = job;\r\n    }\r\n\r\n    public Float getSalery() {\r\n        return Salery;\r\n    }\r\n\r\n    public void setSalery(Float salery) {\r\n        Salery = salery;\r\n    }\r\n\r\n    public LocalDate getStart_date() {\r\n        return start_date;\r\n    }\r\n\r\n    public void setStart_date(LocalDate start_date) {\r\n        this.start_date = start_date;\r\n    }\r\n    public LocalDate getEnd_date() {\r\n        return end_date;\r\n    }\r\n\r\n    public void setEnd_date(LocalDate end_date) {\r\n        this.end_date = end_date;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (o == null || o instanceof Employee) {\r\n            return false;\r\n        }\r\n        Employee othre = (Employee) o;\r\n        return this.getID()==othre.getID();\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/Employee.java b/dev/src/domain/Employee.java
+--- a/dev/src/domain/Employee.java	
++++ b/dev/src/domain/Employee.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ import java.time.LocalDate;
+ import java.util.Date;
+Index: dev/src/domain/ManagmantJob.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\npublic class ManagmantJob extends Job{\r\n\r\n    public ManagmantJob(String jobName) {\r\n        super(jobName);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/ManagmantJob.java b/dev/src/domain/ManagmantJob.java
+--- a/dev/src/domain/ManagmantJob.java	
++++ b/dev/src/domain/ManagmantJob.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ public class ManagmantJob extends Job{
+ 
+Index: dev/src/domain/Managment_Employee.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.Date;\r\n\r\npublic class Managment_Employee extends Employee {\r\n\r\n    public Managment_Employee(String name, String bank_accuont, String ID, ManagmantJob job, Float salery, LocalDate start_date) {\r\n        super(name, bank_accuont, ID,job, salery, start_date);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/Managment_Employee.java b/dev/src/domain/Managment_Employee.java
+--- a/dev/src/domain/Managment_Employee.java	
++++ b/dev/src/domain/Managment_Employee.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ import java.time.LocalDate;
+ import java.util.Date;
+Index: dev/src/domain/EvningShift.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\nimport java.sql.Time;\r\nimport java.time.LocalDate;\r\nimport java.util.Date;\r\n\r\npublic class EvningShift extends Shift {\r\n\r\n    private static Time Ds_time = new Time(14,30,00);\r\n    private static Time De_time=new Time(22,30,00);\r\n\r\n    public EvningShift(LocalDate date){\r\n        super(Ds_time,De_time,date);\r\n    };\r\n\r\n    public EvningShift(Time start_time,Time end_time,LocalDate date){\r\n        super(start_time,end_time,date);\r\n    }\r\n\r\n    public static Time getDs_time() {\r\n        return Ds_time;\r\n    }\r\n\r\n    public static void setDs_time(Time ds_time) {\r\n        Ds_time = ds_time;\r\n    }\r\n\r\n    public static Time getDe_time() {\r\n        return De_time;\r\n    }\r\n\r\n    public static void setDe_time(Time de_time) {\r\n        De_time = de_time;\r\n    }\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/EvningShift.java b/dev/src/domain/EvningShift.java
+--- a/dev/src/domain/EvningShift.java	
++++ b/dev/src/domain/EvningShift.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ import java.sql.Time;
+ import java.time.LocalDate;
+Index: dev/src/domain/Job.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\npublic class Job {\r\n    String JobName;\r\n    public Job(String jobName) {\r\n        this.JobName=jobName;\r\n    }\r\n\r\n    public String getJobName() {\r\n        return JobName;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/Job.java b/dev/src/domain/Job.java
+--- a/dev/src/domain/Job.java	
++++ b/dev/src/domain/Job.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ public class Job {
+     String JobName;
+Index: dev/src/domain/MornnigShift.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\nimport java.sql.Time;\r\nimport java.time.LocalDate;\r\nimport java.util.Date;\r\n\r\npublic class MornnigShift extends Shift {\r\n\r\n    private static Time Ds_time = new Time(6,30,00);\r\n    private static Time De_time=new Time(14,30,00);\r\n\r\n\r\n\r\n    public MornnigShift(LocalDate date){\r\n        super(Ds_time,De_time,date);\r\n    };\r\n\r\n    public MornnigShift(Time start_time,Time end_time,LocalDate date){\r\n        super(start_time,end_time,date);\r\n    }\r\n\r\n    public static Time getDs_time() {\r\n        return Ds_time;\r\n    }\r\n\r\n    public static void setDs_time(Time ds_time) {\r\n        Ds_time = ds_time;\r\n    }\r\n\r\n    public static Time getDe_time() {\r\n        return De_time;\r\n    }\r\n\r\n    public static void setDe_time(Time de_time) {\r\n        De_time = de_time;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/MornnigShift.java b/dev/src/domain/MornnigShift.java
+--- a/dev/src/domain/MornnigShift.java	
++++ b/dev/src/domain/MornnigShift.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ import java.sql.Time;
+ import java.time.LocalDate;
+Index: dev/src/domain/Shift.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\nimport java.sql.Time;\r\nimport java.time.LocalDate;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\nimport java.util.List;\r\n\r\npublic abstract class Shift {\r\n\r\n    private List<Employee> employee_in_shift;\r\n    private Time start_time;\r\n    private Time end_time;\r\n    private LocalDate date;\r\n\r\n    public Shift() {\r\n        this.start_time =null;\r\n        this.end_time=null;\r\n        this.date=null;\r\n        this.employee_in_shift=new ArrayList<Employee>();\r\n\r\n    }\r\n    public Shift(Time start_time,Time end_time,LocalDate date){\r\n        this.date=date;\r\n        this.start_time=start_time;\r\n        this.end_time=end_time;\r\n        this.employee_in_shift=new ArrayList<Employee>();\r\n    }\r\n\r\n    public Time getStart_time() {\r\n        return start_time;\r\n    }\r\n\r\n    public void setStart_time(Time start_time) {\r\n        this.start_time = start_time;\r\n    }\r\n\r\n    public Time getEnd_time() {\r\n        return end_time;\r\n    }\r\n\r\n    public void setEnd_time(Time end_time) {\r\n        this.end_time = end_time;\r\n    }\r\n\r\n    public LocalDate getDate() {\r\n        return date;\r\n    }\r\n\r\n    public void setDate(LocalDate date) {\r\n        this.date = date;\r\n    }\r\n\r\n    public List<Employee> getEmployee_in_shift() {\r\n        return employee_in_shift;\r\n    }\r\n\r\n    public void setEmployee_in_shift(List<Employee> employee_in_shift) {\r\n        this.employee_in_shift = employee_in_shift;\r\n    }\r\n\r\n    public void addEmployee_to_shift(Employee employee){\r\n        this.employee_in_shift.add(employee);\r\n    }\r\n\r\n    public void removeEmployee_from_shift(Employee employee){\r\n        this.employee_in_shift.remove(employee);\r\n    }\r\n\r\n    public void removeEmployee_from_shift(String IDemployee){\r\n        for(Employee emp :this.employee_in_shift){\r\n            if (emp.getID()==IDemployee){\r\n                this.employee_in_shift.remove(emp);\r\n                break;\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/Shift.java b/dev/src/domain/Shift.java
+--- a/dev/src/domain/Shift.java	
++++ b/dev/src/domain/Shift.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ import java.sql.Time;
+ import java.time.LocalDate;
+Index: dev/src/menus/EmployeeMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/menus/EmployeeMenu.java b/dev/src/menus/EmployeeMenu.java
+new file mode 100644
+--- /dev/null	
++++ b/dev/src/menus/EmployeeMenu.java	
+@@ -0,0 +1,29 @@
++package dev.src.menus;
++
++import java.util.Scanner;
++
++public class EmployeeMenu {
++
++    public EmployeeMenu(String ID, services.HRManagerShiftService HRM) {
++        Scanner scanner = new Scanner(System.in);
++        String id=ID;
++        services.HRManagerShiftService hrm=HRM;
++
++
++        while (true) {
++            System.out.println("Welcome to employee menu!");
++            System.out.println("1. View employee details");
++            System.out.println("2. Go to the Constraints menu");
++            System.out.println("3. Show shifts");
++            System.out.print("Enter your choice: ");
++            int choice = scanner.nextInt();
++            scanner.nextLine();
++
++            switch (choice) {
++                case 1:
++                    System.out.println();
++
++            }
++        }
++    }
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"b6af2913-206d-48db-9bfb-6d1c9ead1cba\" name=\"Changes\" comment=\"starting the work\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/dev/src/META-INF/emploee.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/dev/src/META-INF/emploee.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2gEiqGD2ieLv4JbBVCI4vKkiKMK\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"b6af2913-206d-48db-9bfb-6d1c9ead1cba\" name=\"Changes\" comment=\"\" />\r\n      <created>1715269328319</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1715269328319</updated>\r\n      <workItem from=\"1716542772322\" duration=\"343000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00001\" summary=\"starting the work\">\r\n      <created>1716235825714</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1716235825714</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"starting the work\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"starting the work\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -5,16 +5,36 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="starting the work">
++      <change afterPath="$PROJECT_DIR$/dev/src/menus/EmployeeMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2024_23_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2024_23_07__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/dev/src/META-INF/emploee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/META-INF/emploee.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/assignments.iml" beforeDir="false" afterPath="$PROJECT_DIR$/assignments.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/Constraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Constraint.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Employee.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/EvningShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/EvningShift.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Job.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/ManagmantJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/ManagmantJob.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/Managment_Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Managment_Employee.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/MornnigShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/MornnigShift.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/domain/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Shift.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/menus/SystemManagarMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/menus/SystemManagarMenu.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/dev/src/presentation/Login_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/Login_menu.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Class" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="ProjectId" id="2gEiqGD2ieLv4JbBVCI4vKkiKMK" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+@@ -30,6 +50,9 @@
+     "node.js.detected.package.eslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+     "node.js.selected.package.tslint": "(autodetect)",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0",
+     "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
+Index: dev/src/domain/Constraint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain;\r\n\r\nimport java.sql.Time;\r\nimport java.util.Date;\r\nimport java.util.Date;\r\nimport java.time.*;\r\nimport java.util.*;\r\npublic class Constraint {\r\n    private Employee emp;\r\n    private LocalDate date;\r\n    private Time start_t;\r\n    private Time end_t;\r\n\r\n    public Constraint(Employee emp, LocalDate date, Time start_t, Time end_t) {\r\n        this.emp = emp;\r\n        this.date = date;\r\n        this.start_t = start_t;\r\n        this.end_t = end_t;\r\n    }\r\n\r\n    public LocalDate getDate() {\r\n        return date;\r\n    }\r\n\r\n    public void setDate(LocalDate date) {\r\n        this.date = date;\r\n    }\r\n\r\n    public Time getStart_t() {\r\n        return start_t;\r\n    }\r\n\r\n    public void setStart_t(Time start_t) {\r\n        this.start_t = start_t;\r\n    }\r\n\r\n    public Time getEnd_t() {\r\n        return end_t;\r\n    }\r\n\r\n    public void setEnd_t(Time end_t) {\r\n        this.end_t = end_t;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/dev/src/domain/Constraint.java b/dev/src/domain/Constraint.java
+--- a/dev/src/domain/Constraint.java	
++++ b/dev/src/domain/Constraint.java	
+@@ -1,4 +1,4 @@
+-package domain;
++package dev.src.domain;
+ 
+ import java.sql.Time;
+ import java.util.Date;
+Index: assignments.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/assignments.iml b/assignments.iml
+--- a/assignments.iml	
++++ b/assignments.iml	
+@@ -3,6 +3,7 @@
+   <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+     </content>
+     <orderEntry type="inheritedJdk" />
