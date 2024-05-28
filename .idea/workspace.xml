@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="starting the work">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="starting the work-employeeMenu">
+      <change afterPath="$PROJECT_DIR$/dev/src/presentation/menus/ConstraintMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2024_23_07_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2024_23_07__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assignments.iml" beforeDir="false" afterPath="$PROJECT_DIR$/assignments.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/shila/Documents/semester_5/QA/ADSS_Group_V",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -61,6 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715269328319</updated>
       <workItem from="1716542772322" duration="343000" />
+      <workItem from="1716888479613" duration="1597000" />
     </task>
     <task id="LOCAL‎-00001" summary="starting the work">
       <created>1716235825714</created>
@@ -69,7 +72,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1716235825714</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="starting the work-employeeMenu">
+      <created>1716736615655</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716736615655</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,6 +98,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="starting the work" />
-    <option name="LAST_COMMIT_MESSAGE" value="starting the work" />
+    <MESSAGE value="starting the work-employeeMenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="starting the work-employeeMenu" />
   </component>
 </project>
