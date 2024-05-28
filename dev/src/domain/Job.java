@@ -9,4 +9,13 @@ public class Job {
     public String getJobName() {
         return JobName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || ! (o instanceof Job)) {
+            return false;
+        }
+        Job other = (Job) o;
+        return this.getJobName()==other.getJobName();
+    }
 }
