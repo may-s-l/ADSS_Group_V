@@ -2,55 +2,69 @@ package dev.src.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Employee {
-
-    private String name;
-    private String bank_accuont;
+    private static int EmployeeNUM=0;
+    private String Name;
     private String ID;
-    private List<Job> jobs;
-    private Float Salery;
-    private LocalDate start_date;
-    private LocalDate end_date;
-
+    private String Bank_account;
     private Branch Branch;
+    private int employeenum;
+    private TermsOfEmployment terms;
+    private List<Job> Jobs;
 
-
-    public Employee(String name, String bank_accuont, String ID, Job job, Float salery, LocalDate start_date,Branch Branch) {
-        this.name = name;
-        this.bank_accuont = bank_accuont;
+    //constructor- gets all the data for employee
+    public Employee(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms,Job job) {
+        Name = name;
         this.ID = ID;
-        this.jobs = new ArrayList<Job>();
-        this.jobs.add(job);
-        this.Salery = salery;
-        this.Branch =Branch;
-        this.start_date=start_date;
-        this.end_date=null;
+        Bank_account = bank_account;
+        Branch = branch;
+//        this.IS_shift_manager = IS_shift_manager;
+        this.terms = terms;
+        Jobs = new ArrayList<Job>();
+        Jobs.add(job);
+        this.employeenum=EmployeeNUM;
+        EmployeeNUM+=1;
     }
+
+    //constructor- gets all the data for employee
+    public Employee(String name, String ID, String bank_account, Branch branch, double vacationDay, LocalDate start_date, double salary, String jod_type, String Salary_type,Job job) {
+        Name = name;
+        this.ID = ID;
+        Bank_account = bank_account;
+        Branch = branch;
+        this.terms = new TermsOfEmployment(vacationDay,start_date,salary,jod_type,Salary_type);
+        Jobs = new ArrayList<Job>();
+        Jobs.add(job);
+        this.employeenum=EmployeeNUM;
+        EmployeeNUM+=1;
+    }
+
+    //default constructor when is shift false and basic term of employment
+    public Employee(String name, String ID, String bank_account, Branch branch, Job job) {
+        Name = name;
+        this.ID = ID;
+        Bank_account = bank_account;
+        Branch = branch;
+//        this.IS_shift_manager = false;
+        this.terms = new TermsOfEmployment();
+        Jobs = new ArrayList<Job>();
+        Jobs.add(job);
+        this.employeenum=EmployeeNUM;
+        EmployeeNUM+=1;
+    }
+
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public Boolean setName(String name) {
-        if(name==null){
+    public boolean setName(String name) {
+        if (name==null||name.contains("[0-9]+")) {
             return false;
         }
-        this.name = name;
-        return true;
-    }
-
-    public String getBank_accuont() {
-        return bank_accuont;
-    }
-
-    public boolean setBank_accuont(String bank_accuont) {
-        if(bank_accuont==null){
-            return false;
-        }
-        this.bank_accuont = bank_accuont;
+        this.Name = name;
         return true;
     }
 
@@ -59,77 +73,89 @@ public class Employee {
     }
 
     public boolean setID(String ID) {
-        if(ID==null) {
+        if (ID==null||ID.contains("[a-z,A-Z]+")||ID.length()!=6) {
             return false;
         }
         this.ID = ID;
         return true;
     }
 
-    public List<Job> getJobs() {
-        return jobs;
+    public String getBank_account() {
+        return Bank_account;
     }
 
-    public boolean AddJob(Job job) {
-        if(job==null||job instanceof ManagmantJob){
+    public boolean setBank_account(String bank_account) {
+        if (bank_account==null||bank_account.contains("[a-z,A-Z]+")||bank_account.length()!=8) {
             return false;
         }
-        this.jobs.add(job);
+        Bank_account = bank_account;
         return true;
     }
 
-    public boolean RemoveJob(Job job) {
-        if (job == null) {
-            return false;
-        }
-        return this.jobs.remove(job);
-    }
-
-    public Float getSalery() {
-        return Salery;
-    }
-
-    public boolean setSalery(Float salery) {
-        if(salery==null||salery<=0) {
-            return false ;
-        }
-        Salery = salery;
-        return true;
-    }
-
-    public LocalDate getStart_date() {
-        return start_date;
-    }
-
-    public boolean setStart_date(LocalDate start_date) {
-        if(start_date==null){
-            return false;
-        }
-        this.start_date = start_date;
-        return true;
-    }
-    public LocalDate getEnd_date() {
-        return end_date;
-    }
-
-    public boolean setEnd_date(LocalDate end_date) {
-        if(end_date==null||end_date.isBefore(this.start_date)) {
-            return false;
-        }
-        this.end_date = end_date;
-        return true;
-    }
-
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
-
-    public Branch getBranch() {
+    public Branch getBranch_ID() {
         return Branch;
     }
 
-    public void setBranch(Branch branch) {
+    public boolean setBranch_ID(Branch branch) {
+        if (branch==null){
+            return false;
+        }
         Branch = branch;
+        return true;
+    }
+
+//    public boolean isIS_shift_manager() {
+//        return IS_shift_manager;
+//    }
+//
+//    public void setIS_shift_manager(boolean IS_shift_manager) {
+//        this.IS_shift_manager = IS_shift_manager;
+//    }
+
+    public TermsOfEmployment getTerms() {
+        return terms;
+    }
+
+    public boolean setTerms(TermsOfEmployment terms) {
+        if(terms==null){
+            return false;
+        }
+        this.terms = terms;
+        return true;
+    }
+
+    public List<Job> getJobs() {
+        return Jobs;
+    }
+
+    public boolean setJobs(List<Job> jobs) {
+        if(jobs==null||jobs.isEmpty()){
+            return false;
+        }
+        Jobs = jobs;
+        return true;
+    }
+
+    public boolean employeeCanbe(Job job){
+        return this.Jobs.contains(job);
+    }
+
+    public int getEmployeenum() {
+        return employeenum;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "Name='" + Name + '\'' +
+                ", ID='" + ID + '\'' +
+                ", Bank_account='" + Bank_account + '\'' +
+                ", Branch=" + Branch +
+                ", employeenum=" + employeenum +
+                ", terms=" + terms +
+                ", Jobs=" + Jobs +
+                '}';
     }
 
     @Override
@@ -140,6 +166,4 @@ public class Employee {
         Employee othre = (Employee) o;
         return this.getID()==othre.getID();
     }
-
-
 }

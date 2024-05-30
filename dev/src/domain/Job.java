@@ -1,15 +1,26 @@
 package dev.src.domain;
 
 public class Job {
-    String JobName;
-    public Job(String jobName) {
-        this.JobName=jobName;
+    String name;
+
+    public Job(String name) {
+        this.name = name;
     }
 
     public String getJobName() {
-        return JobName;
+        return name;
     }
 
+    public void setJobName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "name='" + name + '\'' +
+                '}';
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || ! (o instanceof Job)) {
@@ -19,3 +30,4 @@ public class Job {
         return this.getJobName()==other.getJobName();
     }
 }
+

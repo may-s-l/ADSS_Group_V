@@ -4,12 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="starting the work-employeeMenu">
-      <change afterPath="$PROJECT_DIR$/dev/src/presentation/menus/ConstraintMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2024_23_07_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2024_23_07__Changes_.xml" beforeDir="false" />
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="menu-constraint and employee">
+      <change afterPath="$PROJECT_DIR$/dev/src/domain/Enums.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/src/domain/ManagerEmployee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/src/domain/MyMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/src/domain/TermsOfEmployment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Branch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/Constraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Constraint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/EvningShift.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/ManagmantJob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/Managment_Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/MornnigShift.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/domain/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/ConstraintMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/ConstraintMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/services/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/services/HRManagerEmployeeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -33,7 +46,9 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="2gEiqGD2ieLv4JbBVCI4vKkiKMK" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -44,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/shila/Documents/semester_5/QA/ADSS_Group_V",
+    "last_opened_file_path": "C:/Users/shila/Documents/semester_6/Analysis and Design of Software Systems/nituz/ADSS_Group_K-313578379_208386227_322658741_322931510_322330010_322521642_322572488_207884701",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -63,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715269328319</updated>
       <workItem from="1716542772322" duration="343000" />
-      <workItem from="1716888479613" duration="1597000" />
+      <workItem from="1716888479613" duration="15270000" />
     </task>
     <task id="LOCAL‎-00001" summary="starting the work">
       <created>1716235825714</created>
@@ -79,7 +94,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1716736615655</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎-00003" summary="menu-constraint and employee">
+      <created>1716921584695</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716921584695</updated>
+    </task>
+    <task id="LOCAL‎-00004" summary="menu-constraint and employee">
+      <created>1716921757051</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716921757051</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +128,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="starting the work" />
     <MESSAGE value="starting the work-employeeMenu" />
-    <option name="LAST_COMMIT_MESSAGE" value="starting the work-employeeMenu" />
+    <MESSAGE value="menu-constraint and employee" />
+    <option name="LAST_COMMIT_MESSAGE" value="menu-constraint and employee" />
   </component>
 </project>

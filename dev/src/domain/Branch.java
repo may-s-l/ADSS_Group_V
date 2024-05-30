@@ -1,26 +1,65 @@
 package dev.src.domain;
 
 public class Branch {
-    String branch_name;
+    private static int numBranch=0;
+    private String name;
+    private String address;
+    private ManagerEmployee managerEmployee;
+    private int branchNum;
 
-    public Branch(String branch_name) {
-        this.branch_name = branch_name;
+    public Branch(String name, String address, ManagerEmployee managerEmployee) {
+        this.name = name;
+        this.address = address;
+        this.managerEmployee = managerEmployee;
+        this.branchNum=numBranch+1;
+        numBranch=+1;
     }
 
-    public String getBranch_name() {
-        return branch_name;
+    public String getName() {
+        return name;
     }
 
-    public void setBranch_name(String branch_name) {
-        this.branch_name = branch_name;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public ManagerEmployee getManagerEmployee() {
+        return managerEmployee;
+    }
+
+    public void setManagerEmployee(ManagerEmployee managerEmployee) {
+        this.managerEmployee = managerEmployee;
+    }
+
+    public int getBranchNum() {
+        return branchNum;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Branch{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", managerEmployee=" + managerEmployee +
+                ", branchNum=" + branchNum +
+             '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null ||!(o instanceof Branch)) {
+        if (o == null || o instanceof Branch) {
             return false;
         }
         Branch othre = (Branch) o;
-        return this.getBranch_name()==othre.getBranch_name();
+        return this.getBranchNum()==othre.getBranchNum();
     }
 }

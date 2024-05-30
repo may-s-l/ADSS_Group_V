@@ -3,10 +3,7 @@ import dev.src.Temp_DataBase;
 import dev.src.domain.*;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarException;
 
 public class HRManagerEmployeeController {
 
@@ -93,7 +90,7 @@ public class HRManagerEmployeeController {
         return NEWemployee;
     }
 
-    public Managment_Employee createManagmentEmployee(String name, String bank_accuont, String ID, Job job, Float salery,Branch branch){
+    public ManagementEmployee createManagmentEmployee(String name, String bank_accuont, String ID, Job job, Float salery, Branch branch){
         //NULL
         if(name==null|name.contains("[0-9]+")|bank_accuont==null|ID==null|job==null|salery==null|branch==null)
             return null;
@@ -119,7 +116,7 @@ public class HRManagerEmployeeController {
         }
         if (job instanceof ManagmantJob) {
             LocalDate today = LocalDate.now();
-            Managment_Employee NEWemployee = new Managment_Employee(name, bank_accuont, ID, (ManagmantJob)job, salery, today,branch);
+            ManagementEmployee NEWemployee = new ManagementEmployee(name, bank_accuont, ID, (ManagmantJob)job, salery, today,branch);
             this.Temp_Database.getEmployees_temp_database().add(NEWemployee);
             return NEWemployee;
         }
@@ -216,7 +213,7 @@ public class HRManagerEmployeeController {
         for (Employee emp:this.Temp_Database.getEmployees_temp_database()){
             if(ID==emp.getID()){
                 empToUpdate=emp;
-                if (empToUpdate instanceof Managment_Employee){
+                if (empToUpdate instanceof ManagementEmployee){
                     if (job instanceof ManagmantJob){
                          return empToUpdate.AddJob(job);
                     }else {
@@ -256,11 +253,11 @@ public class HRManagerEmployeeController {
         }
         Employee empToUpdate =getEmployeeByID(ID);
         if (empToUpdate!=null){
-            if(empToUpdate instanceof Managment_Employee){
+            if(empToUpdate instanceof ManagementEmployee){
                return false;
             }
             this.Temp_Database.getEmployees_temp_database().remove(empToUpdate);
-            Managment_Employee empToUpdateASmaneger =createManagmentEmployee(empToUpdate.getName(), empToUpdate.getBank_accuont(), empToUpdate.getID(), job, empToUpdate.getSalery(),empToUpdate.getBranch());
+            ManagementEmployee empToUpdateASmaneger =createManagmentEmployee(empToUpdate.getName(), empToUpdate.getBank_accuont(), empToUpdate.getID(), job, empToUpdate.getSalery(),empToUpdate.getBranch());
             if (empToUpdateASmaneger==null){
                 return false;
             }
@@ -276,11 +273,11 @@ public class HRManagerEmployeeController {
         }
         Employee empToUpdate =getEmployeeByID(ID);
         if (empToUpdate!=null){
-            if(empToUpdate instanceof Managment_Employee){
+            if(empToUpdate instanceof ManagementEmployee){
                 return false;
             }
             this.Temp_Database.getEmployees_temp_database().remove(empToUpdate);
-            Managment_Employee empToUpdateASmaneger =createManagmentEmployee(empToUpdate.getName(), empToUpdate.getBank_accuont(), empToUpdate.getID(), job, salery,empToUpdate.getBranch());
+            ManagementEmployee empToUpdateASmaneger =createManagmentEmployee(empToUpdate.getName(), empToUpdate.getBank_accuont(), empToUpdate.getID(), job, salery,empToUpdate.getBranch());
             if (empToUpdateASmaneger==null){
                 return false;
             }

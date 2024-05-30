@@ -1,7 +1,6 @@
 package dev.src.presentation.menus;
 import dev.src.domain.Branch;
 import dev.src.domain.Employee;
-import dev.src.domain.ManagmantJob;
 import dev.src.services.HRManagerEmployeeController;
 
 import java.util.Scanner;
@@ -10,7 +9,7 @@ public class Login_menu {
 
     public Login_menu() {
         HRManagerEmployeeController HRMcontroller = new HRManagerEmployeeController();
-        ManagmantJob job = HRMcontroller.createManagingJob("SystemManagar");
+        ManagmantJob job = HRMcontroller.createManagingJob("SystemManager");
         Branch branch = HRMcontroller.createBranch("MAIN Branch SuperLEE");
         HRMcontroller.createManagmentEmployee("ADMIN","012345678910","111111",job,(float)1000000,branch);
         Scanner scanner = new Scanner(System.in);

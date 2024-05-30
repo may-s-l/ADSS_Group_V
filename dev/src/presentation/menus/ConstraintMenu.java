@@ -29,9 +29,13 @@ public class ConstraintMenu {
                 case 1:
                     System.out.print("Enter date: as year/day/month ");
                     LocalDate date = LocalDate.parse(scanner.nextLine());
+
                     System.out.print("Enter the start time: as hh:mm ");
                     String start_t_string=scanner.nextLine() + ":00";
-                    Time start_t = Time.valueOf(start_t_string);
+                    try{
+                        Time start_t = Time.valueOf(start_t_string);
+                    } catch ()
+
                     System.out.print("Enter the end time: as hh:mm ");
                     String end_t_string=scanner.nextLine() + ":00";
                     Time end_t = Time.valueOf(end_t_string);
