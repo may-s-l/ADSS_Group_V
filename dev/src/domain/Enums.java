@@ -8,4 +8,5 @@ public class Enums {
 
     public enum Salary_type {GLOBAL, HOURLY}
 
+
 }

@@ -26,11 +26,11 @@ public class EmployeeMenu {
             switch (choice) {
                 case 1:
                     System.out.println("name: "+ employee1.getName());
-                    System.out.println("bank account: "+employee1.getBank_accuont());
+                    System.out.println("bank account: "+employee1.getBank_account());
                     System.out.println("your ID: "+ employee1.getID());
-                    System.out.println("your work role: "+employee1.getJob());
-                    System.out.println("Salary: "+ employee1.getSalery());
-                    System.out.println("your start of work date: "+employee1.getStart_date());
+                    System.out.println("your work role: "+employee1.getJobs());
+                    System.out.println("Salary: "+ employee1.getTerms().getSalary());
+                    System.out.println("your start of work date: "+employee1.getTerms().getStart_date());
 
                 case 2:
                     ConstraintMenu cons= new ConstraintMenu(employee1);

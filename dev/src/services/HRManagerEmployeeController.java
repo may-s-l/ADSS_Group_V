@@ -20,7 +20,7 @@ public class HRManagerEmployeeController {
             return null;
         }
         for (Branch b: this.Temp_Database.getBranch_temp_database()){
-            if(b.getBranch_name()==name){
+            if(b.getBranchName()==name){
                 return null;
             }
         }

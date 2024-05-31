@@ -10,7 +10,7 @@ public class Employee {
     private String ID;
     private String Bank_account;
     private Branch Branch;
-    private int employeenum;
+    private int employeeNum;
     private TermsOfEmployment terms;
     private List<Job> Jobs;
 
@@ -20,11 +20,10 @@ public class Employee {
         this.ID = ID;
         Bank_account = bank_account;
         Branch = branch;
-//        this.IS_shift_manager = IS_shift_manager;
         this.terms = terms;
         Jobs = new ArrayList<Job>();
         Jobs.add(job);
-        this.employeenum=EmployeeNUM;
+        this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
     }
 
@@ -37,7 +36,7 @@ public class Employee {
         this.terms = new TermsOfEmployment(vacationDay,start_date,salary,jod_type,Salary_type);
         Jobs = new ArrayList<Job>();
         Jobs.add(job);
-        this.employeenum=EmployeeNUM;
+        this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
     }
 
@@ -51,7 +50,7 @@ public class Employee {
         this.terms = new TermsOfEmployment();
         Jobs = new ArrayList<Job>();
         Jobs.add(job);
-        this.employeenum=EmployeeNUM;
+        this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
     }
 
@@ -136,12 +135,20 @@ public class Employee {
         return true;
     }
 
+    public dev.src.domain.Branch getBranch() {
+        return Branch;
+    }
+
+    public void setBranch(dev.src.domain.Branch branch) {
+        Branch = branch;
+    }
+
     public boolean employeeCanbe(Job job){
         return this.Jobs.contains(job);
     }
 
-    public int getEmployeenum() {
-        return employeenum;
+    public int getEmployeeNum() {
+        return employeeNum;
     }
 
 
@@ -152,7 +159,7 @@ public class Employee {
                 ", ID='" + ID + '\'' +
                 ", Bank_account='" + Bank_account + '\'' +
                 ", Branch=" + Branch +
-                ", employeenum=" + employeenum +
+                ", employeeNum=" + employeeNum +
                 ", terms=" + terms +
                 ", Jobs=" + Jobs +
                 '}';

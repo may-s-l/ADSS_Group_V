@@ -15,19 +15,19 @@ public class Branch {
         numBranch=+1;
     }
 
-    public String getName() {
+    public String getBranchName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setBranchName(String name) {
         this.name = name;
     }
 
-    public String getAddress() {
+    public String getBranchAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setBranchAddress(String address) {
         this.address = address;
     }
 
