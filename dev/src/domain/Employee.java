@@ -10,7 +10,7 @@ public class Employee {
     private String ID;
     private String Bank_account;
     private Branch Branch;
-    private int employeeNum;
+    private int employeenum;
     private TermsOfEmployment terms;
     private List<Job> Jobs;
 
@@ -20,23 +20,24 @@ public class Employee {
         this.ID = ID;
         Bank_account = bank_account;
         Branch = branch;
+//        this.IS_shift_manager = IS_shift_manager;
         this.terms = terms;
         Jobs = new ArrayList<Job>();
         Jobs.add(job);
-        this.employeeNum =EmployeeNUM;
+        this.employeenum=EmployeeNUM;
         EmployeeNUM+=1;
     }
 
-    //constructor- gets all the data and terms for employee
-    public Employee(String name, String ID, String bank_account, Branch branch, double vacationDay, LocalDate start_date, double salary, String job_type, String Salary_type,Job job) {
+    //constructor- gets all the data for employee
+    public Employee(String name, String ID, String bank_account, Branch branch, double vacationDay, LocalDate start_date, double salary, String jod_type, String Salary_type,Job job) {
         Name = name;
         this.ID = ID;
         Bank_account = bank_account;
         Branch = branch;
-        this.terms = new TermsOfEmployment(vacationDay,start_date,salary,job_type,Salary_type);
+        this.terms = new TermsOfEmployment(vacationDay,start_date,salary,jod_type,Salary_type);
         Jobs = new ArrayList<Job>();
         Jobs.add(job);
-        this.employeeNum =EmployeeNUM;
+        this.employeenum=EmployeeNUM;
         EmployeeNUM+=1;
     }
 
@@ -46,10 +47,11 @@ public class Employee {
         this.ID = ID;
         Bank_account = bank_account;
         Branch = branch;
+//        this.IS_shift_manager = false;
         this.terms = new TermsOfEmployment();
         Jobs = new ArrayList<Job>();
         Jobs.add(job);
-        this.employeeNum =EmployeeNUM;
+        this.employeenum=EmployeeNUM;
         EmployeeNUM+=1;
     }
 
@@ -90,11 +92,11 @@ public class Employee {
         return true;
     }
 
-    public Branch getBranch() {
+    public Branch getBranch_ID() {
         return Branch;
     }
 
-    public boolean setBranch(Branch branch) {
+    public boolean setBranch_ID(Branch branch) {
         if (branch==null){
             return false;
         }
@@ -102,6 +104,13 @@ public class Employee {
         return true;
     }
 
+//    public boolean isIS_shift_manager() {
+//        return IS_shift_manager;
+//    }
+//
+//    public void setIS_shift_manager(boolean IS_shift_manager) {
+//        this.IS_shift_manager = IS_shift_manager;
+//    }
 
     public TermsOfEmployment getTerms() {
         return terms;
@@ -127,36 +136,23 @@ public class Employee {
         return true;
     }
 
-    public boolean addJob(Job job) {
-        if(job==null){
-            return false;
-        }
-        return Jobs.add(job);
-    }
-
-
     public boolean employeeCanbe(Job job){
         return this.Jobs.contains(job);
     }
 
-    public int getEmployeeNum() {
-        return employeeNum;
+    public int getEmployeenum() {
+        return employeenum;
     }
 
 
     @Override
     public String toString() {
-        return "Name:" + Name +" "+
-                "employeeNum:" + employeeNum;
-    }
-
-    public String toStringfullinfo() {
         return "Employee{" +
                 "Name='" + Name + '\'' +
                 ", ID='" + ID + '\'' +
                 ", Bank_account='" + Bank_account + '\'' +
                 ", Branch=" + Branch +
-                ", employeeNum=" + employeeNum +
+                ", employeenum=" + employeenum +
                 ", terms=" + terms +
                 ", Jobs=" + Jobs +
                 '}';

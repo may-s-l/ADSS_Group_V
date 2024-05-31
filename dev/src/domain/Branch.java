@@ -7,7 +7,6 @@ public class Branch {
     private ManagerEmployee managerEmployee;
     private int branchNum;
 
-
     public Branch(String name, String address, ManagerEmployee managerEmployee) {
         this.name = name;
         this.address = address;
@@ -16,27 +15,19 @@ public class Branch {
         numBranch=+1;
     }
 
-    public Branch(String name, String address) {
-        this.name = name;
-        this.address = address;
-        this.managerEmployee = null;
-        this.branchNum=numBranch+1;
-        numBranch=+1;
-    }
-
-    public String getBranchName() {
+    public String getName() {
         return name;
     }
 
-    public void setBranchName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getBranchAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setBranchAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -60,7 +51,7 @@ public class Branch {
                 ", address='" + address + '\'' +
                 ", managerEmployee=" + managerEmployee +
                 ", branchNum=" + branchNum +
-                '}';
+             '}';
     }
 
     @Override

@@ -32,14 +32,14 @@ public class ConstraintMenu {
 
                     System.out.print("Enter the start time: as hh:mm ");
                     String start_t_string=scanner.nextLine() + ":00";
-//                    try{
-//                        Time start_t = Time.valueOf(start_t_string);
-//                    } catch ()}
+                    try{
+                        Time start_t = Time.valueOf(start_t_string);
+                    } catch ()
 
                     System.out.print("Enter the end time: as hh:mm ");
                     String end_t_string=scanner.nextLine() + ":00";
                     Time end_t = Time.valueOf(end_t_string);
-                //    Constraint new_constrain=new Constraint(employee1, date,start_t,end_t);
+                    Constraint new_constrain=new Constraint(employee1, date,start_t,end_t);
                 case 2:
                     System.out.print("Enter date: as year/day/month ");
                     LocalDate dateToEdit = LocalDate.parse(scanner.nextLine());
