@@ -17,9 +17,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Job: " + name ;
     }
     @Override
     public boolean equals(Object o) {
@@ -30,4 +28,3 @@ public class Job {
         return this.getJobName()==other.getJobName();
     }
 }
-

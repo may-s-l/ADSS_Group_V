@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Shift {
 
     private LocalDate date;
     private Enums.Shift_type st;
-
     private MyMap<Job,List<Employee>> EmployeesInShift;
 
     public Shift(LocalDate date,String shift_type) {
@@ -19,13 +19,17 @@ public class Shift {
         this.st = Enums.Shift_type.valueOf(shift_type);
         this.EmployeesInShift=new MyMap<Job,List<Employee>>();
     }
+    public Shift(LocalDate date, Enums.Shift_type shift_type) {
+        this.date = date;
+        this.st = shift_type;
+        this.EmployeesInShift=new MyMap<Job,List<Employee>>();
+    }
+
 
     public void addEmployeeToShift(Employee employee, Job job) {
-
         if (!EmployeesInShift.containsKey(job)) {
             EmployeesInShift.put(job, new ArrayList<>());
         }
-
         EmployeesInShift.get(job).add(employee);
     }
 
@@ -38,7 +42,20 @@ public class Shift {
         }
     }
 
-
+    public void removeEmployeeFromShift(Employee employee){
+        Set<Job> jobs=this.EmployeesInShift.getKeys();
+        if (jobs!=null){
+            for(Job j:jobs){
+                List<Employee>empl=this.EmployeesInShift.get(j);
+                if(empl.contains(employee)){
+                    empl.remove(employee);
+                }
+                if (empl.isEmpty()) {
+                    EmployeesInShift.remove(j);
+                }
+            }
+        }
+    }
 
 
     public MyMap<Job, List<Employee>> getEmployeesInShift() {
@@ -63,5 +80,13 @@ public class Shift {
 
     public void setSt(Enums.Shift_type st) {
         this.st=st;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Shift:" + st +"\n"+
+                "Employees In Shift: \n" + EmployeesInShift +
+                '\n';
     }
 }

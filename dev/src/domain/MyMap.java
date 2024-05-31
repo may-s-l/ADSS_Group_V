@@ -3,6 +3,7 @@ package dev.src.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MyMap<K, V> {
 
@@ -12,33 +13,34 @@ public class MyMap<K, V> {
         this.map = new HashMap<>();
     }
 
-    // הוספת ערך למיפוי
     public void put(K key, V value) {
         map.put(key, value);
     }
 
-    // קבלת ערך מהמיפוי לפי מפתח
     public V get(K key) {
         return map.get(key);
     }
 
-    // האם המיפוי מכיל את המפתח
     public boolean containsKey(K key) {
         return map.containsKey(key);
     }
 
-    // מחיקת ערך מהמיפוי לפי מפתח
+    public Set<K> getKeys(){return map.keySet();}
+
     public void remove(K key) {
         map.remove(key);
     }
 
-    // קבלת גודל המיפוי
     public int size() {
         return map.size();
     }
 
-    // ריקון המיפוי
     public void clear() {
         map.clear();
+    }
+
+    @Override
+    public String toString() {
+        return  map.toString();
     }
 }
