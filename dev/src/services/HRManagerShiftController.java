@@ -15,8 +15,8 @@ public class HRManagerShiftController {
     }
 
     public Week createWeekforassignment(){
-        Week week= new Week();
-
+        Week week= new Week(LocalDate.now());
+        return week;
     }
 
 
