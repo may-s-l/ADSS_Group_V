@@ -1,24 +1,28 @@
-package dev.src.domain;
+package dev.src.Domain;
+
+import dev.src.Domain.Enums.*;
+import dev.src.Domain.*;
 
 public class Job {
-    String name;
+    private String jobName;
 
-    public Job(String name) {
-        this.name = name;
+    public Job(String jobName) {
+        this.jobName = jobName;
     }
 
     public String getJobName() {
-        return name;
+        return jobName;
     }
 
-    public void setJobName(String name) {
-        this.name = name;
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
     @Override
     public String toString() {
-        return "Job: " + name ;
+        return "Job: "+ this.jobName;
     }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || ! (o instanceof Job)) {

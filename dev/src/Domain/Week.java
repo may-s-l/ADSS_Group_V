@@ -1,14 +1,15 @@
-package dev.src.domain;
+package dev.src.Domain;
 
+import dev.src.Domain.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
-import java.util.*;
+import java.util.Locale;
 
 public class Week {
-    private int WeekNUM;
+    private int weekNUM;
     private LocalDate start_date;
-    private LocalDate End_date;
+    private LocalDate end_date;
     private MyMap<LocalDate,Day> DayInWEEK;
 
     public Week(LocalDate start_date) {
@@ -22,12 +23,12 @@ public class Week {
                 this.DayInWEEK.put(date, d);
                 if (date.getDayOfWeek() == DayOfWeek.TUESDAY) {
                     WeekFields weekFields = WeekFields.of(Locale.getDefault());
-                    this.WeekNUM = date.get(weekFields.weekOfWeekBasedYear());
+                    this.weekNUM = date.get(weekFields.weekOfWeekBasedYear());
                 }
             } else {
                 d = new Day(true, date);
                 this.DayInWEEK.put(date, d);
-                this.End_date = date;
+                this.end_date = date;
             }
             date = date.plusDays(1);
         }
@@ -39,10 +40,15 @@ public class Week {
 
     @Override
     public String toString() {
-        return
-                "Week number: " + WeekNUM + " " +start_date + "-" + End_date +
-                "\n" + DayInWEEK ;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Week number: ").append(weekNUM)
+                .append(" ").append(start_date).append(" - ").append(end_date).append("\n");
+
+        for (LocalDate date : DayInWEEK.getKeys()) {
+            sb.append(DayInWEEK.get(date)).append("\n");
+        }
+
+        return sb.toString();
     }
 }
-
 

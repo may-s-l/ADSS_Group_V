@@ -1,4 +1,8 @@
-package dev.src.domain;
+package dev.src.Domain;
+
+import dev.src.Domain.*;
+
+import dev.src.Domain.Enums.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -18,8 +22,8 @@ public class Day {
         dayOfWeek=date.getDayOfWeek();
         if (!isdayofrest){
             shiftsInDay= new Shift[2];
-            shiftsInDay[0]=new Shift(date,Enums.Shift_type.MORNING);
-            shiftsInDay[1]=new Shift(date,Enums.Shift_type.EVENING);
+            shiftsInDay[0]=new MorningShift(date);
+            shiftsInDay[1]=new EveningShift(date);
         }
         else {
             shiftsInDay=null;
@@ -65,10 +69,11 @@ public class Day {
     public String toString() {
         if(this.isdayofrest){
             return "Date: "+ this.Date+"\n"+
-                    "Day of Week : "+this.dayOfWeek+"\n---Day off---";
+                    "Day of Week : "+this.dayOfWeek+"\n---Day off---\n";
         }
-        return "Date: "+ this.Date+"\n"+
+        return  "Date: "+ this.Date+"\n"+
                 "Day of Week : "+this.dayOfWeek+"\n"
-                +this.shiftsInDay;
+                +this.shiftsInDay[0].toString()+"\n"+
+                this.shiftsInDay[1].toString()+"\n";
     }
 }

@@ -1,9 +1,9 @@
-package dev.src;
+package dev.src.Data;
 
-import dev.src.domain.Branch;
-import dev.src.domain.Employee;
-import dev.src.domain.Job;
-import dev.src.domain.*;
+import dev.src.Domain.Branch;
+import dev.src.Domain.Employee;
+import dev.src.Domain.Job;
+import dev.src.Domain.*;
 
 import java.util.ArrayList;
 import java.util.List;

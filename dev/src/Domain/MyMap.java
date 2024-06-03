@@ -1,11 +1,10 @@
-package dev.src.domain;
+package dev.src.Domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MyMap<K, V> {
+public class  MyMap<K, V> {
 
     private final Map<K, V> map;
 
@@ -41,6 +40,7 @@ public class MyMap<K, V> {
 
     @Override
     public String toString() {
-        return  map.toString();
+        return  map.toString().replace("="," :").replace("{","").replace("}","");
     }
+
 }

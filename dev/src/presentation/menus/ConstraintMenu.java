@@ -1,10 +1,11 @@
 package dev.src.presentation.menus;
 
-import dev.src.domain.Constraint;
-import dev.src.domain.Employee;
-import dev.src.domain.Enums;
-import dev.src.presentation.menus.EmployeeMenu;
-import dev.src.services.EmployeeConstraintService;
+import dev.src.Controllers.*;
+import dev.src.Data.*;
+import dev.src.Domain.*;
+import dev.src.Domain.Enums.*;
+
+
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConstraintMenu {
-    private static final EmployeeConstraintService employeeConstraintService=new EmployeeConstraintService();
+    private static final EmployeeConstraintController employeeConstraintService=new EmployeeConstraintController();
 
     public ConstraintMenu(Employee employee){
 
@@ -72,13 +73,13 @@ public class ConstraintMenu {
         System.out.print("Enter type of shift: ");
         String shiftType=scanner.nextLine().toUpperCase();
         try {
-            Enums.Shift_type shift_type=Enums.Shift_type.valueOf(shiftType);
+            ShiftType shift_type=ShiftType.valueOf(shiftType);
         } catch (IllegalArgumentException e) {
             System.out.print("you provide a wrong type of shift. ");
             addConstraintToEmployee(employee);
             return;
         }
-        Enums.Shift_type shift_type=Enums.Shift_type.valueOf(shiftType);
+        ShiftType shift_type=ShiftType.valueOf(shiftType);
         if (employeeConstraintService.isConstraintExist(employee,date,shift_type)){
             System.out.println("constrain already exit");
             new ConstraintMenu(employee);
@@ -99,15 +100,15 @@ public class ConstraintMenu {
         }
         LocalDate date = LocalDate.parse(scanner.nextLine());
         System.out.print("Enter type of shift: ");
-        String shiftType=scanner.nextLine().toUpperCase();
+        String shift_type=scanner.nextLine().toUpperCase();
         try {
-            Enums.Shift_type shift_type=Enums.Shift_type.valueOf(shiftType);
+            ShiftType shiftType=ShiftType.valueOf(shift_type);
         } catch (IllegalArgumentException e) {
             System.out.print("you provide a wrong type of shift. ");
             addConstraintToEmployee(employee);
         }
-        Enums.Shift_type shift_type=Enums.Shift_type.valueOf(shiftType);
-        if (employeeConstraintService.isConstraintExist(employee,date,shift_type)){
+        ShiftType shiftType=ShiftType.valueOf(shift_type);
+        if (employeeConstraintService.isConstraintExist(employee,date,shiftType)){
             employeeConstraintService.deleteConstrain(employee,date,shift_type);
         } else {
             System.out.println("constrain not exit");

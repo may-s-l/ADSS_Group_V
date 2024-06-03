@@ -1,24 +1,26 @@
-package dev.src.domain;
+package dev.src.Domain;
+
+import Domain.Enums.JobType;
+import Domain.Enums.SalaryType;
 
 import java.time.LocalDate;
 
 public class TermsOfEmployment {
 
-
     private double vacationDay;
     private LocalDate Start_date;
     private LocalDate End_date;
     private double Salary;
-    private Enums.job_type jt;
-    private Enums.Salary_type st;
+    private JobType jt;
+    private SalaryType st;
 
     public TermsOfEmployment(double vacationday, LocalDate start_date, double salary, String jt, String st) {
         this.vacationDay = vacationday;
         Start_date = start_date;
         End_date = null;
         Salary = salary;
-        this.jt = Enums.job_type.valueOf(jt);
-        this.st = Enums.Salary_type.valueOf(st);
+        this.jt = JobType.valueOf(jt);
+        this.st = SalaryType.valueOf(st);
     }
 
     //לראות איך מכניסים את זה לקובץ קונפיגורציה
@@ -27,8 +29,8 @@ public class TermsOfEmployment {
         Start_date = LocalDate.now();
         End_date = null;
         Salary = 30;
-        this.jt = Enums.job_type.PART;
-        this.st = Enums.Salary_type.HOURLY;
+        this.jt = JobType.PART;
+        this.st = SalaryType.HOURLY;
     }
 
     public double getVacationDay() {
@@ -63,31 +65,30 @@ public class TermsOfEmployment {
         Salary = salary;
     }
 
-    public Enums.job_type getJt() {
+    public JobType getJt() {
         return jt;
     }
 
     public void setJt(String jt) {
-        this.jt = Enums.job_type.valueOf(jt);
+        this.jt = JobType.valueOf(jt);
     }
 
-    public Enums.Salary_type getSt() {
+    public SalaryType getSt() {
         return st;
     }
 
     public void setSt(String st) {
-        this.st = Enums.Salary_type.valueOf(st);
+        this.st =SalaryType.valueOf(st);
     }
 
     @Override
     public String toString() {
-        return "TermsOfEmployment{" +
-                "vacationday=" + vacationDay +
-                ", Start_date=" + Start_date +
-                ", End_date=" + End_date +
-                ", Salary=" + Salary +
-                ", job type=" + jt +
-                ", salary type=" + st +
-                '}';
+        return "Terms Of Employment " +
+                "vacation day:" + vacationDay +
+                "job type: " + jt + ", salary type=" + st+ "\n"+
+                "Start date: " + Start_date + "\n"+
+                "End date: " + End_date +
+                "Salary: " + Salary ;
     }
+
 }

@@ -1,17 +1,28 @@
-package dev.src.domain;
+package dev.src.Domain;
+
+import dev.src.Domain.*;
+import dev.src.Domain.Enums.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Branch {
     private static int numBranch=0;
     private String name;
     private String address;
     private ManagerEmployee managerEmployee;
+    //האם צריך לתמוך בסניף שנסגר ואיך ןמה לעשות עם עובדי הבניף האם למנהל כוח אדם בסניף אחר יש הרשאה לסניפים אחרים אם לא האם זה אומר שעובד לא יעבור בן סניפים
+    private List<Employee> EmployeesInBranch;
     private int branchNum;
+
+
 
     public Branch(String name, String address, ManagerEmployee managerEmployee) {
         this.name = name;
         this.address = address;
         this.managerEmployee = managerEmployee;
         this.branchNum=numBranch+1;
+        this.EmployeesInBranch=new ArrayList<Employee>();
         numBranch=+1;
     }
 
@@ -20,6 +31,7 @@ public class Branch {
         this.address = address;
         this.managerEmployee = null;
         this.branchNum=numBranch+1;
+        this.EmployeesInBranch=new ArrayList<Employee>();
         numBranch=+1;
     }
 
@@ -27,24 +39,28 @@ public class Branch {
         return name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public void setBranchName(String name) {
         this.name = name;
     }
 
-    public String getAddress() {
+    public String getBranchAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setBranchAddress(String address) {
         this.address = address;
     }
 
     public ManagerEmployee getManagerEmployee() {
         return managerEmployee;
+    }
+
+    public List<Employee> getEmployeesInBranch() {
+        return EmployeesInBranch;
+    }
+
+    public void setEmployeesInBranch(List<Employee> employeesInBranch) {
+        EmployeesInBranch = employeesInBranch;
     }
 
     public void setManagerEmployee(ManagerEmployee managerEmployee) {
@@ -58,12 +74,10 @@ public class Branch {
 
     @Override
     public String toString() {
-        return "Branch{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", managerEmployee=" + managerEmployee +
-                ", branchNum=" + branchNum +
-                 '}';
+        return "Branch name: " + name + '\n' +
+                "address: " + address + '\n' +
+                "branch Num: " + branchNum +'\n' +
+                "managerEmployee: " + managerEmployee ;
     }
 
     @Override

@@ -1,13 +1,16 @@
-package dev.src.domain;
+package dev.src.Domain;
 
-import java.time.*;
+import dev.src.Domain.Enums.*;
+import dev.src.Domain.*;
+
+import java.time.LocalDate;
 
 public class Constraint {
     private Employee emp;
     private LocalDate date;
-    private Enums.Shift_type shiftType;
+    private Domain.Enums.ShiftType shiftType;
 
-    public Constraint(Employee emp, LocalDate date, Enums.Shift_type shiftType) {
+    public Constraint(Employee emp, LocalDate date, Domain.Enums.ShiftType shiftType) {
         this.emp = emp;
         this.date = date;
         this.shiftType=shiftType;
@@ -21,11 +24,11 @@ public class Constraint {
         this.date = date;
     }
 
-    public Enums.Shift_type getShiftType() {
+    public Domain.Enums.ShiftType getShiftType() {
         return shiftType;
     }
 
-    public void setShiftType(Enums.Shift_type shiftType) {
+    public void setShiftType(Domain.Enums.ShiftType shiftType) {
         this.shiftType = shiftType;
     }
     @Override
