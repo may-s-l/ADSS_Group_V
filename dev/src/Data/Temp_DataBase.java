@@ -12,12 +12,12 @@ public class Temp_DataBase {
 
     private List<Branch> Branch_temp_database;
     private List<Job> Employeejobs_temp_database;
-    private List<Employee> Employees_temp_database;
+    private MyMap<String, Employee> Employees_temp_database;
     private MyMap<Employee,List<Constraint>> Constraint_temp_database;
 
 
     public Temp_DataBase() {
-        this.Employees_temp_database = new ArrayList<Employee>();
+        this.Employees_temp_database = new MyMap<String, Employee>();
         this.Employeejobs_temp_database=new ArrayList<Job>();
         this.Branch_temp_database = new ArrayList<Branch>();
         this.Constraint_temp_database = new MyMap<Employee, List<Constraint>>();
@@ -39,11 +39,11 @@ public class Temp_DataBase {
         Employeejobs_temp_database = employeejobs_temp_database;
     }
 
-    public List<Employee> getEmployees_temp_database() {
+    public MyMap<String, Employee> getEmployees_temp_database() {
         return Employees_temp_database;
     }
 
-    public void setEmployees_temp_database(List<Employee> employees_temp_database) {
+    public void setEmployees_temp_database(MyMap<String, Employee> employees_temp_database) {
         Employees_temp_database = employees_temp_database;
     }
 

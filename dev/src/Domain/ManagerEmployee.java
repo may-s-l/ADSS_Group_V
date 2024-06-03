@@ -1,11 +1,8 @@
 package dev.src.Domain;
-import dev.src.Domain.*;
-import dev.src.Domain.Enums.*;
-
 
 import java.time.LocalDate;
 
-public class ManagerEmployee extends Domain.Employee {
+public class ManagerEmployee extends Employee {
     public ManagerEmployee(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms, ManagementJob job) {
         super(name, ID, bank_account, branch, terms,(Job) job);
     }

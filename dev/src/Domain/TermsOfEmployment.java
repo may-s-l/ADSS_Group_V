@@ -1,7 +1,6 @@
 package dev.src.Domain;
 
-import Domain.Enums.JobType;
-import Domain.Enums.SalaryType;
+import dev.src.Domain.Enums.*;
 
 import java.time.LocalDate;
 

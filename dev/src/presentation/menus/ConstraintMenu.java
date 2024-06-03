@@ -109,7 +109,7 @@ public class ConstraintMenu {
         }
         ShiftType shiftType=ShiftType.valueOf(shift_type);
         if (employeeConstraintService.isConstraintExist(employee,date,shiftType)){
-            employeeConstraintService.deleteConstrain(employee,date,shift_type);
+            employeeConstraintService.deleteConstrain(employee,date,shiftType);
         } else {
             System.out.println("constrain not exit");
             new ConstraintMenu(employee);

@@ -1,6 +1,5 @@
 package dev.src.Domain;
 
-import dev.src.Domain.*;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,7 +8,8 @@ import java.util.Set;
 
 public abstract class Shift {
 
-    private MyMap<Job,List<Domain.Employee>> employee_in_shift;
+    private MyMap<Job,List<Employee>> employee_in_shift;
+    public MyMap<Job,Integer> NumberofWorkersPerPosition;
     private Time start_time;
     private Time end_time;
     private LocalDate date;
@@ -18,14 +18,14 @@ public abstract class Shift {
         this.start_time =null;
         this.end_time=null;
         this.date=null;
-        this.employee_in_shift=new MyMap<Job,List<Domain.Employee>>();
+        this.employee_in_shift=new MyMap<Job,List<Employee>>();
 
     }
     public Shift(Time start_time,Time end_time,LocalDate date){
         this.date=date;
         this.start_time=start_time;
         this.end_time=end_time;
-        this.employee_in_shift=new MyMap<Job,List<Domain.Employee>>();
+
     }
 
     public Time getStart_time() {
@@ -52,23 +52,23 @@ public abstract class Shift {
         this.date = date;
     }
 
-    public MyMap<Job,List<Domain.Employee>> getEmployee_in_shift() {
+    public MyMap<Job,List<Employee>> getEmployee_in_shift() {
         return employee_in_shift;
     }
 
-    public void setEmployee_in_shift(MyMap<Job,List<Domain.Employee>> employee_in_shift) {
+    public void setEmployee_in_shift(MyMap<Job,List<Employee>> employee_in_shift) {
         this.employee_in_shift = employee_in_shift;
     }
 
 
-    public void addEmployeeToShift(Domain.Employee employee, Job job) {
+    public void addEmployeeToShift(Employee employee, Job job) {
         if (!employee_in_shift.containsKey(job)) {
             employee_in_shift.put(job, new ArrayList<>());
         }
         employee_in_shift.get(job).add(employee);
     }
 
-    public void removeEmployeeFromShift(Domain.Employee employee, Job job) {
+    public void removeEmployeeFromShift(Employee employee, Job job) {
         if (employee_in_shift.containsKey(job)) {
             employee_in_shift.get(job).remove(employee);
             if (employee_in_shift.get(job).isEmpty()) {
@@ -77,11 +77,11 @@ public abstract class Shift {
         }
     }
 
-    public void removeEmployeeFromShift(Domain.Employee employee){
+    public void removeEmployeeFromShift(Employee employee){
         Set<Job> jobs=this.employee_in_shift.getKeys();
         if (jobs!=null){
             for(Job j:jobs){
-                List<Domain.Employee>empl=this.employee_in_shift.get(j);
+                List<Employee>empl=this.employee_in_shift.get(j);
                 if(empl.contains(employee)){
                     empl.remove(employee);
                 }
@@ -100,7 +100,7 @@ public abstract class Shift {
         if(jobs.contains(job)){
             return false;
         }
-        List<Domain.Employee>employeeList=new ArrayList<Domain.Employee>();
+        List<Employee>employeeList=new ArrayList<Employee>();
         employee_in_shift.put(job,employeeList);
         return true;
     }

@@ -8,9 +8,9 @@ import java.time.LocalDate;
 public class Constraint {
     private Employee emp;
     private LocalDate date;
-    private Domain.Enums.ShiftType shiftType;
+    private ShiftType shiftType;
 
-    public Constraint(Employee emp, LocalDate date, Domain.Enums.ShiftType shiftType) {
+    public Constraint(Employee emp, LocalDate date, ShiftType shiftType) {
         this.emp = emp;
         this.date = date;
         this.shiftType=shiftType;
@@ -24,11 +24,11 @@ public class Constraint {
         this.date = date;
     }
 
-    public Domain.Enums.ShiftType getShiftType() {
+    public ShiftType getShiftType() {
         return shiftType;
     }
 
-    public void setShiftType(Domain.Enums.ShiftType shiftType) {
+    public void setShiftType(ShiftType shiftType) {
         this.shiftType = shiftType;
     }
     @Override
