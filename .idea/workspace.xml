@@ -5,23 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="menu-constraint and employee">
-      <change afterPath="$PROJECT_DIR$/dev/src/domain/Enums.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/domain/ManagerEmployee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/domain/MyMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/domain/TermsOfEmployment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Temp_DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Temp_DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/domain/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Branch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/Constraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Constraint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/EvningShift.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Job.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/ManagmantJob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/Managment_Employee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/MornnigShift.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/domain/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/domain/Shift.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/ConstraintMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/ConstraintMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/services/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/services/HRManagerEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/services/HRManagerShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/services/HRManagerShiftController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +57,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

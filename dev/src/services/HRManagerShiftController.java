@@ -28,4 +28,8 @@ public class HRManagerShiftController {
         }
         return false;
     }
+
+    public static void printShiftSchedule(LocalDate startDate, LocalDate endDate, Employee employee){
+
+    }
 }

@@ -15,6 +15,18 @@ public class Branch {
         numBranch=+1;
     }
 
+    public Branch(String name, String address) {
+        this.name = name;
+        this.address = address;
+        this.managerEmployee = null;
+        this.branchNum=numBranch+1;
+        numBranch=+1;
+    }
+
+    public String getBranchName() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }
@@ -51,7 +63,7 @@ public class Branch {
                 ", address='" + address + '\'' +
                 ", managerEmployee=" + managerEmployee +
                 ", branchNum=" + branchNum +
-             '}';
+                 '}';
     }
 
     @Override

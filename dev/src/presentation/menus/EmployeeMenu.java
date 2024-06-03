@@ -2,16 +2,15 @@ package dev.src.presentation.menus;
 
 import dev.src.domain.Employee;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.Scanner;
 
 public class EmployeeMenu {
 
-    public EmployeeMenu(String ID, List<Employee> employees, Employee employee) {
+    public EmployeeMenu(Employee emp) {
         Scanner scanner = new Scanner(System.in);
-        String id=ID;
-        List<Employee> employeeList=employees;
-        Employee employee1=employee;
+        Employee employee=emp;
 
 
         while (true) {
@@ -25,15 +24,11 @@ public class EmployeeMenu {
 
             switch (choice) {
                 case 1:
-                    System.out.println("name: "+ employee1.getName());
-                    System.out.println("bank account: "+employee1.getBank_accuont());
-                    System.out.println("your ID: "+ employee1.getID());
-                    System.out.println("your work role: "+employee1.getJob());
-                    System.out.println("Salary: "+ employee1.getSalery());
-                    System.out.println("your start of work date: "+employee1.getStart_date());
+                    employee.toString();
+                    new EmployeeMenu(employee);
 
                 case 2:
-                    ConstraintMenu cons= new ConstraintMenu(employee1);
+                    new ConstraintMenu(employee);
 
                 case 3:
 
@@ -41,5 +36,29 @@ public class EmployeeMenu {
                     System.out.println("Invalid choice. Please try again.");
             }
         }
+    }
+
+    public static void ShowMenu(Employee employee){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the start date of the shift you want: as year/day/month ");
+        LocalDate startDate;
+        try {
+            startDate = LocalDate.parse(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println("you provide invalid date. ");
+            new EmployeeMenu(employee);
+            return;
+        }
+        System.out.println("Enter the end date of the shift you want: as year/day/month ");
+        LocalDate endDate;
+        try {
+            endDate = LocalDate.parse(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println("you provide invalid date. ");
+            new EmployeeMenu(employee);
+            return;
+        }
+
+
     }
 }

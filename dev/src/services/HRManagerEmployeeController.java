@@ -15,16 +15,16 @@ public class HRManagerEmployeeController {
     public void HRManagerEmployeeService() {
         this.Temp_Database=new Temp_DataBase();
     }
-    public Branch createBranch(String name){
+    public Branch createBranch(String name, String address){
         if(name==null){
             return null;
         }
         for (Branch b: this.Temp_Database.getBranch_temp_database()){
-            if(b.getBranch_name()==name){
+            if(b.getName()==name){
                 return null;
             }
         }
-        Branch newbranch=new Branch(name);
+        Branch newbranch=new Branch(name, address);
         this.Temp_Database.getBranch_temp_database().add(newbranch);
         return newbranch;
     }
