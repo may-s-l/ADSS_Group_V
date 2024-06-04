@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConstraintMenu {
-    private static final EmployeeConstraintController employeeConstraintService=new EmployeeConstraintController();
+    private static final EmployeeConstraintController employeeConstraintController=new EmployeeConstraintController();
 
-    public ConstraintMenu(Employee employee){
+    public ConstraintMenu(String employeeID){
 
         Scanner scanner = new Scanner(System.in);
-        Employee employee1=employee;
+        String id=employeeID;
 
 
         while (true) {
@@ -33,7 +33,12 @@ public class ConstraintMenu {
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    addConstraintToEmployee(employee);
+                    Scanner scanner1 = new Scanner(System.in);
+                    System.out.print("please Enter date and shift type: as year/day/month, MORNING,EVENING");
+                    String input = scanner.nextLine();
+                    String[] details = input.split(", ");
+
+
                 case 2:
                     deleteConstraint(employee);
                 case 3:
@@ -45,7 +50,7 @@ public class ConstraintMenu {
     }
     public static void addConstraintToEmployee(Employee employee){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter date: as year/day/month ");
+        System.out.print("Enter date: as year/day/month");
         LocalDate date;
         try {
             date = LocalDate.parse(scanner.nextLine());

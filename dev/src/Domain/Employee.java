@@ -15,6 +15,7 @@ public class Employee {
     private int employeeNum;
     private TermsOfEmployment terms;
     private List<Job> Jobs;
+    private MyMap<LocalDate, Constraint> constraintMyMap;
 
     //constructor- gets all the data for employee
     public Employee(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms,Job job) {
@@ -27,6 +28,7 @@ public class Employee {
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
+        constraintMyMap=null;
     }
 
     //constructor- gets all the data and terms for employee
@@ -40,6 +42,7 @@ public class Employee {
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
+        constraintMyMap=null;
     }
 
     //default constructor when is shift false and basic term of employment
@@ -53,6 +56,7 @@ public class Employee {
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
+        constraintMyMap=null;
     }
 
 
@@ -145,6 +149,17 @@ public class Employee {
         return employeeNum;
     }
 
+    public MyMap<LocalDate, Constraint> getConstraintMyMap() {
+        return constraintMyMap;
+    }
+
+    public void setConstraintMyMap(MyMap<LocalDate, Constraint> constraintMyMap) {
+        this.constraintMyMap = constraintMyMap;
+    }
+
+    public Constraint getConstraintByDate(LocalDate date) {
+        return constraintMyMap.get(date);
+    }
 
     @Override
     public String toString() {
