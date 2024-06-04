@@ -1,14 +1,10 @@
 package dev.src.Controllers;
 
-import dev.src.Data.*;
 import dev.src.Domain.*;
 import dev.src.Domain.Enums.*;
-import dev.src.service.EmployeeConstraintService;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EmployeeConstraintController {
 
@@ -34,10 +30,14 @@ public class EmployeeConstraintController {
         try {
             shiftType = ShiftType.valueOf(sshiftType.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid shift type. Valid types are: MORNING, EVENING.");
+            throw new IllegalArgumentException("Invalid shift type. Valid types are: MORNING, EVENING, FULLDAY.");
         }
 
         Employee employee = employeesTempDatabase.get(employeeID);
+
+        if (employee == null) {
+            throw new IllegalArgumentException("Employee not found.");
+        }
 
         // Check if the date is in the past
         if (date.isBefore(LocalDate.now())) {
@@ -46,21 +46,17 @@ public class EmployeeConstraintController {
 
         // Check if the constraint already exists
         MyMap<LocalDate, Constraint> constraints = employee.getConstraintMyMap();
-        if (constraints != null) {
-            if (constraints.get(date).equals(constraint))
-            for (Constraint constraint : constraints) {
-                if (constraint.getShiftDate().equals(date) && constraint.getShiftType() == shiftType) {
-                    throw new IllegalArgumentException("Constraint already exists.");
-                }
-            }
-        } else {
-            constraints = new ArrayList<>();
+        if (constraints == null) {
+            constraints = new MyMap<>();
+            employee.setConstraintMyMap(constraints);
         }
 
-        // Add the new constraint
         Constraint newConstraint = new Constraint(employee, date, shiftType);
-        constraints.add(newConstraint);
-        tempDatabase.getConstraint_temp_database().put(employee, constraints);
+        if (constraints.get(date) != null && constraints.get(date).equals(newConstraint)) {
+            throw new IllegalArgumentException("Constraint already exists.");
+        }
+
+        constraints.put(date, newConstraint);
     }
 
     public void removeConstraint(String employeeID, String sdate, String sshiftType) throws IllegalArgumentException {
@@ -81,33 +77,18 @@ public class EmployeeConstraintController {
             throw new IllegalArgumentException("Invalid shift type. Valid types are: MORNING, EVENING.");
         }
 
-        // Check if the employee exists
-        Employee employee = tempDatabase.getEmployees_temp_database().get(employeeID);
+        Employee employee = employeesTempDatabase.get(employeeID);
 
-        // Check if the constraint exists
-        List<Constraint> constraints = tempDatabase.getEmployeeConstraint(employee);
-        if (constraints == null || constraints.isEmpty()) {
-            throw new IllegalArgumentException("No constraints found for the given employee.");
+        if (employee == null) {
+            throw new IllegalArgumentException("Employee not found.");
         }
 
-        // Find and remove the constraint
-        Constraint toRemove = null;
-        for (Constraint constraint : constraints) {
-            if (constraint.getShiftDate().equals(date) && constraint.getShiftType() == shiftType) {
-                toRemove = constraint;
-                break;
-            }
-        }
-
-        if (toRemove == null) {
+        MyMap<LocalDate, Constraint> constraints = employee.getConstraintMyMap();
+        if (constraints == null || constraints.get(date) == null || !constraints.get(date).getShiftType().equals(shiftType)) {
             throw new IllegalArgumentException("Constraint not found.");
         }
 
-        constraints.remove(toRemove);
-        if (constraints.isEmpty()) {
-            tempDatabase.getConstraint_temp_database().remove(employee);
-        } else {
-            tempDatabase.getConstraint_temp_database().put(employee, constraints);
-        }
+        constraints.remove(date);
     }
 }
+

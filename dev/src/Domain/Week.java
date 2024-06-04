@@ -50,5 +50,29 @@ public class Week {
 
         return sb.toString();
     }
+
+    public String weekInTableToShow() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Week number: ").append(weekNUM).append("\n");
+        sb.append("Start date: ").append(start_date).append("\n");
+        sb.append("End date: ").append(end_date).append("\n");
+        sb.append("Day\t\tDate\t\tMorning Shift\t\tEvening Shift\n");
+        sb.append("--------------------------------------------------------\n");
+
+        for (LocalDate date : DayInWEEK.getKeys()) {
+            Day day = DayInWEEK.get(date);
+            sb.append(day.getDayOfWeek()).append("\t\t")
+                    .append(day.getDate()).append("\t\t");
+
+            if (day.isIsdayofrest()) {
+                sb.append("Day off").append("\n");
+            } else {
+                sb.append(day.getShiftsInDay()[0].toString()).append("\t\t")
+                        .append(day.getShiftsInDay()[1].toString()).append("\n");
+            }
+        }
+
+        return sb.toString();
+    }
 }
 

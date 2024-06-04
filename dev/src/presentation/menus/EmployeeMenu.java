@@ -1,16 +1,21 @@
 package dev.src.presentation.menus;
 
-import dev.src.Domain.Employee;
+import dev.src.service.EmployeeService;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class EmployeeMenu {
+    private EmployeeService employeeService;
+    private String employeeID;
 
-    public EmployeeMenu(Employee emp) {
+    public EmployeeMenu(EmployeeService employeeService, String employeeID) {
+        this.employeeService = employeeService;
+        this.employeeID = employeeID;
+        displayMenu();
+    }
+
+    public void displayMenu() {
         Scanner scanner = new Scanner(System.in);
-        Employee employee=emp;
-
 
         while (true) {
             System.out.println("Welcome to employee menu!");
@@ -23,41 +28,78 @@ public class EmployeeMenu {
 
             switch (choice) {
                 case 1:
-                    employee.toString();
-                    new EmployeeMenu(employee);
-
+                    viewEmployeeDetails();
+                    break;
                 case 2:
-                    new ConstraintMenu(employee);
-
+                    goToConstraintsMenu(scanner);
+                    break;
                 case 3:
-
+                    showShifts();
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
     }
 
-    public static void ShowMenu(Employee employee){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the start date of the shift you want: as year/day/month ");
-        LocalDate startDate;
-        try {
-            startDate = LocalDate.parse(scanner.nextLine());
-        } catch (IllegalArgumentException e) {
-            System.out.println("you provide invalid date. ");
-            new EmployeeMenu(employee);
-            return;
-        }
-        System.out.println("Enter the end date of the shift you want: as year/day/month ");
-        LocalDate endDate;
-        try {
-            endDate = LocalDate.parse(scanner.nextLine());
-        } catch (IllegalArgumentException e) {
-            System.out.println("you provide invalid date. ");
-            new EmployeeMenu(employee);
-            return;
-        }
+    private void viewEmployeeDetails() {
+        String details = employeeService.viewEmployeeDetails(employeeID);
+        System.out.println(details);
+    }
 
+    private void goToConstraintsMenu(Scanner scanner) {
+        while (true) {
+            System.out.println("Constraints Menu:");
+            System.out.println("1. Add constraint");
+            System.out.println("2. Remove constraint");
+            System.out.println("3. View constraints");
+            System.out.println("4. Back to main menu");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addConstraint(scanner);
+                    break;
+                case 2:
+                    removeConstraint(scanner);
+                    break;
+                case 3:
+                    viewConstraints();
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private void addConstraint(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter shift type (MORNING/EVENING/FULLDAY): ");
+        String shiftType = scanner.nextLine();
+        String result = employeeService.addConstraintToEmployee(employeeID, date, shiftType);
+        System.out.println(result);
+    }
+
+    private void removeConstraint(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter shift type (MORNING/EVENING/FULLDAY): ");
+        String shiftType = scanner.nextLine();
+        String result = employeeService.removeConstraintFromEmployee(employeeID, date, shiftType);
+        System.out.println(result);
+    }
+
+    private void viewConstraints() {
+        String constraints = employeeService.viewEmployeeConstraints(employeeID);
+        System.out.println(constraints);
+    }
+
+    private void showShifts() {
 
     }
 }
