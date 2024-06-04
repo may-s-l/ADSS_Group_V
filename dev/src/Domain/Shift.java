@@ -9,23 +9,65 @@ import java.util.Set;
 public abstract class Shift {
 
     private MyMap<Job,List<Employee>> employee_in_shift;
-    public MyMap<Job,Integer> NumberofWorkersPerPosition;
+    public static MyMap<Job,Integer> NumberofWorkersPerPosition;
     private Time start_time;
     private Time end_time;
     private LocalDate date;
+
+    private MyMap<Job,Integer> NumberofWorkersPerJob;
+
 
     public Shift() {
         this.start_time =null;
         this.end_time=null;
         this.date=null;
         this.employee_in_shift=new MyMap<Job,List<Employee>>();
+        this.NumberofWorkersPerJob=null;
+
+
 
     }
     public Shift(Time start_time,Time end_time,LocalDate date){
         this.date=date;
         this.start_time=start_time;
         this.end_time=end_time;
+        this.NumberofWorkersPerJob=null;
+    }
 
+    public static MyMap<Job, Integer> getNumberofWorkersPerPosition() {
+        return NumberofWorkersPerPosition;
+    }
+
+    public static boolean ChangingtheDifultNumberOfemployeesPerJob(Job job,int quantity) {
+        if (job == null || quantity < 0) {
+            return false;
+        }
+        NumberofWorkersPerPosition.put(job,quantity);
+        return true;
+    }
+    public void ChangingTheNumberOfemployeesPerJobInShift(Job job,int quantity){
+        if(this.NumberofWorkersPerJob==null){
+            this.NumberofWorkersPerJob = getNumberofWorkersPerPosition();
+            this.NumberofWorkersPerJob.put(job,quantity);
+        }
+        this.NumberofWorkersPerJob.put(job,quantity);
+    }
+
+    public boolean isJobInShiftisFull(Job job) {
+        List<Employee> employeeList = this.employee_in_shift.get(job);
+        if (this.NumberofWorkersPerJob == null) {
+            if (employeeList != null && NumberofWorkersPerPosition.containsKey(job)) {
+                if (employeeList.size() == NumberofWorkersPerPosition.get(job)) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        if(this.NumberofWorkersPerJob.containsKey(job) && this.NumberofWorkersPerJob.get(job) == employeeList.size()) {
+            return true;
+        }
+        return false;
     }
 
     public Time getStart_time() {

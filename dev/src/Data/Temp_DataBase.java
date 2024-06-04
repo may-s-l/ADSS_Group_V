@@ -7,10 +7,11 @@ import dev.src.Domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Temp_DataBase {
 
-    private List<Branch> Branch_temp_database;
+    private MyMap<String,Branch> Branch_temp_database;//String address
     private List<Job> Employeejobs_temp_database;
     private MyMap<String, Employee> Employees_temp_database;//string=ID
     private MyMap<Employee,List<Constraint>> Constraint_temp_database;
@@ -19,15 +20,15 @@ public class Temp_DataBase {
     public Temp_DataBase() {
         this.Employees_temp_database = new MyMap<String, Employee>();
         this.Employeejobs_temp_database=new ArrayList<Job>();
-        this.Branch_temp_database = new ArrayList<Branch>();
+        this.Branch_temp_database = new MyMap<String,Branch>();
         this.Constraint_temp_database = new MyMap<Employee, List<Constraint>>();
     }
 
-    public List<Branch> getBranch_temp_database() {
+    public MyMap<String,Branch> getBranch_temp_database() {
         return Branch_temp_database;
     }
 
-    public void setBranch_temp_database(List<Branch> branch_temp_database) {
+    public void setBranch_temp_database(MyMap<String,Branch> branch_temp_database) {
         Branch_temp_database = branch_temp_database;
     }
 
@@ -59,4 +60,51 @@ public class Temp_DataBase {
     public List<Constraint> getEmployeeConstraint(Employee employee){
         return this.Constraint_temp_database.get(employee);
     }
+
+    public Job getJobByName(String Jobname){
+        if (Jobname==null){
+            return null;
+        }
+        Job job;
+        for(Job j :getEmployeejobs_temp_database()){
+            if(j.getJobName()==Jobname){
+                job=j;
+                return job;
+            }
+        }
+        return null;
+    }
+    public Branch getBranchByAddress(String AddressName){
+        return this.Branch_temp_database.get(AddressName);
+    }
+    public List<Branch> getAllBranch() {
+        List<Branch> branchList = new ArrayList<Branch>();
+        Set<String> addressSet = this.Branch_temp_database.getKeys();
+        for (String address:addressSet){
+            branchList.add(this.getBranchByAddress(address));
+        }
+        return branchList;
+    }
+
+
+    public MyMap<String, Employee> getAllEmployees() {
+
+        return getEmployees_temp_database();
+    }
+    public List<Job> getAlljobs() {
+
+        return getEmployeejobs_temp_database();
+    }
+
+    public Employee getEmployeeByID(String ID) {
+        if (getEmployees_temp_database().containsKey(ID)) {
+            Employee emp = getEmployees_temp_database().get(ID);
+            return emp;
+        }
+        return null;
+    }
+
+
 }
+
+

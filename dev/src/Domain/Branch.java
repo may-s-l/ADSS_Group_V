@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Branch {
-    private static int numBranch=0;
+
     private String name;
     private String address;
     private ManagerEmployee managerEmployee;
-    //האם צריך לתמוך בסניף שנסגר ואיך ןמה לעשות עם עובדי הבניף האם למנהל כוח אדם בסניף אחר יש הרשאה לסניפים אחרים אם לא האם זה אומר שעובד לא יעבור בן סניפים
-    private List<Employee> EmployeesInBranch;
+    private MyMap<String,Employee> EmployeesInBranch;
     private int branchNum;
 
 
@@ -21,18 +20,15 @@ public class Branch {
         this.name = name;
         this.address = address;
         this.managerEmployee = managerEmployee;
-        this.branchNum=numBranch+1;
-        this.EmployeesInBranch=new ArrayList<Employee>();
-        numBranch=+1;
+        this.EmployeesInBranch=new MyMap<String,Employee>();
     }
 
     public Branch(String name, String address) {
         this.name = name;
         this.address = address;
         this.managerEmployee = null;
-        this.branchNum=numBranch+1;
-        this.EmployeesInBranch=new ArrayList<Employee>();
-        numBranch=+1;
+        this.EmployeesInBranch=new MyMap<String,Employee>();
+
     }
 
     public String getBranchName() {
@@ -55,11 +51,11 @@ public class Branch {
         return managerEmployee;
     }
 
-    public List<Employee> getEmployeesInBranch() {
+    public MyMap<String,Employee> getEmployeesInBranch() {
         return EmployeesInBranch;
     }
 
-    public void setEmployeesInBranch(List<Employee> employeesInBranch) {
+    public void setEmployeesInBranch(MyMap<String,Employee> employeesInBranch) {
         EmployeesInBranch = employeesInBranch;
     }
 
@@ -67,8 +63,16 @@ public class Branch {
         this.managerEmployee = managerEmployee;
     }
 
-    public int getBranchNum() {
-        return branchNum;
+    public void addEmployeeToBranch(Employee employee){
+        this.EmployeesInBranch.put(employee.getID(),employee);
+    }
+
+    public Employee getEmployee(String ID){
+        return this.EmployeesInBranch.get(ID);
+    }
+
+    public void removEmployeeFromBranch(Employee employee){
+        this.EmployeesInBranch.remove(employee.getID());
     }
 
 
@@ -86,6 +90,6 @@ public class Branch {
             return false;
         }
         Branch othre = (Branch) o;
-        return this.getBranchNum()==othre.getBranchNum();
+        return this.getBranchName()==othre.getBranchName();
     }
 }
