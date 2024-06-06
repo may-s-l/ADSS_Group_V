@@ -32,7 +32,7 @@ public class Login_menu {
                     System.out.print("Enter ID: ");
                     String password = scanner.nextLine();
                     res=MC.checkLoginEmployee(password);
-                    if(Objects.equals(res, "HRManager")){
+                    if(Objects.equals(res, "HR-MANAGER")){
                         new SystemManagerMenu(HRS);
                     }
                     if(Objects.equals(res, "Employee")){
@@ -52,83 +52,84 @@ public class Login_menu {
         }
     }
 
-    private void dataupload(MasterController MC){
-        String file = "dev.src.DataToupload\\Branchs.csv";
-        BufferedReader reader = null;
-        String line = "";
+    private void dataupload(MasterController MC) {
+        String branchFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Branchs.csv";
+        String jobFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Jobs.csv";
+        String employeeFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Employees.csv";
+        uploadBranchData(MC, branchFile);
+        uploadJobData(MC, jobFile);
+        uploadEmployeeData(MC, employeeFile);
 
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            while((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
-                MC.getHR_Employee().createBranch(row[0],row[1]);
-            }
+        // Verify there are branches and employees before accessing them
+        if (!MC.getHR_Employee().getAllBranch().isEmpty() && MC.getHR_Employee().getEmployeeByID("111111") instanceof ManagerEmployee) {
+            MC.getHR_Employee().getAllBranch().get(0).setManagerEmployee((ManagerEmployee) MC.getHR_Employee().getEmployeeByID("111111"));
         }
-        catch(Exception e) {
+    }
+
+    private void uploadBranchData(MasterController MC, String filePath) {
+        if (!new File(filePath).exists()) {
+            System.out.println("File not found: " + filePath);
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] row = line.split(",");
+                MC.getHR_Employee().createBranch(row[0], row[1]);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    }
+
+    private void uploadJobData(MasterController MC, String filePath) {
+        if (!new File(filePath).exists()) {
+            System.out.println("File not found: " + filePath);
+            return;
         }
 
-        file = "dev.src.DataToupload\\Jobs.csv";
-        reader = null;
-        line = "";
-
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            while((line = reader.readLine()) != null) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
                 String[] row = line.split(",");
-                if(row[0]=="HRManager"){
+                if (row[0].equals("HRManager")) {
                     MC.getHR_Employee().createManagementJob(row[0]);
-                }
-                else {
+                } else {
                     MC.getHR_Employee().createJob(row[0]);
                 }
             }
-        }
-        catch(Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    }
+
+    private void uploadEmployeeData(MasterController MC, String filePath) {
+        if (!new File(filePath).exists()) {
+            System.out.println("File not found: " + filePath);
+            return;
         }
 
-        file = "dev.src.DataToupload\\Employees.csv";
-        reader = null;
-        line = "";
-
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            while((line = reader.readLine()) != null) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
                 String[] row = line.split(",");
-                if(row[9]=="HRManager"){
-                    MC.getHR_Employee().createManagmentEmployee(row[0],row[1],row[2],row[3],Double.parseDouble(row[4]),row[5],Double.parseDouble(row[6]),row[7],row[8],row[9]);
-                }
-                else {
-                    MC.getHR_Employee().createEmployee(row[0],row[1],row[2],row[3],Double.parseDouble(row[4]),row[5],Double.parseDouble(row[6]),row[7],row[8],row[9]);
+                try {
+                    double salary = Double.parseDouble(row[4]);
+                    double hours = Double.parseDouble(row[6]);
+
+                    if (row[9].equals("HRManager")) {
+                        MC.getHR_Employee().createManagmentEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
+                    } else {
+                        MC.getHR_Employee().createEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid number format in row: " + String.join(", ", row));
                 }
             }
-        }
-        catch(Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        MC.getHR_Employee().getAllBranch().get(0).setManagerEmployee((ManagerEmployee) MC.getHR_Employee().getEmployeeByID("111111"));
     }
 
 }

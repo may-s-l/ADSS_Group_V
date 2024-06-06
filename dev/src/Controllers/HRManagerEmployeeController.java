@@ -3,10 +3,7 @@ package dev.src.Controllers;
 import dev.src.Domain.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 public class HRManagerEmployeeController {
 
@@ -43,7 +40,7 @@ public class HRManagerEmployeeController {
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
         for (Job j : this.Employeejobs_temp_database) {
-            if (j.getJobName() == jobname) {
+            if (j.getJobName().equals(jobname)) {
                 job_to_emp = j;
                 break;
             }
@@ -55,7 +52,7 @@ public class HRManagerEmployeeController {
         Branch branch_to_emp = null;
         List<Branch> Allbranch=getAllBranch();
         for (Branch b : Allbranch ) {
-            if (b.getBranchName() == branch) {
+            if (b.getBranchName().equals(branch)) {
                 branch_to_emp = b;
                 break;
             }
@@ -110,7 +107,7 @@ public class HRManagerEmployeeController {
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
         for (Job j : this.Employeejobs_temp_database) {
-            if (j.getJobName() == jobname&&j instanceof ManagementJob) {
+            if (j.getJobName().equals(jobname)&&j instanceof ManagementJob) {
                 job_to_emp = j;
                 break;
             }
@@ -122,7 +119,7 @@ public class HRManagerEmployeeController {
         Branch branch_to_emp = null;
         List<Branch> Allbranch=getAllBranch();
         for (Branch b : Allbranch ) {
-            if (b.getBranchName() == branch) {
+            if (Objects.equals(b.getBranchName(), branch)) {
                 branch_to_emp = b;
                 break;
             }
@@ -318,7 +315,7 @@ public class HRManagerEmployeeController {
         return "SalaryType is successfully updated for employee";
     }
     public boolean updateEmployeeTermsSalary(String ID,double salary, String job_type, String Salary_type){
-        if(ID==null||salary<=30||job_type==null||Salary_type==null||(job_type.toUpperCase()!="PART"&&job_type.toUpperCase()!="FULL")||(Salary_type.toUpperCase()!="GLOBAL"&&Salary_type.toUpperCase()!="HOURLY")){
+        if(ID==null||salary<=30||job_type==null||Salary_type==null||(!job_type.toUpperCase().equals("PART") && !job_type.toUpperCase().equals("FULL"))||(!Salary_type.toUpperCase().equals("GLOBAL") && !Salary_type.toUpperCase().equals("HOURLY"))){
             return false;
         }
         Employee empToUpdate=getEmployeeByID(ID);
@@ -368,7 +365,7 @@ public class HRManagerEmployeeController {
         Jobname=Jobname.toUpperCase();
         Job job;
         for(Job j : this.Employeejobs_temp_database){
-            if(j.getJobName()==Jobname){
+            if(Objects.equals(j.getJobName(), Jobname)){
                 job=j;
                 return job;
             }
@@ -391,7 +388,7 @@ public class HRManagerEmployeeController {
         }
         name=name.toUpperCase();
         for (Job j: this.Employeejobs_temp_database){
-            if(j.getJobName()==name){
+            if(Objects.equals(j.getJobName(), name)){
                 throw new IllegalArgumentException("The job already exists");
             }
         }
@@ -405,7 +402,7 @@ public class HRManagerEmployeeController {
         }
         name=name.toUpperCase();
         for (Job j: this.Employeejobs_temp_database){
-            if(j.getJobName()==name){
+            if(Objects.equals(j.getJobName(), name)){
                 throw new IllegalArgumentException("The job already exists");
             }
         }
