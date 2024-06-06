@@ -4,8 +4,11 @@ import dev.src.Controllers.EmployeeConstraintController;
 import dev.src.Controllers.MasterController;
 
 public class EmployeeService {
-    MasterController masterController = new MasterController();
+    MasterController masterController;
 
+    public EmployeeService(MasterController masterController) {
+        this.masterController = masterController;
+    }
 
     public String viewEmployeeDetails(String employeeID) {
         try {

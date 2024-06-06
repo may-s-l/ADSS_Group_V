@@ -5,7 +5,7 @@ import dev.src.service.EmployeeService;
 import java.util.Scanner;
 
 public class EmployeeMenu {
-    EmployeeService employeeService=new EmployeeService();
+    EmployeeService employeeService;
     private String employeeID;
 
     public EmployeeMenu(EmployeeService employeeService, String employeeID) {

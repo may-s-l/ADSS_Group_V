@@ -1,5 +1,5 @@
 package dev.src.Controllers;
-import dev.src.Data.*;
+
 import dev.src.Domain.*;
 
 import java.time.LocalDate;
@@ -40,6 +40,7 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("ID must be 8 numeric characters long");
         }
         //-------job-------//
+        jobname=jobname.toUpperCase();
         Job job_to_emp = null;
         for (Job j : this.Employeejobs_temp_database) {
             if (j.getJobName() == jobname) {
@@ -106,6 +107,7 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("ID must be 8 numeric characters long");
         }
         //-------job-------//
+        jobname=jobname.toUpperCase();
         Job job_to_emp = null;
         for (Job j : this.Employeejobs_temp_database) {
             if (j.getJobName() == jobname&&j instanceof ManagementJob) {
@@ -211,6 +213,7 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("Arguments can not be NULL");
         }
         Employee empToUpdate = getEmployeeByID(ID);
+        job=job.toUpperCase();
         Job jobToUpdate = getJobByName(job);
         if (empToUpdate == null ){
             throw new IllegalArgumentException("Employee is NOT exist");
@@ -334,6 +337,7 @@ public class HRManagerEmployeeController {
             return false;
         }
         Employee empToUpdate =getEmployeeByID(ID);
+        job=job.toUpperCase();
         Job jobToUpdat=getJobByName(job);
         if (empToUpdate!=null&&jobToUpdat!=null){
             if(empToUpdate instanceof ManagerEmployee||!(jobToUpdat instanceof ManagementJob)){
@@ -361,6 +365,7 @@ public class HRManagerEmployeeController {
         if (Jobname==null){
             return null;
         }
+        Jobname=Jobname.toUpperCase();
         Job job;
         for(Job j : this.Employeejobs_temp_database){
             if(j.getJobName()==Jobname){
@@ -384,6 +389,7 @@ public class HRManagerEmployeeController {
         if(name==null){
             throw new IllegalArgumentException("Name can not be NULL");
         }
+        name=name.toUpperCase();
         for (Job j: this.Employeejobs_temp_database){
             if(j.getJobName()==name){
                 throw new IllegalArgumentException("The job already exists");
@@ -397,6 +403,7 @@ public class HRManagerEmployeeController {
         if(name==null){
             throw new IllegalArgumentException("Name can not be NULL");
         }
+        name=name.toUpperCase();
         for (Job j: this.Employeejobs_temp_database){
             if(j.getJobName()==name){
                 throw new IllegalArgumentException("The job already exists");

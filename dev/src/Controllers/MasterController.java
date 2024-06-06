@@ -1,9 +1,6 @@
 package dev.src.Controllers;
 
-import dev.src.Domain.Branch;
-import dev.src.Domain.Employee;
-import dev.src.Domain.Job;
-import dev.src.Domain.MyMap;
+import dev.src.Domain.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,6 +40,18 @@ public class MasterController {
     public EmployeeConstraintController getEmployee_Constraint() {
         return Employee_Constraint;
     }
+
+    public String checkLoginEmployee(String ID){
+        if(this.Employees_temp_database.containsKey(ID)){
+            Employee employee = this.Employees_temp_database.get(ID);
+            if(employee instanceof ManagerEmployee){
+                return "HRManager";
+            }
+            return "Employee";
+        }
+        return "Login failed Check ID";
+    }
+
 }
 
 
