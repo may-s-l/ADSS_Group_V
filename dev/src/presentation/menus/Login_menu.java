@@ -118,7 +118,7 @@ public class Login_menu {
                     double salary = Double.parseDouble(row[4]);
                     double hours = Double.parseDouble(row[6]);
 
-                    if (row[9].equals("HRManager")) {
+                    if (row[9].equals("HR-MANAGER")) {
                         MC.getHR_Employee().createManagmentEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
                     } else {
                         MC.getHR_Employee().createEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
