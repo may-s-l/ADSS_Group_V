@@ -5,6 +5,8 @@ import dev.src.Domain.Enums.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EmployeeConstraintController {
 
@@ -13,6 +15,10 @@ public class EmployeeConstraintController {
 
     public EmployeeConstraintController(MyMap<String, Employee> Employees_temp_database) {
         this.employeesTempDatabase=Employees_temp_database;
+    }
+
+    public String returnEmployeeDetails(String id) {
+        return employeesTempDatabase.get(id).toString();
     }
 
     public void addConstraint(String employeeID, String sdate, String sshiftType) throws IllegalArgumentException {
@@ -89,6 +95,28 @@ public class EmployeeConstraintController {
         }
 
         constraints.remove(date);
+    }
+
+    public String getConstraintFromToday(String employeeID) {
+        MyMap<LocalDate, Constraint> constraintMyMap=employeesTempDatabase.get(employeeID).getConstraintMyMap();
+
+        if (constraintMyMap == null) {
+            return "No constraints found for this employee.";
+        }
+
+        LocalDate today = LocalDate.now();
+        MyMap<LocalDate, Constraint> futureConstraints = new MyMap<>();
+        String stringFutureConstraints=null;
+        for (LocalDate date : constraintMyMap.getKeys()) {
+            if (!date.isBefore(today)) {
+                futureConstraints.put(date, constraintMyMap.get(date));
+                stringFutureConstraints+=constraintMyMap.get(date).toString() + "/n";
+            }
+        }
+        if (futureConstraints == null) {
+            return "No constraints found for this employee.";
+        }
+        return stringFutureConstraints;
     }
 }
 

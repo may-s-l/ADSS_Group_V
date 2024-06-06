@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="add FULLDAY to enum&#10;and insert the constraint menu to employee menu">
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="in EmployeeMenu changing the constructor">
+      <change afterPath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeDataMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagarMenu.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/EmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +62,26 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dev.src.Main" />
+      <module name="assignments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.src.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,7 +92,7 @@
       <updated>1715269328319</updated>
       <workItem from="1716542772322" duration="343000" />
       <workItem from="1716888479613" duration="15270000" />
-      <workItem from="1717533272587" duration="3284000" />
+      <workItem from="1717533272587" duration="24566000" />
     </task>
     <task id="LOCAL‎-00001" summary="starting the work">
       <created>1716235825714</created>
@@ -117,7 +143,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1717531391915</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL‎-00008" summary="in EmployeeMenu changing the constructor">
+      <created>1717536664718</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717536664718</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +174,7 @@
     <MESSAGE value="בדיקה" />
     <MESSAGE value="שיניתי את האילוציםבקונטרולר" />
     <MESSAGE value="add FULLDAY to enum&#10;and insert the constraint menu to employee menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="add FULLDAY to enum&#10;and insert the constraint menu to employee menu" />
+    <MESSAGE value="in EmployeeMenu changing the constructor" />
+    <option name="LAST_COMMIT_MESSAGE" value="in EmployeeMenu changing the constructor" />
   </component>
 </project>

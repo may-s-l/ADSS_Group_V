@@ -37,6 +37,10 @@ public class MasterController {
     public HRManagerShiftController getHR_Shift() {
         return HR_Shift;
     }
+
+    public EmployeeConstraintController getEmployee_Constraint() {
+        return Employee_Constraint;
+    }
 }
 
 

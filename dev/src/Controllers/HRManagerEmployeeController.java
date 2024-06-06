@@ -269,6 +269,51 @@ public class HRManagerEmployeeController {
         oldbranch.removEmployeeFromBranch(empToUpdate);
         return "An employee was transferred to another branch successfully";
     }
+    public String updateVacationDays(String ID, double amount) {
+        Employee empToUpdate = getEmployeeByID(ID);
+        if (empToUpdate == null) {
+            throw new IllegalArgumentException("Employee not found.");
+        }
+        TermsOfEmployment term = empToUpdate.getTerms();
+        term.setVacationDay(amount);
+        return "Vacation Days is successfully updated for employee";
+    }
+    public String updateEmployeeSalary(String ID, double salary) throws IllegalArgumentException {
+        if (ID == null || salary <= 30) {
+            throw new IllegalArgumentException("Invalid ID or salary.");
+        }
+        Employee empToUpdate = getEmployeeByID(ID);
+        if (empToUpdate == null) {
+            throw new IllegalArgumentException("Employee not found.");
+        }
+        TermsOfEmployment term = empToUpdate.getTerms();
+        term.setSalary(salary);
+        return "Salary is successfully updated for employee";
+    }
+    public String updateEmployeeJobType(String ID, String job_type) throws IllegalArgumentException {
+        if (ID == null || job_type == null || (!job_type.toUpperCase().equals("PART") && !job_type.toUpperCase().equals("FULL"))) {
+            throw new IllegalArgumentException("Invalid ID or job type.");
+        }
+        Employee empToUpdate = getEmployeeByID(ID);
+        if (empToUpdate == null) {
+            throw new IllegalArgumentException("Employee not found.");
+        }
+        TermsOfEmployment term = empToUpdate.getTerms();
+        term.setJt(job_type);
+        return "JobType is successfully updated for employee";
+    }
+    public String updateEmployeeSalaryType(String ID, String salary_type) throws IllegalArgumentException {
+        if (ID == null || salary_type == null || (!salary_type.toUpperCase().equals("GLOBAL") && !salary_type.toUpperCase().equals("HOURLY"))) {
+            throw new IllegalArgumentException("Invalid ID or salary type.");
+        }
+        Employee empToUpdate = getEmployeeByID(ID);
+        if (empToUpdate == null) {
+            throw new IllegalArgumentException("Employee not found.");
+        }
+        TermsOfEmployment term = empToUpdate.getTerms();
+        term.setSt(salary_type);
+        return "SalaryType is successfully updated for employee";
+    }
     public boolean updateEmployeeTermsSalary(String ID,double salary, String job_type, String Salary_type){
         if(ID==null||salary<=30||job_type==null||Salary_type==null||(job_type.toUpperCase()!="PART"&&job_type.toUpperCase()!="FULL")||(Salary_type.toUpperCase()!="GLOBAL"&&Salary_type.toUpperCase()!="HOURLY")){
             return false;
@@ -283,7 +328,6 @@ public class HRManagerEmployeeController {
         term.setSt(Salary_type);
         return true;
     }
-
     //UPDATE Employee TO ManagmantEmployee
     public boolean UPDATEemployeeToManagmantEmployee(String ID,String job){
         if(ID==null|job==null){
@@ -335,7 +379,6 @@ public class HRManagerEmployeeController {
         }
         return Allbranch;
     }
-
 
     public String createJob(String name)throws IllegalArgumentException{
         if(name==null){
