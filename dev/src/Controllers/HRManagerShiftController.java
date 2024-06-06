@@ -16,12 +16,17 @@ public class HRManagerShiftController {
     private MyMap<String, Branch> Branch_temp_database;//String key address
     private List<Job> Employeejobs_temp_database;
     private MyMap<String, Employee> Employees_temp_database;//String key ID
-    private MyMap<Integer,MyMap<Integer, Week>> Employees_INBranch_temp_database;//INT keys BranchNUM and EmployeeNUM
-    public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database) {
+    private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
+
+    private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
+
+    public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database,MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
         this.Employees_temp_database=Employees_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employeejobs_temp_database=Employeejobs_temp_database;
-        this.Employees_INBranch_temp_database=new MyMap<Integer,MyMap<Integer,Week>>();
+        this.BranchWeek_temp_database=new MyMap<Integer,MyMap<LocalDate,Week>>();
+
+        this.History_Shifts_temp_database=History_Shifts_temp_database;
     }
 
 
@@ -31,6 +36,15 @@ public class HRManagerShiftController {
         MyMap<Integer, Employee>BranchemployeeBYemployeeNUM = new MyMap<Integer, Employee>();
         List<List<Object>> TableofEmployeeandConstrin =createEmployeeConstraintJobTable(branch.getEmployeesInBranch(),date,BranchemployeeBYemployeeNUM);
         Week Weekforassignment = createWeekforassignment(date);
+        if(this.BranchWeek_temp_database.containsKey(branchNum)){
+            MyMap<LocalDate,Week> dateWeek= this.BranchWeek_temp_database.get(branchNum);
+            dateWeek.put(Weekforassignment.getStart_date(),Weekforassignment);
+        }
+        else {
+            MyMap<LocalDate, Week> dateWeekMyMap = new MyMap<LocalDate, Week>();
+            dateWeekMyMap.put(Weekforassignment.getStart_date(), Weekforassignment);
+            this.BranchWeek_temp_database.put(branchNum,dateWeekMyMap);
+        }
         MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> pair = new MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>>(Weekforassignment,TableofEmployeeandConstrin,BranchemployeeBYemployeeNUM);
         return pair;
     }
@@ -73,7 +87,7 @@ public class HRManagerShiftController {
         CleanInformation.add(job);
         return CleanInformation;
     }
-    public List<String> addEmployeetoshift(List<Object> empsNUM_shift_job,MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>>WeekAndConstrainAndMAPemployee )throws IllegalArgumentException{
+    public String addEmployeetoshift(List<Object> empsNUM_shift_job,MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>>WeekAndConstrainAndMAPemployee )throws IllegalArgumentException{
         if(empsNUM_shift_job==null){
             throw new IllegalArgumentException("Argumets can not be NULL");
         }
@@ -82,29 +96,29 @@ public class HRManagerShiftController {
         List<Integer> employeeNum=(List<Integer>)empsNUM_shift_job.get(0);
         Shift shift=(Shift) empsNUM_shift_job.get(1);
         Job job=(Job) empsNUM_shift_job.get(2);
-        List<String> employeeListNOTasing=new ArrayList<String>();
+        String s="";
         for(int e:employeeNum){
             Employee emp_to_workon=null;
             if(!(empMAP.containsKey(e))){
-                employeeListNOTasing.add( e+"- Employee NUMBER is not in this branch or DATA");
+                s+= e+"- Employee NUMBER is not in this branch or DATA\n";
                 continue;
             }
             emp_to_workon=empMAP.get(e);
             if(!emp_to_workon.employeeCanbe(job)){
-                employeeListNOTasing.add(emp_to_workon.toString()+" Can't work as "+job.getJobName()+"\n");
+                s+=emp_to_workon.toString()+" Can't work as "+job.getJobName()+"\n";
                 continue;
             }
             if(emp_to_workon.getConstraintByDate(shift.getDate())!=null&&(emp_to_workon.getConstraintByDate(shift.getDate()).getShiftType()==shift.getShiftType()||emp_to_workon.getConstraintByDate(shift.getDate()).getShiftType()== ShiftType.FULLDAY)){
-                employeeListNOTasing.add(emp_to_workon.toString()+" there is a shift constraint "+emp_to_workon.getConstraintByDate(shift.getDate()).toString()+"\n");
+                s+=emp_to_workon.toString()+" there is a shift constraint "+emp_to_workon.getConstraintByDate(shift.getDate()).toString()+"\n";
                 continue;
             }
             if(shift.isJobInShiftisFull(job)){
-                employeeListNOTasing.add(emp_to_workon.toString()+" the number of worker needed is already full \n");
+                s+=emp_to_workon.toString()+" the number of worker needed is already full \n";
                 continue;
             }
             shift.addEmployeeToShift(emp_to_workon,job);
         }
-        return employeeListNOTasing;
+        return s;
 
     }
     public String toStringforweekANDemlpoyeeinbanc(Week week,List<List<Object>> employeeTable){
@@ -248,6 +262,20 @@ public class HRManagerShiftController {
             }
         }
         if(S==null){
+            String weekstring=week.weekInTableToShow();
+            Set<Employee> EMP=week.getDayOfWeek(week.getStart_date()).getShiftsInDay()[0].getEmployeeinshiftSet();
+            List<Employee> myList = new ArrayList<>(EMP);
+            int branchNum= myList.get(0).getBranch().getBranchNum();
+            if(this.History_Shifts_temp_database.containsKey(branchNum)){
+                MyMap<LocalDate,String> dateWeek= this.History_Shifts_temp_database.get(branchNum);
+                dateWeek.put(week.getStart_date(),weekstring);
+            }
+            else {
+                MyMap<LocalDate, String> dateWeekMyMap = new MyMap<LocalDate, String>();
+                dateWeekMyMap.put(week.getStart_date(),weekstring);
+                this.History_Shifts_temp_database.put(branchNum,dateWeekMyMap);
+            }
+
             return "All positions have been filled";
         }
         return S;

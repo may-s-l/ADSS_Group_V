@@ -1,6 +1,6 @@
 package dev.src.service;
 
-import dev.src.Controllers.MasterController;
+import dev.src.Controllers.*;
 
 public class HRManagerService {
     private MasterController masterController;
