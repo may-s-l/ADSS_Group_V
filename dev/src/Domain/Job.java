@@ -1,8 +1,5 @@
 package dev.src.Domain;
 
-import dev.src.Domain.Enums.*;
-import dev.src.Domain.*;
-
 public class Job {
     private String jobName;
 

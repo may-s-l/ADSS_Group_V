@@ -1,10 +1,8 @@
 package dev.src.Domain;
 
 import dev.src.Domain.Enums.*;
-import dev.src.Domain.*;
 
 import java.time.LocalDate;
-
 public class Constraint {
     private Employee emp;
     private LocalDate date;
@@ -33,8 +31,6 @@ public class Constraint {
     }
     @Override
     public String toString() {
-        return "constrain for Employee ID:" + emp.getID() +
-                "at date: '" + date + "in " + shiftType +
-                "shift";
+        return "can't work on "+this.date.getDayOfWeek()+" "+this.shiftType.toString();
     }
 }

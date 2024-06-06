@@ -1,22 +1,23 @@
 package dev.src.Domain;
 
+import dev.src.Domain.Enums.ShiftType;
+
 import java.sql.Time;
 import java.time.LocalDate;
 
-public class MorningShift extends Shift{
+public class MorningShift extends Shift {
 
 
     private static Time Ds_time = new Time(6,00,00);
     private static Time De_time=new Time(14,00,00);
 
 
-
     public MorningShift(LocalDate date){
-        super(Ds_time,De_time,date);
+        super(Ds_time,De_time,date, ShiftType.MORNING);
     };
 
     public MorningShift(Time start_time,Time end_time,LocalDate date){
-        super(start_time,end_time,date);
+        super(start_time,end_time,date,ShiftType.MORNING);
     }
 
     public static Time getDs_time() {

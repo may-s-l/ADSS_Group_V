@@ -3,11 +3,9 @@ package dev.src.Domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import dev.src.Domain.Enums.*;
-import dev.src.Domain.*;
 
 public class Employee {
-    private static int EmployeeNUM=0;
+    private static int EmployeeNUM=1;
     private String Name;
     private String ID;
     private String Bank_account;
@@ -16,6 +14,7 @@ public class Employee {
     private TermsOfEmployment terms;
     private List<Job> Jobs;
     private MyMap<LocalDate, Constraint> constraintMyMap;
+
 
     //constructor- gets all the data for employee
     public Employee(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms,Job job) {
@@ -44,21 +43,6 @@ public class Employee {
         EmployeeNUM+=1;
         constraintMyMap=null;
     }
-
-    //default constructor when is shift false and basic term of employment
-    public Employee(String name, String ID, String bank_account, Branch branch, Job job) {
-        Name = name;
-        this.ID = ID;
-        Bank_account = bank_account;
-        Branch = branch;
-        this.terms = new TermsOfEmployment();
-        Jobs = new ArrayList<Job>();
-        Jobs.add(job);
-        this.employeeNum =EmployeeNUM;
-        EmployeeNUM+=1;
-        constraintMyMap=null;
-    }
-
 
     public String getName() {
         return Name;
@@ -140,7 +124,6 @@ public class Employee {
         return Jobs.add(job);
     }
 
-
     public boolean employeeCanbe(Job job){
         return this.Jobs.contains(job);
     }
@@ -158,8 +141,15 @@ public class Employee {
     }
 
     public Constraint getConstraintByDate(LocalDate date) {
+        if (this.constraintMyMap==null){
+            return null;
+        }
+        if(!constraintMyMap.containsKey(date)){
+            return null;
+        }
         return constraintMyMap.get(date);
     }
+
 
     @Override
     public String toString() {

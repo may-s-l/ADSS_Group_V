@@ -1,10 +1,10 @@
 package dev.src.service;
 
 import dev.src.Controllers.EmployeeConstraintController;
-import dev.src.Controllers.MasterControllee;
+import dev.src.Controllers.MasterController;
 
 public class EmployeeService {
-    MasterControllee masterController=new MasterControllee();
+    MasterController masterController=new MasterController();
 
 
 //    public String viewEmployeeDetails(String employeeID) {

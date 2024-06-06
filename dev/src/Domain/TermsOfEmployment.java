@@ -1,6 +1,7 @@
 package dev.src.Domain;
 
-import dev.src.Domain.Enums.*;
+import dev.src.Domain.Enums.JobType;
+import dev.src.Domain.Enums.SalaryType;
 
 import java.time.LocalDate;
 
@@ -20,16 +21,6 @@ public class TermsOfEmployment {
         Salary = salary;
         this.jt = JobType.valueOf(jt);
         this.st = SalaryType.valueOf(st);
-    }
-
-    //לראות איך מכניסים את זה לקובץ קונפיגורציה
-    public TermsOfEmployment() {
-        this.vacationDay = 14;
-        Start_date = LocalDate.now();
-        End_date = null;
-        Salary = 30;
-        this.jt = JobType.PART;
-        this.st = SalaryType.HOURLY;
     }
 
     public double getVacationDay() {
