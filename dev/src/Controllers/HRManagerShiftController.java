@@ -19,6 +19,7 @@ public class HRManagerShiftController {
     private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
 
     private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
+    private MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> CurrentSchedule;
 
     public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database,MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
         this.Employees_temp_database=Employees_temp_database;
@@ -31,7 +32,7 @@ public class HRManagerShiftController {
 
 
     //======================Functions for working on weekly employee placement=====================================================//
-    public MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> MakeScheduleforNextWeek(int branchNum,String date){
+    public String MakeScheduleforNextWeek(int branchNum,String date){
         Branch branch =getBranchByBranchNUM(branchNum);
         MyMap<Integer, Employee>BranchemployeeBYemployeeNUM = new MyMap<Integer, Employee>();
         List<List<Object>> TableofEmployeeandConstrin =createEmployeeConstraintJobTable(branch.getEmployeesInBranch(),date,BranchemployeeBYemployeeNUM);
@@ -46,9 +47,11 @@ public class HRManagerShiftController {
             this.BranchWeek_temp_database.put(branchNum,dateWeekMyMap);
         }
         MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> pair = new MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>>(Weekforassignment,TableofEmployeeandConstrin,BranchemployeeBYemployeeNUM);
-        return pair;
+        this.CurrentSchedule=pair;
+        return "Schedule Successfully created:) ";
     }
-    public List<Object> checkaddEmployeesToShiftsByDateANDJob(List<Integer> employeeNum,String jobname,String shiftype,String date,Week week) throws IllegalArgumentException{
+    public List<Object> checkaddEmployeesToShiftsByDateANDJob(List<Integer> employeeNum,String jobname,String shiftype,String date) throws IllegalArgumentException{
+        Week week=this.getWeek();
         if(employeeNum==null||employeeNum.isEmpty()||jobname==null||shiftype==null||date==null){
             throw new IllegalArgumentException("Argumets can not be NULL");
         }
@@ -87,9 +90,10 @@ public class HRManagerShiftController {
         CleanInformation.add(job);
         return CleanInformation;
     }
-    public String addEmployeetoshift(List<Object> empsNUM_shift_job,MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>>WeekAndConstrainAndMAPemployee )throws IllegalArgumentException{
+    public String addEmployeetoshift(List<Object> empsNUM_shift_job)throws IllegalArgumentException{
+        MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> WeekAndConstrainAndMAPemployee= this.CurrentSchedule;
         if(empsNUM_shift_job==null){
-            throw new IllegalArgumentException("Argumets can not be NULL");
+            throw new IllegalArgumentException("Arguments can not be NULL");
         }
         Week week =WeekAndConstrainAndMAPemployee.getFirst();
         MyMap<Integer, Employee> empMAP=WeekAndConstrainAndMAPemployee.getThird();
@@ -120,6 +124,10 @@ public class HRManagerShiftController {
         }
         return s;
 
+    }
+
+    public Week getWeek() {
+        return this.CurrentSchedule.getFirst();
     }
     public String toStringforweekANDemlpoyeeinbanc(Week week,List<List<Object>> employeeTable){
         return toStringEmployeeConstraintJobTable(employeeTable)+week.weekInTableToShow();
@@ -284,7 +292,8 @@ public class HRManagerShiftController {
     }
 
     //---------------------------Functions for changing default values for a specific shift-----------------------------------------//
-    public String ChangingdefaultvaluesinSpecificShiftNUMworkertoJob(String date,String shiftype,String jobname,int numworker,Week week)throws IllegalArgumentException{
+    public String ChangingdefaultvaluesinSpecificShiftNUMworkertoJob(String date,String shiftype,String jobname,int numworker)throws IllegalArgumentException{
+        Week week=this.getWeek();
         if(jobname==null||shiftype==null||date==null||numworker<0){
             throw new IllegalArgumentException("Argumets can not be NULL");
         }
@@ -327,7 +336,8 @@ public class HRManagerShiftController {
 
     }
 
-    public String ChangingdefaultvaluesinSpecificShiftWORKHoursStart_End(String date,String shiftype,String start_time,String end_time,Week week){
+    public String ChangingdefaultvaluesinSpecificShiftWORKHoursStart_End(String date,String shiftype,String start_time,String end_time){
+        Week week=this.getWeek();
         if(start_time==null||end_time==null||shiftype==null||date==null||week==null){
             throw new IllegalArgumentException("Argumets can not be NULL");
         }
@@ -360,9 +370,10 @@ public class HRManagerShiftController {
         return "Shift Hours is change to "+start+"-"+end;
     }
 
-    public String ChangingdefaultvaluesinSpecificDayDAY_OFF(String date,Week week,String bool){
+    public String ChangingdefaultvaluesinSpecificDayDAY_OFF(String date,String bool){
+        Week week=this.getWeek();
         if(date==null||week==null||bool==null){
-            throw new IllegalArgumentException("Argumets can not be NULL");
+            throw new IllegalArgumentException("Arguments can not be NULL");
         }
         //-------date------//
         LocalDate dateToCheck= LocalDate.parse(date);
@@ -446,7 +457,6 @@ public class HRManagerShiftController {
 
         return shiftype+" Shift Hours is change to "+start+"-"+end;
     }
-
 
 
 }

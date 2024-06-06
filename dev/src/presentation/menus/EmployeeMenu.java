@@ -34,7 +34,7 @@ public class EmployeeMenu {
                     goToConstraintsMenu(scanner);
                     break;
                 case 3:
-                    showShifts();
+                    showShifts(scanner);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -99,7 +99,13 @@ public class EmployeeMenu {
         System.out.println(constraints);
     }
 
-    private void showShifts() {
-
+    private void showShifts(Scanner scanner) {
+        System.out.print("Enter branch number: ");
+        int branchNum = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the start date of the week (YYYY-MM-DD): ");
+        String dateStr = scanner.nextLine();
+        String result = employeeService.printingWeekHistory(branchNum, dateStr);
+        System.out.println(result);
     }
 }

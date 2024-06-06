@@ -2,6 +2,8 @@ package dev.src.service;
 
 import dev.src.Controllers.*;
 
+import java.util.List;
+
 public class HRManagerService {
     private MasterController masterController;
 
@@ -115,11 +117,68 @@ public class HRManagerService {
         }
     }
 
-//    public String makeScheduleForNextWeek(int branchNum, String date) {
-//        try {
-//            return masterController.getHR_Shift().MakeScheduleforNextWeek(branchNum, date);
-//        } catch (IllegalArgumentException e) {
-//            return e.getMessage();
-//        }
-//    }
+    public String changingDefaultValuesInShiftNumWorkersToJob(String jobName, int numWorkers) {
+        try {
+            return masterController.getHR_Shift().ChangingdefaultvaluesforALLShiftNUMworkertoJob(jobName, numWorkers);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String changingDefaultValuesInShiftWorkHours(String shiftType,String startTime, String endTime) {
+        try {
+            return masterController.getHR_Shift().ChangingdefaultvaluesforALLshiftWORKHoursStart_End(shiftType, startTime,endTime);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String makeScheduleForNextWeek(int branchNum, String date) {
+        try {
+            return masterController.getHR_Shift().MakeScheduleforNextWeek(branchNum, date).toString();
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String addEmployeeToShift( String date, List<Integer> employeeNums, String shiftType, String jobName) {
+        try {
+            return masterController.getHR_Shift().addEmployeetoshift(masterController.getHR_Shift().checkaddEmployeesToShiftsByDateANDJob(employeeNums,jobName,shiftType,date));
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String changingDefaultValuesInSpecificShiftNumWorkersToJob( String date, String shiftType, String jobName, int numWorkers) {
+        try {
+            return masterController.getHR_Shift().ChangingdefaultvaluesinSpecificShiftNUMworkertoJob(date, shiftType, jobName, numWorkers);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String changingDefaultValuesInSpecificShiftWorkHours(String date, String shiftType, String startTime, String endTime) {
+        try {
+            return masterController.getHR_Shift().ChangingdefaultvaluesinSpecificShiftWORKHoursStart_End(date, shiftType, startTime, endTime);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String changingDefaultValuesInSpecificDayOff( String date, String bool) {
+        try {
+            return masterController.getHR_Shift().ChangingdefaultvaluesinSpecificDayDAY_OFF(date, bool);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String printingWeekHistory(int branchNum, String dateStr) {
+        try {
+            return masterController.printingWeekHistory(branchNum, dateStr);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
 }

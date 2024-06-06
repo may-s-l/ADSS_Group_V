@@ -2,6 +2,8 @@ package dev.src.presentation.menus;
 
 import dev.src.service.HRManagerService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SystemManagerMenu{
@@ -37,7 +39,7 @@ public class SystemManagerMenu{
                     createJob(scanner);
                     break;
                 case 4:
-                    shiftSchedulingLogMenu(scanner);
+                    shiftScheduleMenu(scanner);
                     break;
                 case 5:
                     return;
@@ -218,12 +220,12 @@ public class SystemManagerMenu{
         System.out.println(result);
     }
 
-    private void shiftSchedulingLogMenu(Scanner scanner) {
+    private void shiftScheduleMenu(Scanner scanner) {
         while (true) {
             System.out.println("welcome to shift scheduling log menu! ");
             System.out.println("1. Go to changing default for shifts menu");
             System.out.println("2. Show shifts history");
-            System.out.println("3. Create new shift week");
+            System.out.println("3. Go to create new shift week menu");
             System.out.println("4. Back to main menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -237,7 +239,7 @@ public class SystemManagerMenu{
                     showShiftsHistory(scanner);
                     break;
                 case 3:
-//                    makeScheduleForNextWeek(scanner);
+                    shiftSchedulingLogMenu(scanner);
                     break;
                 case 4:
                     return;
@@ -273,30 +275,139 @@ public class SystemManagerMenu{
     }
 
     private void defineNumberOfWorkers(Scanner scanner) {
-        System.out.println("Defining the number of workers from each position in the shift.");
-
+        System.out.println("Defining the number of workers from each position in the shift:");
+        System.out.print("Enter job name: ");
+        String jobName = scanner.nextLine();
+        System.out.print("Enter the number of worker for this job: ");
+        int numWorkers = scanner.nextInt();
+        scanner.nextLine();
+        String result = managerService.changingDefaultValuesInShiftNumWorkersToJob(jobName, numWorkers);
+        System.out.println(result);
     }
 
     private void setShiftsHours(Scanner scanner) {
-        System.out.println("Setting shifts hours.");
-
+        System.out.println("Setting shifts hours:");
+        System.out.print("Enter shift type (MORNING/EVENING): ");
+        String shiftType = scanner.nextLine();
+        System.out.print("Enter start time (HH:MM): ");
+        String startTime = scanner.nextLine();
+        System.out.print("Enter end time (HH:MM): ");
+        String endTime = scanner.nextLine();
+        String result = managerService.changingDefaultValuesInShiftWorkHours(shiftType,startTime, endTime);
+        System.out.println(result);
     }
 
     private void showShiftsHistory(Scanner scanner) {
-        System.out.println("Showing shifts history.");
-
+        System.out.print("Enter branch number: ");
+        int branchNum = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the start date of the week (YYYY-MM-DD): ");
+        String dateStr = scanner.nextLine();
+        String result = managerService.printingWeekHistory(branchNum, dateStr);
+        System.out.println(result);
     }
 
 
-//    private void makeScheduleForNextWeek(Scanner scanner) {
-//        System.out.print("Enter branch number: ");
-//        int branchNum = scanner.nextInt();
-//        scanner.nextLine();
-//        System.out.print("Enter start date of the week (YYYY-MM-DD): ");
-//        String date = scanner.nextLine();
-//        String result = managerService.makeScheduleForNextWeek(branchNum, date);
-//        System.out.println(result);
-//    }
+    private void shiftSchedulingLogMenu(Scanner scanner) {
+        while (true) {
+            System.out.println("Welcome to shift scheduling log menu!");
+            System.out.println("1. Make schedule for next week");
+            System.out.println("2. Add employee to shift");
+            System.out.println("3. Change default number of workers for a job in a specific shift");
+            System.out.println("4. Change work hours for a specific shift");
+            System.out.println("5. Change day off setting for a specific day");
+            System.out.println("6. Back to main menu");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    makeScheduleForNextWeek(scanner);
+                    break;
+                case 2:
+                    addEmployeeToShift(scanner);
+                    break;
+                case 3:
+                    changeDefaultNumWorkers(scanner);
+                    break;
+                case 4:
+                    changeWorkHours(scanner);
+                    break;
+                case 5:
+                    changeDayOff(scanner);
+                    break;
+                case 6:
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private void makeScheduleForNextWeek(Scanner scanner) {
+        System.out.print("Enter branch number: ");
+        int branchNum = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter start date of the week (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        String result = managerService.makeScheduleForNextWeek(branchNum, date);
+        System.out.println(result);
+    }
+
+    private void addEmployeeToShift(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter employee numbers (comma-separated): ");
+        String[] empNums = scanner.nextLine().split(",");
+        List<Integer> empNumList = new ArrayList<>();
+        for (String num : empNums) {
+            empNumList.add(Integer.parseInt(num.trim()));
+        }
+        System.out.print("Enter shift type (MORNING/EVENING): ");
+        String shiftType = scanner.nextLine();
+        System.out.print("Enter job name: ");
+        String jobName = scanner.nextLine();
+        String result = managerService.addEmployeeToShift( date, empNumList, shiftType, jobName);
+        System.out.println(result);
+    }
+
+    private void changeDefaultNumWorkers(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter shift type (MORNING/EVENING): ");
+        String shiftType = scanner.nextLine();
+        System.out.print("Enter job name: ");
+        String jobName = scanner.nextLine();
+        System.out.print("Enter number of workers: ");
+        int numWorkers = scanner.nextInt();
+        scanner.nextLine();
+        String result = managerService.changingDefaultValuesInSpecificShiftNumWorkersToJob( date, shiftType, jobName, numWorkers);
+        System.out.println(result);
+    }
+
+    private void changeWorkHours(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter shift type (MORNING/EVENING): ");
+        String shiftType = scanner.nextLine();
+        System.out.print("Enter start time (HH:MM): ");
+        String startTime = scanner.nextLine();
+        System.out.print("Enter end time (HH:MM): ");
+        String endTime = scanner.nextLine();
+        String result = managerService.changingDefaultValuesInSpecificShiftWorkHours(date, shiftType, startTime, endTime);
+        System.out.println(result);
+    }
+
+    private void changeDayOff(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter 'T' for true (day off) or 'F' for false (work day): ");
+        String bool = scanner.nextLine();
+        String result = managerService.changingDefaultValuesInSpecificDayOff(date, bool);
+        System.out.println(result);
+    }
+
 
 
 }

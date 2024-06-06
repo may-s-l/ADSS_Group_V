@@ -1,6 +1,5 @@
 package dev.src.service;
 
-import dev.src.Controllers.EmployeeConstraintController;
 import dev.src.Controllers.MasterController;
 
 public class EmployeeService {
@@ -39,6 +38,14 @@ public class EmployeeService {
     public String viewEmployeeConstraints(String employeeID) {
         try {
             return masterController.getEmployee_Constraint().getConstraintFromToday(employeeID);
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String printingWeekHistory(int branchNum, String dateStr) {
+        try {
+            return masterController.printingWeekHistory(branchNum, dateStr);
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         }

@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="in EmployeeMenu changing the constructor">
-      <change afterPath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" afterDir="false" />
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="finnish all menu for employee and manager except shifts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeDataMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagarMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +90,7 @@
       <updated>1715269328319</updated>
       <workItem from="1716542772322" duration="343000" />
       <workItem from="1716888479613" duration="15270000" />
-      <workItem from="1717533272587" duration="24566000" />
+      <workItem from="1717533272587" duration="39998000" />
     </task>
     <task id="LOCAL‎-00001" summary="starting the work">
       <created>1716235825714</created>
@@ -150,7 +148,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1717536664718</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="finnish all menu for employee and manager except shifts">
+      <created>1717682440207</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717682440207</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +180,7 @@
     <MESSAGE value="שיניתי את האילוציםבקונטרולר" />
     <MESSAGE value="add FULLDAY to enum&#10;and insert the constraint menu to employee menu" />
     <MESSAGE value="in EmployeeMenu changing the constructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="in EmployeeMenu changing the constructor" />
+    <MESSAGE value="finnish all menu for employee and manager except shifts" />
+    <option name="LAST_COMMIT_MESSAGE" value="finnish all menu for employee and manager except shifts" />
   </component>
 </project>

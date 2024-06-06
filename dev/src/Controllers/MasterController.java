@@ -3,6 +3,7 @@ package dev.src.Controllers;
 import dev.src.Domain.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,10 +53,33 @@ public class MasterController {
         return "Login failed Check ID";
     }
 
+
+    public String printingWeekHistory(int branchNum, String dateStr) {
+        if (dateStr == null) {
+            return "Date can't be null";
+        }
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            return "Invalid date format. Please use YYYY-MM-DD.";
+        }
+
+        MyMap<LocalDate, String> branchHistory = History_Shifts_temp_database.get(branchNum);
+
+        if (branchHistory == null) {
+            return "Branch not found";
+        }
+
+        String weekHistory = branchHistory.get(date);
+
+        if (weekHistory == null) {
+            return "No history found for the given week.";
+        }
+
+        return weekHistory;
+    }
+
+
 }
-
-
-
-
-
-
