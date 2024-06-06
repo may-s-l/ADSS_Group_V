@@ -110,9 +110,9 @@ public class Week {
         // Separator line
         sb.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * DayInWEEK.size() + DayInWEEK.size() + 3, "-"))).append("\n");
 
-        Set<Domain.Job> jobsToFill = Shift.getNumberofWorkersPerPositionDifult().getKeys(); // Assuming all days have the same jobs to fill
+        Set<Job> jobsToFill = Shift.getNumberofWorkersPerPositionDifult().getKeys(); // Assuming all days have the same jobs to fill
 
-        for (Domain.Job job : jobsToFill) {
+        for (Job job : jobsToFill) {
             sb.append(String.format("| %-" + jobWidth + "s |", job.getJobName()));
             for (LocalDate date : DayInWEEK.getKeys()) {
                 Day day = DayInWEEK.get(date);
