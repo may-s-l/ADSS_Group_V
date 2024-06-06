@@ -52,7 +52,7 @@ public class HRManagerEmployeeController {
         Branch branch_to_emp = null;
         List<Branch> Allbranch=getAllBranch();
         for (Branch b : Allbranch ) {
-            if (b.getBranchName().equals(branch)) {
+            if (b.getBranchName().trim().equals(branch.trim())) {
                 branch_to_emp = b;
                 break;
             }

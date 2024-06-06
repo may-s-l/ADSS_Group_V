@@ -81,7 +81,7 @@ public class Branch {
     }
     @Override
     public String toString() {
-        return "Branch name: " + name + '\n' +
+        return  "Branch name: " + name + '\n' +
                 "address: " + address + '\n' +
                 "branch Num: " + branchNum +'\n' +
                 "managerEmployee: " + managerEmployee ;
