@@ -75,6 +75,9 @@ public abstract class Shift {
         if(job==null){
             return false;
         }
+        if(NumberofWorkersPerPositionDifult.containsKey(job)){
+            return true;
+        }
         NumberofWorkersPerPositionDifult.put(job,1);
         return true;
     }

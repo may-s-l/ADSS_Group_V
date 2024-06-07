@@ -17,7 +17,6 @@ public class HRManagerShiftController {
     private List<Job> Employeejobs_temp_database;
     private MyMap<String, Employee> Employees_temp_database;//String key ID
     private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
-
     private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
     private MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> CurrentSchedule;
 
@@ -78,7 +77,7 @@ public class HRManagerShiftController {
         jobname=jobname.toUpperCase();
         Job job = null;
         for (Job j : shiftassignment.getAllJobInShift()) {
-            if (j.getJobName() == jobname) {
+            if (Objects.equals(j.getJobName(), jobname)) {
                 job = j;
                 break;
             }
