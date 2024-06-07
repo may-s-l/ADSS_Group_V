@@ -135,12 +135,26 @@ public class Week {
                         Shift morningShift = day.getShiftsInDay()[0];
                         Shift eveningShift = day.getShiftsInDay()[1];
 
-                        List<Employee> morningShiftEmployees = morningShift.getEmployeeinshiftSet().stream()
-                                .filter(emp -> emp.getJobs().contains(job))
-                                .collect(Collectors.toList());
-                        List<Employee> eveningShiftEmployees = eveningShift.getEmployeeinshiftSet().stream()
-                                .filter(emp -> emp.getJobs().contains(job))
-                                .collect(Collectors.toList());
+
+                        List<Employee> morningShiftEmployees = new ArrayList<>();
+                        for (Employee emp : morningShift.getEmployeeinshiftSet()) {
+                            if (morningShift.getEmployeeinshiftMap().get(emp)==job) {
+                                morningShiftEmployees.add(emp);
+                            }
+                        }
+                        List<Employee> eveningShiftEmployees = new ArrayList<>();
+                        for (Employee emp : morningShift.getEmployeeinshiftSet()) {
+                            if (eveningShift.getEmployeeinshiftMap().get(emp)==job) {
+                                eveningShiftEmployees.add(emp);
+                            }
+                        }
+
+//                        List<Employee> morningShiftEmployees = morningShift.getEmployeeinshiftSet().stream()
+//                                .filter(emp -> emp.getJobs().contains(job))
+//                                .collect(Collectors.toList());
+//                        List<Employee> eveningShiftEmployees = eveningShift.getEmployeeinshiftSet().stream()
+//                                .filter(emp -> emp.getJobs().contains(job))
+//                                .collect(Collectors.toList());
 
                         morningRequired = String.valueOf(morningShift.getNumberofWorkersPerJob(job));
                         eveningRequired = String.valueOf(eveningShift.getNumberofWorkersPerJob(job));
