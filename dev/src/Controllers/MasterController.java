@@ -46,7 +46,7 @@ public class MasterController {
         if(this.Employees_temp_database.containsKey(ID)){
             Employee employee = this.Employees_temp_database.get(ID);
             if(employee instanceof ManagerEmployee){
-                return "HRManager";
+                return "HR-MANAGER";
             }
             return "Employee";
         }

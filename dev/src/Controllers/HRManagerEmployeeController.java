@@ -64,8 +64,8 @@ public class HRManagerEmployeeController {
         LocalDate date = LocalDate.parse(start_date);
         LocalDate now = LocalDate.now();
         LocalDate twoWeeksLater = now.plusWeeks(2);
-        if (!date.isBefore(now) && !date.isAfter(twoWeeksLater)) {
-            throw new IllegalArgumentException("Date of strat cannot be before today or after two weeks from today");
+        if (date.isAfter(twoWeeksLater)) {
+            throw new IllegalArgumentException("Date of strat cannot be after two weeks from today");
         }
         //-------Enums-------//
         job_type=job_type.toUpperCase();
@@ -131,8 +131,8 @@ public class HRManagerEmployeeController {
         LocalDate date = LocalDate.parse(start_date);
         LocalDate now = LocalDate.now();
         LocalDate twoWeeksLater = now.plusWeeks(2);
-        if (!date.isBefore(now) && !date.isAfter(twoWeeksLater)) {
-            throw new IllegalArgumentException("Date of strat cannot be before today or after two weeks from today");
+        if (date.isAfter(twoWeeksLater)) {
+            throw new IllegalArgumentException("Date of strat cannot be after two weeks from today");
         }
         //-------Enums-------//
         job_type=job_type.toUpperCase();

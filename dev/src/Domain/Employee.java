@@ -158,11 +158,11 @@ public class Employee {
     }
 
     public String toStringfullinfo() {
-        return "Name: " + Name + "ID: " + ID + '\n' +
-                "employeeNum=: " + employeeNum +
-                " Bank_account: " + Bank_account + '\n' +
-                "Branch: " + Branch +
-                "Jobs: " + Jobs+ "\n"+
+        return "Name:" + Name + ", ID:" + ID + '\n' +
+                "employeeNum:" + employeeNum +
+                " Bank_account:" + Bank_account + '\n' +
+                "Branch:" + Branch.getBranchAddress() +
+                ", Jobs:" + Jobs+ "\n"+
                 "terms" + terms ;
 
     }

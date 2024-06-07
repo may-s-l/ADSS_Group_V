@@ -18,7 +18,7 @@ public class EmployeeConstraintController {
     }
 
     public String returnEmployeeDetails(String id) {
-        return employeesTempDatabase.get(id).toString();
+        return employeesTempDatabase.get(id).toStringfullinfo();
     }
 
     public void addConstraint(String employeeID, String sdate, String sshiftType) throws IllegalArgumentException {
@@ -106,11 +106,11 @@ public class EmployeeConstraintController {
 
         LocalDate today = LocalDate.now();
         MyMap<LocalDate, Constraint> futureConstraints = new MyMap<>();
-        String stringFutureConstraints=null;
+        String stringFutureConstraints="";
         for (LocalDate date : constraintMyMap.getKeys()) {
             if (!date.isBefore(today)) {
                 futureConstraints.put(date, constraintMyMap.get(date));
-                stringFutureConstraints+=constraintMyMap.get(date).toString() + "/n";
+                stringFutureConstraints=constraintMyMap.get(date).toString() + "\n";
             }
         }
         if (futureConstraints == null) {

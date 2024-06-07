@@ -74,9 +74,16 @@ public class Login_menu {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            int i=0;
             while ((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
-                MC.getHR_Employee().createBranch(row[0], row[1]);
+                i+=1;
+                if(i==1){
+                    continue;
+                }
+                else {
+                    String[] row = line.split(",");
+                    MC.getHR_Employee().createBranch(row[0], row[1]);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,12 +98,19 @@ public class Login_menu {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            int i=0;
             while ((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
-                if (row[0].equals("HRManager")) {
-                    MC.getHR_Employee().createManagementJob(row[0]);
-                } else {
-                    MC.getHR_Employee().createJob(row[0]);
+                i+=1;
+                if(i==1){
+                    continue;
+                }
+                else {
+                    String[] row = line.split(",");
+                    if (row[0].equals("HR-MANAGER")) {
+                        MC.getHR_Employee().createManagementJob(row[0]);
+                    } else {
+                        MC.getHR_Employee().createJob(row[0]);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -112,19 +126,26 @@ public class Login_menu {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            int i=0;
             while ((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
-                try {
-                    double salary = Double.parseDouble(row[4]);
-                    double hours = Double.parseDouble(row[6]);
+                i+=1;
+                if(i==1){
+                    continue;
+                }
+                else {
+                    String[] row = line.split(",");
+                    try {
+                        double salary = Double.parseDouble(row[4]);
+                        double hours = Double.parseDouble(row[6]);
 
-                    if (row[9].equals("HR-MANAGER")) {
-                        MC.getHR_Employee().createManagmentEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
-                    } else {
-                        MC.getHR_Employee().createEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
+                        if (row[9].equals("HR-MANAGER")) {
+                            MC.getHR_Employee().createManagmentEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
+                        } else {
+                            MC.getHR_Employee().createEmployee(row[0], row[1], row[2], row[3], salary, row[5], hours, row[7], row[8], row[9]);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid number format in row: " + String.join(", ", row));
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid number format in row: " + String.join(", ", row));
                 }
             }
         } catch (IOException e) {

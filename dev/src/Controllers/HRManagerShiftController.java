@@ -48,7 +48,7 @@ public class HRManagerShiftController {
         }
         MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> pair = new MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>>(Weekforassignment,TableofEmployeeandConstrin,BranchemployeeBYemployeeNUM);
         this.CurrentSchedule=pair;
-        return "Schedule Successfully created:) ";
+        return "Schedule Successfully created:) \n"+ toStringforweekANDemlpoyeeinbanc(pair.getFirst(),pair.getSecond());
     }
     public List<Object> checkaddEmployeesToShiftsByDateANDJob(List<Integer> employeeNum,String jobname,String shiftype,String date) throws IllegalArgumentException{
         Week week=this.getWeek();
@@ -60,6 +60,10 @@ public class HRManagerShiftController {
         if(!((dateToCheck.isEqual(week.getStart_date()) || dateToCheck.isAfter(week.getStart_date())) && (dateToCheck.isEqual(week.getEnd_date()) || dateToCheck.isBefore(week.getEnd_date())))){
             throw new IllegalArgumentException("Date must be in week of work");
         }
+        if(week.getDayOfWeek(dateToCheck).isIsdayofrest()){
+            throw new IllegalArgumentException("THIS day is day off");
+        }
+
         //-------EnumShiftType-------//
         shiftype=shiftype.toUpperCase();
         if (!shiftype.equals("MORNING") && !shiftype.equals("EVENING")) {
@@ -71,6 +75,7 @@ public class HRManagerShiftController {
             i=0;
         }
         Shift shiftassignment=week.getDayOfWeek(dateToCheck).getShiftsInDay()[i];
+        jobname=jobname.toUpperCase();
         Job job = null;
         for (Job j : shiftassignment.getAllJobInShift()) {
             if (j.getJobName() == jobname) {

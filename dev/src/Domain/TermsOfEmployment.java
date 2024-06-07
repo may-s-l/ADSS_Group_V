@@ -73,12 +73,17 @@ public class TermsOfEmployment {
 
     @Override
     public String toString() {
-        return "Terms Of Employment " +
-                "vacation day:" + vacationDay +
-                "job type: " + jt + ", salary type=" + st+ "\n"+
-                "Start date: " + Start_date + "\n"+
-                "End date: " + End_date +
-                "Salary: " + Salary ;
+        String S= "Terms Of Employment: \n" +
+                "Salary: " + Salary+"\n"+
+                "vacation day:" + vacationDay + ", job type: " + jt + ", salary type=" + st+ "\n"+
+                "Start date: " + Start_date + ", End date: ";
+        if(this.End_date==null){
+            S+="----";
+        }
+        else {
+            S+= this.End_date;
+        }
+        return S;
     }
 
 }

@@ -31,6 +31,6 @@ public class Constraint {
     }
     @Override
     public String toString() {
-        return "can't work on "+this.date.getDayOfWeek()+" "+this.shiftType.toString();
+        return "can't work on "+this.date+" "+this.date.getDayOfWeek()+" "+this.shiftType.toString();
     }
 }
