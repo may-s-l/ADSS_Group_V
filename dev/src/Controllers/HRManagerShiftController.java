@@ -53,7 +53,7 @@ public class HRManagerShiftController {
     public List<Object> checkaddEmployeesToShiftsByDateANDJob(List<Integer> employeeNum,String jobname,String shiftype,String date) throws IllegalArgumentException{
         Week week=this.getWeek();
         if(employeeNum==null||employeeNum.isEmpty()||jobname==null||shiftype==null||date==null){
-            throw new IllegalArgumentException("Argumets can not be NULL");
+            throw new IllegalArgumentException("Arguments can not be NULL");
         }
         //-------date------//
         LocalDate dateToCheck= LocalDate.parse(date);
@@ -127,7 +127,7 @@ public class HRManagerShiftController {
             }
             shift.addEmployeeToShift(emp_to_workon,job);
         }
-        return s;
+        return s + "\n"+ toStringforweekANDemlpoyeeinbanc(WeekAndConstrainAndMAPemployee.getFirst(),WeekAndConstrainAndMAPemployee.getSecond());
 
     }
     public String removeEmployeefromShift(int employeenum, String shiftype,String date){

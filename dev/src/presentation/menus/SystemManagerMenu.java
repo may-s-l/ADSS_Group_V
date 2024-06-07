@@ -181,7 +181,7 @@ public class SystemManagerMenu{
         String ID = scanner.nextLine();
         System.out.print("Enter job name: ");
         String jobName = scanner.nextLine();
-        String result = managerService.addJobForEmployee(ID, jobName);
+        String result = managerService.addJobForEmployee(ID, jobName.toUpperCase());
         System.out.println(result);
     }
 
@@ -200,7 +200,7 @@ public class SystemManagerMenu{
         String ID = scanner.nextLine();
         System.out.print("Enter new job type (FULL/PART): ");
         String jobType = scanner.nextLine();
-        String result = managerService.updateEmployeeJobType(ID, jobType);
+        String result = managerService.updateEmployeeJobType(ID, jobType.toUpperCase());
         System.out.println(result);
     }
 
@@ -209,14 +209,14 @@ public class SystemManagerMenu{
         String ID = scanner.nextLine();
         System.out.print("Enter new salary type (GLOBAL/HOURLY): ");
         String salaryType = scanner.nextLine();
-        String result = managerService.updateEmployeeSalaryType(ID, salaryType);
+        String result = managerService.updateEmployeeSalaryType(ID, salaryType.toUpperCase());
         System.out.println(result);
     }
 
     private void createJob(Scanner scanner) {
         System.out.print("Enter job name: ");
         String jobName = scanner.nextLine();
-        String result = managerService.createJob(jobName);
+        String result = managerService.createJob(jobName.toUpperCase());
         System.out.println(result);
     }
 
@@ -313,10 +313,11 @@ public class SystemManagerMenu{
             System.out.println("Welcome to shift scheduling log menu!");
             System.out.println("1. Make schedule for next week");
             System.out.println("2. Add employee to shift");
-            System.out.println("3. Change default number of workers for a job in a specific shift");
-            System.out.println("4. Change work hours for a specific shift");
-            System.out.println("5. Change day off setting for a specific day");
-            System.out.println("6. Back to shift scheduling log menu");
+            System.out.println("3. Remove employee from shift");
+            System.out.println("4. Change default number of workers for a job in a specific shift");
+            System.out.println("5. Change work hours for a specific shift");
+            System.out.println("6. Change day off setting for a specific day");
+            System.out.println("7. Back to shift scheduling log menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -329,15 +330,18 @@ public class SystemManagerMenu{
                     addEmployeeToShift(scanner);
                     break;
                 case 3:
-                    changeDefaultNumWorkers(scanner);
+                    removeEmployeeFromShift(scanner);
                     break;
                 case 4:
-                    changeWorkHours(scanner);
+                    changeDefaultNumWorkers(scanner);
                     break;
                 case 5:
-                    changeDayOff(scanner);
+                    changeWorkHours(scanner);
                     break;
                 case 6:
+                    changeDayOff(scanner);
+                    break;
+                case 7:
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -368,7 +372,24 @@ public class SystemManagerMenu{
         String shiftType = scanner.nextLine();
         System.out.print("Enter job name: ");
         String jobName = scanner.nextLine();
-        String result = managerService.addEmployeeToShift( date, empNumList, shiftType, jobName);
+        String result = managerService.removeEmployeeFromShiftService( date, empNumList, shiftType.toUpperCase(), jobName.toUpperCase());
+        System.out.println(result);
+    }
+
+    private void removeEmployeeFromShift(Scanner scanner) {
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        System.out.print("Enter employee numbers (comma-separated): ");
+        String[] empNums = scanner.nextLine().split(",");
+        List<Integer> empNumList = new ArrayList<>();
+        for (String num : empNums) {
+            empNumList.add(Integer.parseInt(num.trim()));
+        }
+        System.out.print("Enter shift type (MORNING/EVENING): ");
+        String shiftType = scanner.nextLine();
+        System.out.print("Enter job name: ");
+        String jobName = scanner.nextLine();
+        String result = managerService.addEmployeeToShift( date, empNumList, shiftType.toUpperCase(), jobName.toUpperCase());
         System.out.println(result);
     }
 
@@ -395,7 +416,7 @@ public class SystemManagerMenu{
         String startTime = scanner.nextLine();
         System.out.print("Enter end time (HH:MM): ");
         String endTime = scanner.nextLine();
-        String result = managerService.changingDefaultValuesInSpecificShiftWorkHours(date, shiftType, startTime, endTime);
+        String result = managerService.changingDefaultValuesInSpecificShiftWorkHours(date, shiftType.toUpperCase(), startTime, endTime);
         System.out.println(result);
     }
 

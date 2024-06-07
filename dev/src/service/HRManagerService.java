@@ -149,6 +149,14 @@ public class HRManagerService {
         }
     }
 
+    public String removeEmployeeFromShiftService( String date, List<Integer> employeeNums, String shiftType, String jobName) {
+        try {
+            return masterController.getHR_Shift().addEmployeetoshift(masterController.getHR_Shift().checkaddEmployeesToShiftsByDateANDJob(employeeNums,jobName,shiftType,date));
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
+
     public String changingDefaultValuesInSpecificShiftNumWorkersToJob( String date, String shiftType, String jobName, int numWorkers) {
         try {
             return masterController.getHR_Shift().ChangingdefaultvaluesinSpecificShiftNUMworkertoJob(date, shiftType, jobName, numWorkers);

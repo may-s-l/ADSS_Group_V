@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="finish the menu">
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="little changing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Branch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +87,7 @@
       <updated>1715269328319</updated>
       <workItem from="1716542772322" duration="343000" />
       <workItem from="1716888479613" duration="15270000" />
-      <workItem from="1717533272587" duration="58517000" />
+      <workItem from="1717533272587" duration="62095000" />
     </task>
     <task id="LOCAL‎-00001" summary="starting the work">
       <created>1716235825714</created>
@@ -164,7 +159,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1717709286357</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL‎-00011" summary="little changing">
+      <created>1717768200619</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717768200619</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,27 +193,7 @@
     <MESSAGE value="in EmployeeMenu changing the constructor" />
     <MESSAGE value="finnish all menu for employee and manager except shifts" />
     <MESSAGE value="finish the menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish the menu" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
-          <line>432</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
-          <line>433</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="little changing" />
+    <option name="LAST_COMMIT_MESSAGE" value="little changing" />
   </component>
 </project>
