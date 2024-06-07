@@ -34,8 +34,14 @@ public class Day {
 
     public void setIsdayofrest(boolean isdayofrest) {
         this.isdayofrest = isdayofrest;
-        if (isdayofrest && shiftsInDay!=null){
-            shiftsInDay=null;
+        if (isdayofrest) {
+            shiftsInDay = null;
+        } else {
+            if (shiftsInDay == null) {
+                shiftsInDay = new Shift[2];
+                shiftsInDay[0] = new MorningShift(this.Date);
+                shiftsInDay[1] = new EveningShift(this.Date);
+            }
         }
     }
 

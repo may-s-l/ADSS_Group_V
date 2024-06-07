@@ -149,9 +149,9 @@ public class HRManagerService {
         }
     }
 
-    public String removeEmployeeFromShiftService( String date, List<Integer> employeeNums, String shiftType, String jobName) {
+    public String removeEmployeeFromShiftService(String date, int employeeNum, String shiftType) {
         try {
-            return masterController.getHR_Shift().addEmployeetoshift(masterController.getHR_Shift().checkaddEmployeesToShiftsByDateANDJob(employeeNums,jobName,shiftType,date));
+            return masterController.getHR_Shift().removeEmployeefromShift(employeeNum,shiftType,date);
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         }

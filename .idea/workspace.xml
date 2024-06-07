@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="little changing">
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="little chang">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Day.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" afterDir="false" />
     </list>
@@ -87,7 +88,7 @@
       <updated>1715269328319</updated>
       <workItem from="1716542772322" duration="343000" />
       <workItem from="1716888479613" duration="15270000" />
-      <workItem from="1717533272587" duration="62095000" />
+      <workItem from="1717533272587" duration="67323000" />
     </task>
     <task id="LOCAL‎-00001" summary="starting the work">
       <created>1716235825714</created>
@@ -166,7 +167,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1717768200619</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL‎-00012" summary="little chang">
+      <created>1717771536729</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717771536729</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +202,29 @@
     <MESSAGE value="finnish all menu for employee and manager except shifts" />
     <MESSAGE value="finish the menu" />
     <MESSAGE value="little changing" />
-    <option name="LAST_COMMIT_MESSAGE" value="little changing" />
+    <MESSAGE value="little chang" />
+    <option name="LAST_COMMIT_MESSAGE" value="little chang" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
+          <line>106</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="empMAP" />
+        <watch expression="empMAP" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

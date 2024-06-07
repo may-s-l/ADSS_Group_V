@@ -164,7 +164,7 @@ public class HRManagerShiftController {
             throw new IllegalArgumentException("Employee is not work in this shift");
         }
         MAP.remove(emp);
-        return emp+" successfully removed\n";
+        return emp+" successfully removed\n" +  toStringforweekANDemlpoyeeinbanc(week, this.CurrentSchedule.getSecond());
 
     }
     public Week getWeek() {

@@ -372,24 +372,19 @@ public class SystemManagerMenu{
         String shiftType = scanner.nextLine();
         System.out.print("Enter job name: ");
         String jobName = scanner.nextLine();
-        String result = managerService.removeEmployeeFromShiftService( date, empNumList, shiftType.toUpperCase(), jobName.toUpperCase());
+        String result = managerService.addEmployeeToShift( date, empNumList, shiftType.toUpperCase(), jobName.toUpperCase());
         System.out.println(result);
     }
 
     private void removeEmployeeFromShift(Scanner scanner) {
         System.out.print("Enter date (YYYY-MM-DD): ");
         String date = scanner.nextLine();
-        System.out.print("Enter employee numbers (comma-separated): ");
-        String[] empNums = scanner.nextLine().split(",");
-        List<Integer> empNumList = new ArrayList<>();
-        for (String num : empNums) {
-            empNumList.add(Integer.parseInt(num.trim()));
-        }
+        System.out.print("Enter employee number: ");
+        int workNum = scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Enter shift type (MORNING/EVENING): ");
         String shiftType = scanner.nextLine();
-        System.out.print("Enter job name: ");
-        String jobName = scanner.nextLine();
-        String result = managerService.addEmployeeToShift( date, empNumList, shiftType.toUpperCase(), jobName.toUpperCase());
+        String result = managerService.removeEmployeeFromShiftService(date, workNum, shiftType.toUpperCase());
         System.out.println(result);
     }
 
@@ -403,7 +398,7 @@ public class SystemManagerMenu{
         System.out.print("Enter number of workers: ");
         int numWorkers = scanner.nextInt();
         scanner.nextLine();
-        String result = managerService.changingDefaultValuesInSpecificShiftNumWorkersToJob( date, shiftType, jobName, numWorkers);
+        String result = managerService.changingDefaultValuesInSpecificShiftNumWorkersToJob( date, shiftType.toUpperCase(), jobName.toUpperCase(), numWorkers);
         System.out.println(result);
     }
 
