@@ -4,7 +4,11 @@ import dev.src.Domain.*;
 import dev.src.Domain.Enums.*;
 
 import java.time.DateTimeException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -44,11 +48,35 @@ public class EmployeeConstraintController {
         if (employee == null) {
             throw new IllegalArgumentException("Employee not found.");
         }
-
-        // Check if the date is in the past
+        // Check if the date is in the past ---or in curent work day---
         if (date.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Date is in the past.");
         }
+        LocalDate today=LocalDate.now();
+        LocalDate cant = LocalDate.now();
+        List<LocalDate>DAYS_OF_CORENT_WORK_WEEK=new ArrayList<LocalDate>();
+        DAYS_OF_CORENT_WORK_WEEK.add(today);
+        if(today.getDayOfWeek()==DayOfWeek.THURSDAY||today.getDayOfWeek()==DayOfWeek.FRIDAY||today.getDayOfWeek()==DayOfWeek.SATURDAY){
+            throw new IllegalArgumentException("Constraints can only be added from Sunday to Thursday");
+        }
+        if(today.getDayOfWeek()==DayOfWeek.SUNDAY){
+            DAYS_OF_CORENT_WORK_WEEK.add(today);
+            cant=cant.plusDays(1);
+            while (cant.getDayOfWeek()!=DayOfWeek.SUNDAY){
+                DAYS_OF_CORENT_WORK_WEEK.add(cant);
+                cant.plusDays(1);
+            }
+        }
+        else {
+            while (cant.getDayOfWeek()!=DayOfWeek.SUNDAY){
+                DAYS_OF_CORENT_WORK_WEEK.add(cant);
+                cant.plusDays(1);
+            }
+        }
+        if(DAYS_OF_CORENT_WORK_WEEK.contains(date)||date.isEqual(cant.plusWeeks(1))||date.isAfter(cant.plusWeeks(1))){
+            throw new IllegalArgumentException("Constraints can only be added for the next week!");
+        }
+
 
         // Check if the constraint already exists
         MyMap<LocalDate, Constraint> constraints = employee.getConstraintMyMap();

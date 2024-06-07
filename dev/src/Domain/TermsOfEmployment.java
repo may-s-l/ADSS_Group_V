@@ -75,7 +75,7 @@ public class TermsOfEmployment {
     public String toString() {
         String S= "Terms Of Employment: \n" +
                 "Salary: " + Salary+"\n"+
-                "vacation day:" + vacationDay + ", job type: " + jt + ", salary type=" + st+ "\n"+
+                "vacation day:" + vacationDay + ", job type: " + jt + ", salary type:" + st+ "\n"+
                 "Start date: " + Start_date + ", End date: ";
         if(this.End_date==null){
             S+="----";
