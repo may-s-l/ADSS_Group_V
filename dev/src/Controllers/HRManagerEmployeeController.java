@@ -107,7 +107,7 @@ public class HRManagerEmployeeController {
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
         for (Job j : this.Employeejobs_temp_database) {
-            if (j.getJobName().equals(jobname)&&j instanceof ManagementJob) {
+            if (j.getJobName().trim().equals(jobname)&&j instanceof ManagementJob) {
                 job_to_emp = j;
                 break;
             }
