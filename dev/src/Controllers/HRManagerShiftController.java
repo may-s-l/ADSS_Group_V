@@ -17,6 +17,7 @@ public class HRManagerShiftController {
     private List<Job> Employeejobs_temp_database;
     private MyMap<String, Employee> Employees_temp_database;//String key ID
     private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
+
     private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
     private MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> CurrentSchedule;
 
@@ -77,7 +78,7 @@ public class HRManagerShiftController {
         jobname=jobname.toUpperCase();
         Job job = null;
         for (Job j : shiftassignment.getAllJobInShift()) {
-            if (Objects.equals(j.getJobName(), jobname)) {
+            if (j.getJobName().equals(jobname)) {
                 job = j;
                 break;
             }
@@ -116,7 +117,7 @@ public class HRManagerShiftController {
                 s+=emp_to_workon.toString()+" Can't work as "+job.getJobName()+"\n";
                 continue;
             }
-            if(emp_to_workon.getConstraintByDate(shift.getDate())!=null&&(emp_to_workon.getConstraintByDate(shift.getDate()).getShiftType()==shift.getShiftType()||emp_to_workon.getConstraintByDate(shift.getDate()).getShiftType()== ShiftType.FULLDAY)){
+            if(emp_to_workon.getConstraintByDate(shift.getDate())!=null&&(emp_to_workon.getConstraintByDate(shift.getDate()).getShiftType().equals(shift.getShiftType())||emp_to_workon.getConstraintByDate(shift.getDate()).getShiftType()== ShiftType.FULLDAY)){
                 s+=emp_to_workon.toString()+" there is a shift constraint "+emp_to_workon.getConstraintByDate(shift.getDate()).toString()+"\n";
                 continue;
             }
@@ -178,7 +179,7 @@ public class HRManagerShiftController {
         Set<String> employeeIDs = employeeInBranch.getKeys();
         LocalDate startDay = LocalDate.parse(date);
 
-        if (startDay.getDayOfWeek() == DayOfWeek.SUNDAY) {
+        if (startDay.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
             for (String id : employeeIDs) {
                 List<Constraint> constraintList = new ArrayList<>();
                 Employee emp = employeeInBranch.get(id);
@@ -212,7 +213,7 @@ public class HRManagerShiftController {
     }
     private Week createWeekforassignment(String date) {
         LocalDate Ldate = LocalDate.parse(date);
-        if (Ldate.getDayOfWeek() == DayOfWeek.SUNDAY) {
+        if (Ldate.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
             Week week = new Week(Ldate);
             Day day;
             for (int i = 0; i < 7; i++) {
@@ -285,7 +286,7 @@ public class HRManagerShiftController {
     public boolean isItTheTIMEtoAssignmenttToShifts(){
         LocalDate today= LocalDate.now();
         DayOfWeek week_day=today.getDayOfWeek();
-        if(week_day==THURSDAY||week_day==FRIDAY){
+        if(week_day.equals(THURSDAY)||week_day.equals(FRIDAY)){
             return true;
         }
         return false;
@@ -452,7 +453,7 @@ public class HRManagerShiftController {
 
         Job job = null;
         for (Job j : this.Employeejobs_temp_database) {
-            if (j.getJobName() == jobname) {
+            if (j.getJobName().equals(jobname)) {
                 job = j;
                 break;
             }
@@ -461,7 +462,7 @@ public class HRManagerShiftController {
             throw new IllegalArgumentException("Job does not exist");
         }
         if(numworker==0){
-            if (job.getJobName()=="SHIFT MANAGER"){
+            if (job.getJobName().equals("SHIFT MANAGER")){
                 throw new IllegalArgumentException("Must be minimum 1 SHIFT MANAGER");
             }
         }

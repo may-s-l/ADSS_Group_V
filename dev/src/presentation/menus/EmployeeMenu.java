@@ -22,6 +22,7 @@ public class EmployeeMenu {
             System.out.println("1. View employee details");
             System.out.println("2. Go to the Constraints menu");
             System.out.println("3. Show shifts");
+            System.out.println("4. Back to Login menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -36,6 +37,8 @@ public class EmployeeMenu {
                 case 3:
                     showShifts(scanner);
                     break;
+                case 4:
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -53,7 +56,7 @@ public class EmployeeMenu {
             System.out.println("1. Add constraint");
             System.out.println("2. Remove constraint");
             System.out.println("3. View constraints");
-            System.out.println("4. Back to main menu");
+            System.out.println("4. Back to employee menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();

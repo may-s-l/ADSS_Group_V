@@ -69,7 +69,7 @@ public class MasterController {
         MyMap<LocalDate, String> branchHistory = History_Shifts_temp_database.get(branchNum);
 
         if (branchHistory == null) {
-            return "Branch not found";
+            return "Branch not found or does not yet have a placement log";
         }
 
         String weekHistory = branchHistory.get(date);

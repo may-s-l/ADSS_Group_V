@@ -103,6 +103,9 @@ public class EmployeeConstraintController {
         } catch (DateTimeException e) {
             throw new IllegalArgumentException("Invalid date format. Please use YYYY-MM-DD.");
         }
+        LocalDate today=LocalDate.now();
+        if (date.isBefore(today))
+            throw  new IllegalArgumentException("A past constraint cannot be deleted");
 
         // Validate and parse the shift type
         try {
@@ -128,7 +131,7 @@ public class EmployeeConstraintController {
     public String getConstraintFromToday(String employeeID) {
         MyMap<LocalDate, Constraint> constraintMyMap=employeesTempDatabase.get(employeeID).getConstraintMyMap();
 
-        if (constraintMyMap == null) {
+        if (constraintMyMap == null || constraintMyMap.size()==0) {
             return "No constraints found for this employee.";
         }
 

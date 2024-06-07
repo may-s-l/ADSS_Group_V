@@ -23,7 +23,7 @@ public class SystemManagerMenu{
             System.out.println("2. Update employee details");
             System.out.println("3. Create job");
             System.out.println("4. Go to Shift scheduling log menu");
-            System.out.println("5. Exit");
+            System.out.println("5. Back to Login menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -88,7 +88,7 @@ public class SystemManagerMenu{
             System.out.println("7. Update employee vacation days");
             System.out.println("8. Update employee job type");
             System.out.println("9. Update employee salary type");
-            System.out.println("10. Back to main menu");
+            System.out.println("10. Back to manager menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -226,7 +226,7 @@ public class SystemManagerMenu{
             System.out.println("1. Go to changing default for shifts menu");
             System.out.println("2. Show shifts history");
             System.out.println("3. Go to create new shift week menu");
-            System.out.println("4. Back to main menu");
+            System.out.println("4. Back to manager menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -281,7 +281,7 @@ public class SystemManagerMenu{
         System.out.print("Enter the number of worker for this job: ");
         int numWorkers = scanner.nextInt();
         scanner.nextLine();
-        String result = managerService.changingDefaultValuesInShiftNumWorkersToJob(jobName, numWorkers);
+        String result = managerService.changingDefaultValuesInShiftNumWorkersToJob(jobName.toUpperCase(), numWorkers);
         System.out.println(result);
     }
 
@@ -293,7 +293,7 @@ public class SystemManagerMenu{
         String startTime = scanner.nextLine();
         System.out.print("Enter end time (HH:MM): ");
         String endTime = scanner.nextLine();
-        String result = managerService.changingDefaultValuesInShiftWorkHours(shiftType,startTime, endTime);
+        String result = managerService.changingDefaultValuesInShiftWorkHours(shiftType.toUpperCase(),startTime, endTime);
         System.out.println(result);
     }
 
@@ -316,7 +316,7 @@ public class SystemManagerMenu{
             System.out.println("3. Change default number of workers for a job in a specific shift");
             System.out.println("4. Change work hours for a specific shift");
             System.out.println("5. Change day off setting for a specific day");
-            System.out.println("6. Back to main menu");
+            System.out.println("6. Back to shift scheduling log menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();

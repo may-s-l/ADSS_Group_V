@@ -15,8 +15,8 @@ public class Branch {
 
 
     public Branch(String name, String address, ManagerEmployee managerEmployee) {
-        this.name = name;
-        this.address = address;
+        this.name =name;
+        this.address =address;
         this.managerEmployee = managerEmployee;
         this.branchNum=numBranch+1;
         this.EmployeesInBranch=new MyMap<String,Employee>();
@@ -24,8 +24,8 @@ public class Branch {
     }
 
     public Branch(String name, String address) {
-        this.name = name;
-        this.address = address;
+        this.name =name;
+        this.address =address;
         this.managerEmployee = null;
         this.branchNum=numBranch+1;
         this.EmployeesInBranch=new MyMap<String,Employee>();
