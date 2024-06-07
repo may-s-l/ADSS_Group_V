@@ -66,7 +66,7 @@ public class HRManagerShiftController {
         //-------EnumShiftType-------//
         shiftype=shiftype.toUpperCase();
         if (!shiftype.equals("MORNING") && !shiftype.equals("EVENING")) {
-            throw new IllegalArgumentException("Job type must be morning or evening");
+            throw new IllegalArgumentException("Shift type must be morning or evening");
         }
         //-------Job-------//
         int i=1;
@@ -129,7 +129,43 @@ public class HRManagerShiftController {
         return s;
 
     }
+    public String removeEmployeefromShift(int employeenum, String shiftype,String date){
+        Week week=this.getWeek();
+        if(employeenum<=0||shiftype==null||date==null){
+            throw new IllegalArgumentException("Argumets can not be NULL");
+        }
+        //-------date------//
+        LocalDate dateToCheck= LocalDate.parse(date);
+        if(!((dateToCheck.isEqual(week.getStart_date()) || dateToCheck.isAfter(week.getStart_date())) && (dateToCheck.isEqual(week.getEnd_date()) || dateToCheck.isBefore(week.getEnd_date())))){
+            throw new IllegalArgumentException("Date must be in week of work");
+        }
+        if(week.getDayOfWeek(dateToCheck).isIsdayofrest()){
+            throw new IllegalArgumentException("THIS day is day off");
+        }
 
+        //-------EnumShiftType-------//
+        shiftype=shiftype.toUpperCase();
+        if (!shiftype.equals("MORNING") && !shiftype.equals("EVENING")) {
+            throw new IllegalArgumentException("Shift type must be morning or evening");
+        }
+        //-------Employee------//
+        MyMap<Integer, Employee> empMAP=this.CurrentSchedule.getThird();
+        if(!empMAP.containsKey(employeenum)){
+            throw  new IllegalArgumentException("Employee not exist");
+        }
+        int i=1;
+        if(shiftype.equals("MORNING")){
+            i=0;
+        }
+        Employee emp=empMAP.get(employeenum);
+        MyMap<Employee,Job> MAP=week.getDayOfWeek(dateToCheck).getShiftsInDay()[i].getEmployeeinshiftMap();
+        if(!MAP.containsKey(emp)){
+            throw new IllegalArgumentException("Employee is not work in this shift");
+        }
+        MAP.remove(emp);
+        return emp+" successfully removed\n";
+
+    }
     public Week getWeek() {
         return this.CurrentSchedule.getFirst();
     }
