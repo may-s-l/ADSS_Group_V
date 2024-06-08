@@ -33,6 +33,13 @@ public class HRManagerShiftController {
 
     //======================Functions for working on weekly employee placement=====================================================//
     public String MakeScheduleforNextWeek(int branchNum,String date){
+//        if(!isItTheTIMEtoAssignmenttToShifts()){
+//            throw new IllegalArgumentException("You can start placement on Thursday and Friday");
+//        }
+        LocalDate Ldate = LocalDate.parse(date);
+        if(!istenextSunday(Ldate)){
+            throw new IllegalArgumentException("Placement can be started for the next week only");
+        }
         Branch branch =getBranchByBranchNUM(branchNum);
         MyMap<Integer, Employee>BranchemployeeBYemployeeNUM = new MyMap<Integer, Employee>();
         List<List<Object>> TableofEmployeeandConstrin =createEmployeeConstraintJobTable(branch.getEmployeesInBranch(),date,BranchemployeeBYemployeeNUM);
@@ -291,7 +298,8 @@ public class HRManagerShiftController {
         }
         return false;
     }
-    private String isWeekcanbeclose(Week week){
+    public String isWeekcanbeclose(){
+        Week week=this.getWeek();
         LocalDate strat_day=week.getStart_date();
         String S=null;
         for (int i=0 ;i<7;i++){
@@ -304,7 +312,7 @@ public class HRManagerShiftController {
                         continue;
                     }
                     else {
-                        S += "In " + day.getDate() + " " + job + "is not full";
+                        S += "In " + day.getDate() + " " + job + "is not full \n";
                     }
 
                 }
@@ -328,8 +336,17 @@ public class HRManagerShiftController {
             return "All positions have been filled";
         }
         return S;
+    }
 
-
+    private boolean istenextSunday(LocalDate startday_sc){
+        LocalDate today=LocalDate.now();
+        while (today.getDayOfWeek()!=SUNDAY){
+            today=today.plusDays(1);
+        }
+        if(startday_sc.isEqual(today)){
+            return true;
+        }
+        return false;
     }
 
     //---------------------------Functions for changing default values for a specific shift-----------------------------------------//

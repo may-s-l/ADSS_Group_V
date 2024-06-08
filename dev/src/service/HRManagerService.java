@@ -189,4 +189,12 @@ public class HRManagerService {
         }
     }
 
+    public String closeSchedulserver(){
+        try {
+            return masterController.getHR_Shift().isWeekcanbeclose();
+        } catch (IllegalArgumentException e){
+            return e.getMessage();
+        }
+    }
+
 }

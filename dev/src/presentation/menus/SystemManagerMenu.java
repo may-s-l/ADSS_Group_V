@@ -317,7 +317,8 @@ public class SystemManagerMenu{
             System.out.println("4. Change default number of workers for a job in a specific shift");
             System.out.println("5. Change work hours for a specific shift");
             System.out.println("6. Change day off setting for a specific day");
-            System.out.println("7. Back to shift scheduling log menu");
+            System.out.println("7. Close scheduling");
+            System.out.println("8. Back to shift scheduling log menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -342,6 +343,8 @@ public class SystemManagerMenu{
                     changeDayOff(scanner);
                     break;
                 case 7:
+
+                case 8:
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -423,6 +426,12 @@ public class SystemManagerMenu{
         String result = managerService.changingDefaultValuesInSpecificDayOff(date, bool);
         System.out.println(result);
     }
+
+    private void closeSchedul(){
+
+    }
+
+
 
 
 

@@ -85,7 +85,7 @@ public abstract class Shift {
         Set<Employee> employeeSet = this.getEmployeeinshiftSet();
         List<Employee> employeeList = new ArrayList<Employee>();
         for (Employee emp :employeeSet){
-            if(emp.getJobs().contains(job)){
+            if(employee_in_shift.get(emp)==job){
                 employeeList.add(emp);
             }
         }
