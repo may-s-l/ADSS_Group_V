@@ -2,6 +2,7 @@ package dev.src.presentation.menus;
 
 import dev.src.service.EmployeeService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class EmployeeMenu {
@@ -103,9 +104,18 @@ public class EmployeeMenu {
     }
 
     private void showShifts(Scanner scanner) {
-        System.out.print("Enter branch number: ");
-        int branchNum = scanner.nextInt();
-        scanner.nextLine();
+        int branchNum = 0;
+        while (true) {
+            System.out.print("Enter branch number: ");
+            try {
+                branchNum = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine();
+            }
+        }
         System.out.print("Enter the start date of the week (YYYY-MM-DD): ");
         String dateStr = scanner.nextLine();
         String result = employeeService.printingWeekHistory(branchNum, dateStr);
