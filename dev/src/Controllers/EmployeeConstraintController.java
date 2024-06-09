@@ -62,15 +62,15 @@ public class EmployeeConstraintController {
         if(today.getDayOfWeek()==DayOfWeek.SUNDAY){
             DAYS_OF_CORENT_WORK_WEEK.add(today);
             cant=cant.plusDays(1);
-            while (cant.getDayOfWeek()!=DayOfWeek.SUNDAY){
+            while (!cant.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
                 DAYS_OF_CORENT_WORK_WEEK.add(cant);
-                cant.plusDays(1);
+                cant=cant.plusDays(1);
             }
         }
         else {
-            while (cant.getDayOfWeek()!=DayOfWeek.SUNDAY){
+            while (!cant.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
                 DAYS_OF_CORENT_WORK_WEEK.add(cant);
-                cant.plusDays(1);
+                cant=cant.plusDays(1);
             }
         }
         if(DAYS_OF_CORENT_WORK_WEEK.contains(date)||date.isEqual(cant.plusWeeks(1))||date.isAfter(cant.plusWeeks(1))){

@@ -301,12 +301,15 @@ public class HRManagerShiftController {
     public String isWeekcanbeclose(){
         Week week=this.getWeek();
         LocalDate strat_day=week.getStart_date();
-        String S=null;
+        String S="";
         for (int i=0 ;i<7;i++){
             Day day = week.getDayOfWeek(strat_day.plusDays(i));
+            if(day.isIsdayofrest()){
+                continue;
+            }
             Shift[] shifts = day.getShiftsInDay();
-            for (int j=0;j<2;j++){
-                Shift shift=shifts[i];
+            for (int j=0;j<=shifts.length-1;j++){
+                Shift shift=shifts[j];
                 for(Job job:shift.getAllJobInShift()){
                     if(shift.isJobInShiftisFull(job)){
                         continue;
@@ -318,7 +321,7 @@ public class HRManagerShiftController {
                 }
             }
         }
-        if(S==null){
+        if(S.isEmpty()){
             String weekstring=week.weekInTableToShow();
             Set<Employee> EMP=week.getDayOfWeek(week.getStart_date()).getShiftsInDay()[0].getEmployeeinshiftSet();
             List<Employee> myList = new ArrayList<>(EMP);
@@ -337,9 +340,67 @@ public class HRManagerShiftController {
         }
         return S;
     }
+    public String addEmployeetoall_Shiftinweek(Integer employeeNum,String jobname,String shiftype) throws IllegalArgumentException{
+        Week week=this.CurrentSchedule.getFirst();
+        if(employeeNum==null||jobname==null||shiftype==null){
+            throw new IllegalArgumentException("Arguments can not be NULL");
+        }
+        //-------EnumShiftType-------//
+        shiftype=shiftype.toUpperCase();
+        if (!shiftype.equals("MORNING") && !shiftype.equals("EVENING")) {
+            throw new IllegalArgumentException("Shift type must be morning or evening");
+        }
+        //-------Job-------//
+        int i=1;
+        if(shiftype.equals("MORNING")){
+            i=0;
+        }
+        String S="";
+        Set<LocalDate> dayofweek=week.getDayInWEEK();
+        for(LocalDate dateToCheck :dayofweek ) {
+            if(!week.getDayOfWeek(dateToCheck).isIsdayofrest()) {
+                Shift shiftassignment = week.getDayOfWeek(dateToCheck).getShiftsInDay()[i];
+                jobname = jobname.toUpperCase();
+                Job job = null;
+                for (Job j : shiftassignment.getAllJobInShift()) {
+                    if (j.getJobName().equals(jobname)) {
+                        job = j;
+                        break;
+                    }
+                }
+                if (job == null) {
+                    S+="Job "+jobname+ " does not exist in this Shift "+dateToCheck+"\n";
+                    continue;
+                }
+                if (shiftassignment.isJobInShiftisFull(job)) {
+                    S+="Job "+job +" is in max capacity for this Shift " +dateToCheck+"\n";
+                    continue;
+                }
+                if (!this.CurrentSchedule.getThird().containsKey(employeeNum)) {
+                    throw new IllegalArgumentException("Employee NOT exist");
+                }
+                Employee emp_to_workon = this.CurrentSchedule.getThird().get(employeeNum);
+                if (!emp_to_workon.employeeCanbe(job)) {
+                    S+= emp_to_workon.toString() + " Can't work as " + job.getJobName();
+                    continue;
+
+                }
+                if (emp_to_workon.getConstraintByDate(shiftassignment.getDate()) != null && (emp_to_workon.getConstraintByDate(shiftassignment.getDate()).getShiftType().equals(shiftassignment.getShiftType()) || emp_to_workon.getConstraintByDate(shiftassignment.getDate()).getShiftType() == ShiftType.FULLDAY)) {
+                    S+=" there is a shift constraint " + emp_to_workon.getConstraintByDate(shiftassignment.getDate()).toString();
+                    continue;
+                }
+                shiftassignment.addEmployeeToShift(emp_to_workon, job);
+            }
+        }
+        return S += "\n"+toStringforweekANDemlpoyeeinbanc(week,this.CurrentSchedule.getSecond());
+
+    }
 
     private boolean istenextSunday(LocalDate startday_sc){
         LocalDate today=LocalDate.now();
+        if(today.getDayOfWeek()==SUNDAY){
+            today=today.plusDays(1);
+        }
         while (today.getDayOfWeek()!=SUNDAY){
             today=today.plusDays(1);
         }

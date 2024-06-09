@@ -49,6 +49,13 @@ public class Week {
         return end_date;
     }
 
+    public Set<LocalDate> getDayInWEEK() {
+        return DayInWEEK.getKeys();
+    }
+
+    public void setDayInWEEK(MyMap<LocalDate, Day> dayInWEEK) {
+        DayInWEEK = dayInWEEK;
+    }
 
     public Day getDayOfWeek(LocalDate date){
         return this.DayInWEEK.get(date);
@@ -143,7 +150,7 @@ public class Week {
                             }
                         }
                         List<Employee> eveningShiftEmployees = new ArrayList<>();
-                        for (Employee emp : morningShift.getEmployeeinshiftSet()) {
+                        for (Employee emp : eveningShift.getEmployeeinshiftSet()) {
                             if (eveningShift.getEmployeeinshiftMap().get(emp)==job) {
                                 eveningShiftEmployees.add(emp);
                             }

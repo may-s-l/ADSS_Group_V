@@ -197,4 +197,12 @@ public class HRManagerService {
         }
     }
 
+    public String addemployeetoallshiftsserver(int empnum,String job,String shifttype){
+        try {
+            return masterController.getHR_Shift().addEmployeetoall_Shiftinweek(empnum,job.toUpperCase(),shifttype.toUpperCase());
+        } catch (IllegalArgumentException e){
+            return e.getMessage();
+        }
+    }
+
 }
