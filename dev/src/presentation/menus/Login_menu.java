@@ -9,13 +9,15 @@ import dev.src.service.HRManagerService;
 import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Scanner;
+import java.util.Objects;
 
 public class Login_menu {
 
     public Login_menu() {
         MasterController MC = new MasterController();
         EmployeeService ES = new EmployeeService(MC);
-        HRManagerService HRS=new HRManagerService(MC);
+        HRManagerService HRS = new HRManagerService(MC);
         dataupload(MC);
         Scanner scanner = new Scanner(System.in);
 
@@ -24,21 +26,19 @@ public class Login_menu {
             System.out.println("1. Login");
             System.out.println("2. Exit");
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = getValidChoice(scanner);
+
             String res;
             switch (choice) {
                 case 1:
                     System.out.print("Enter ID: ");
                     String password = scanner.nextLine();
-                    res=MC.checkLoginEmployee(password);
-                    if(Objects.equals(res, "HR-MANAGER")){
+                    res = MC.checkLoginEmployee(password);
+                    if (Objects.equals(res, "HR-MANAGER")) {
                         new SystemManagerMenu(HRS);
-                    }
-                    if(Objects.equals(res, "Employee")){
-                        new EmployeeMenu(ES,password);
-                    }
-                    else{
+                    } else if (Objects.equals(res, "Employee")) {
+                        new EmployeeMenu(ES, password);
+                    } else {
                         System.out.println(res);
                     }
                     break;
@@ -51,6 +51,26 @@ public class Login_menu {
             }
         }
     }
+
+    private int getValidChoice(Scanner scanner) {
+        int choice = -1;
+        while (true) {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                System.out.print("Enter your choice: ");
+            }
+        }
+        return choice;
+    }
+
+    public static void main(String[] args) {
+        new Login_menu();
+    }
+
+
 
     private void dataupload(MasterController MC) {
         String branchFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Branchs.csv";

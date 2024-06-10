@@ -11,8 +11,16 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        new Login_menu();
+        while (true) {
+            try {
+                new Login_menu();
+            } catch (Exception e) {
 
+                System.err.println("An unexpected error occurred: " + e.getMessage());
+
+
+                System.out.println("Restarting the system...");
+            }
+        }
     }
-
 }
