@@ -12,7 +12,7 @@ public class Week {
     private int weekNUM;
     private LocalDate start_date;
     private LocalDate end_date;
-    private MyMap<LocalDate,Day> DayInWEEK;
+    private MyMap<LocalDate, Day> DayInWEEK;
 
 
     public Week(LocalDate start_date) {
@@ -57,7 +57,7 @@ public class Week {
         DayInWEEK = dayInWEEK;
     }
 
-    public Day getDayOfWeek(LocalDate date){
+    public Day getDayOfWeek(LocalDate date) {
         return this.DayInWEEK.get(date);
     }
 
@@ -76,33 +76,50 @@ public class Week {
 
 
     public String weekInTableToShow() {
-        StringBuilder sb = new StringBuilder();
-        int jobWidth = 15;
-        int shiftWidth = 30;
-        int daydateWidth = 64;
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        StringBuilder sb3 = new StringBuilder();
+        int jobWidth = 13;
+        int shiftWidth = 19;
+        int daydateWidth = 43;
         int rowsPerJob = 3;
 
-        sb.append("Week number: ").append(weekNUM).append("\n");
-        sb.append("Start date: ").append(start_date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append("\n");
-        sb.append("End date: ").append(end_date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append("\n\n");
+        sb1.append("Week number: ").append(weekNUM).append("\n");
+        sb1.append("Start date: ").append(start_date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append("\n");
+        sb1.append("End date: ").append(end_date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append("\n\n");
 
         // Header Row: Job | Day of Week Date | Day of Week Date | ...
-        sb.append(String.format("| %-" + jobWidth + "s |", "Job"));
+        sb1.append(String.format("| %-" + jobWidth + "s |", "Job"));
+        sb2.append(String.format("| %-" + jobWidth + "s |", "Job"));
+        sb3.append(String.format("| %-" + jobWidth + "s |", "Job"));
         for (LocalDate date : DayInWEEK.getKeys()) {
             Day day = DayInWEEK.get(date);
-            sb.append(String.format(" %-" + daydateWidth + "s|", day.getDayOfWeek() + " " + day.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+            if(day.getDayOfWeek()==DayOfWeek.SUNDAY||day.getDayOfWeek()==DayOfWeek.MONDAY||day.getDayOfWeek()==DayOfWeek.THURSDAY){
+                sb1.append(String.format("%-" + daydateWidth + "s|", day.getDayOfWeek() + " " + day.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+            }
+            if(day.getDayOfWeek()==DayOfWeek.SATURDAY){
+                sb3.append(String.format("%-" + daydateWidth + "s|", day.getDayOfWeek() + " " + day.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+            }
+            if(day.getDayOfWeek()==DayOfWeek.WEDNESDAY||day.getDayOfWeek()==DayOfWeek.TUESDAY||day.getDayOfWeek()==DayOfWeek.FRIDAY){
+                sb2.append(String.format("%-" + daydateWidth + "s|", day.getDayOfWeek() + " " + day.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+            }
         }
-        sb.append("\n");
+        sb1.append("\n");
+        sb2.append("\n");
+        sb3.append("\n");
 
         // Header Row: Morning (Start-End) | Evening (Start-End) | ...
-        sb.append(String.format("| %-" + jobWidth + "s |", ""));
+        sb1.append(String.format("| %-" + jobWidth + "s |", ""));
+        sb2.append(String.format("| %-" + jobWidth + "s |", ""));
+        sb3.append(String.format("| %-" + jobWidth + "s |", ""));
+
         for (LocalDate date : DayInWEEK.getKeys()) {
             Day day = DayInWEEK.get(date);
             if (!day.isIsdayofrest()) {
                 Shift morningShift = day.getShiftsInDay()[0];
                 Shift eveningShift = day.getShiftsInDay()[1];
 
-                String morningShiftHeader = String.format("Morning (%s-%s)",
+                String morningShiftHeader = String.format("Morning(%s-%s)",
                         morningShift.getStart_time().toString(),
                         morningShift.getEnd_time().toString());
 
@@ -110,24 +127,48 @@ public class Week {
                         eveningShift.getStart_time().toString(),
                         eveningShift.getEnd_time().toString());
 
-                sb.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", morningShiftHeader, eveningShiftHeader));
+                if(day.getDayOfWeek()==DayOfWeek.SUNDAY||day.getDayOfWeek()==DayOfWeek.MONDAY||day.getDayOfWeek()==DayOfWeek.THURSDAY){
+                    sb1.append(String.format(" %-" + shiftWidth + "s| %-" + shiftWidth + "s|", morningShiftHeader, eveningShiftHeader));
+                }
+                if(day.getDayOfWeek()==DayOfWeek.SATURDAY){
+                    sb3.append(String.format(" %-" + shiftWidth + "s| %-" + shiftWidth + "s|", morningShiftHeader, eveningShiftHeader));
+                }
+                if(day.getDayOfWeek()==DayOfWeek.WEDNESDAY||day.getDayOfWeek()==DayOfWeek.TUESDAY||day.getDayOfWeek()==DayOfWeek.FRIDAY){
+                    sb2.append(String.format(" %-" + shiftWidth + "s| %-" + shiftWidth + "s|", morningShiftHeader, eveningShiftHeader));
+                }
             } else {
-                sb.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", "Day off", "Day off"));
+                if(day.getDayOfWeek()==DayOfWeek.SUNDAY||day.getDayOfWeek()==DayOfWeek.MONDAY||day.getDayOfWeek()==DayOfWeek.THURSDAY){
+                    sb1.append(String.format(" %-" + shiftWidth + "s| %-" + shiftWidth + "s|", "Day off", "Day off"));
+                }
+                if(day.getDayOfWeek()==DayOfWeek.SATURDAY){
+                    sb3.append(String.format(" %-" + shiftWidth + "s| %-" + shiftWidth + "s|", "Day off", "Day off"));
+                }
+                if(day.getDayOfWeek()==DayOfWeek.WEDNESDAY||day.getDayOfWeek()==DayOfWeek.TUESDAY||day.getDayOfWeek()==DayOfWeek.FRIDAY){
+                    sb2.append(String.format(" %-" + shiftWidth + "s| %-" + shiftWidth + "s|", "Day off", "Day off"));
+                }
             }
         }
-        sb.append("\n");
+        sb1.append("\n");
+        sb2.append("\n");
+        sb3.append("\n");
 
         // Separator line
-        sb.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * DayInWEEK.size() + DayInWEEK.size() + 3, "-"))).append("\n");
+        sb1.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 3+shiftWidth+3 , "-"))).append("\n");
+        sb2.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 3+shiftWidth+3 , "-"))).append("\n");
+        sb3.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 1+shiftWidth-9 , "-"))).append("\n");
 
         Set<Job> jobsToFill = Shift.getNumberofWorkersPerPositionDifult().getKeys(); // Assuming all days have the same jobs to fill
 
         for (Job job : jobsToFill) {
             for (int row = 0; row < rowsPerJob; row++) {
                 if (row == 0) {
-                    sb.append(String.format("| %-" + jobWidth + "s |", job.getJobName()));
+                    sb1.append(String.format("| %-" + jobWidth + "s |", job.getJobName()));
+                    sb2.append(String.format("| %-" + jobWidth + "s |", job.getJobName()));
+                    sb3.append(String.format("| %-" + jobWidth + "s |", job.getJobName()));
                 } else {
-                    sb.append(String.format("| %-" + jobWidth + "s |", ""));
+                    sb1.append(String.format("| %-" + jobWidth + "s |", ""));
+                    sb2.append(String.format("| %-" + jobWidth + "s |", ""));
+                    sb3.append(String.format("| %-" + jobWidth + "s |", ""));
                 }
 
                 for (LocalDate date : DayInWEEK.getKeys()) {
@@ -142,26 +183,18 @@ public class Week {
                         Shift morningShift = day.getShiftsInDay()[0];
                         Shift eveningShift = day.getShiftsInDay()[1];
 
-
                         List<Employee> morningShiftEmployees = new ArrayList<>();
                         for (Employee emp : morningShift.getEmployeeinshiftSet()) {
-                            if (morningShift.getEmployeeinshiftMap().get(emp)==job) {
+                            if (morningShift.getEmployeeinshiftMap().get(emp) == job) {
                                 morningShiftEmployees.add(emp);
                             }
                         }
                         List<Employee> eveningShiftEmployees = new ArrayList<>();
                         for (Employee emp : eveningShift.getEmployeeinshiftSet()) {
-                            if (eveningShift.getEmployeeinshiftMap().get(emp)==job) {
+                            if (eveningShift.getEmployeeinshiftMap().get(emp) == job) {
                                 eveningShiftEmployees.add(emp);
                             }
                         }
-
-//                        List<Employee> morningShiftEmployees = morningShift.getEmployeeinshiftSet().stream()
-//                                .filter(emp -> emp.getJobs().contains(job))
-//                                .collect(Collectors.toList());
-//                        List<Employee> eveningShiftEmployees = eveningShift.getEmployeeinshiftSet().stream()
-//                                .filter(emp -> emp.getJobs().contains(job))
-//                                .collect(Collectors.toList());
 
                         morningRequired = String.valueOf(morningShift.getNumberofWorkersPerJob(job));
                         eveningRequired = String.valueOf(eveningShift.getNumberofWorkersPerJob(job));
@@ -182,18 +215,39 @@ public class Week {
                     }
 
                     if (row == 0) {
-                        sb.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", "(Req:" + morningRequired + ")" + morningEmployee, "(Req:" + eveningRequired + ")" + eveningEmployee));
+                        if(day.getDayOfWeek()==DayOfWeek.SUNDAY||day.getDayOfWeek()==DayOfWeek.MONDAY||day.getDayOfWeek()==DayOfWeek.THURSDAY){
+                            sb1.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", "(Req:" + morningRequired + ")" + morningEmployee, "(Req:" + eveningRequired + ")" + eveningEmployee));
+                        }
+                        if(day.getDayOfWeek()==DayOfWeek.SATURDAY){
+                            sb3.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", "(Req:" + morningRequired + ")" + morningEmployee, "(Req:" + eveningRequired + ")" + eveningEmployee));
+                        }
+                        if(day.getDayOfWeek()==DayOfWeek.WEDNESDAY||day.getDayOfWeek()==DayOfWeek.TUESDAY||day.getDayOfWeek()==DayOfWeek.FRIDAY){
+                            sb2.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", "(Req:" + morningRequired + ")" + morningEmployee, "(Req:" + eveningRequired + ")" + eveningEmployee));
+                        }
                     } else {
-                        sb.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", morningEmployee, eveningEmployee));
+                        if(day.getDayOfWeek()==DayOfWeek.SUNDAY||day.getDayOfWeek()==DayOfWeek.MONDAY||day.getDayOfWeek()==DayOfWeek.THURSDAY){
+                            sb1.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", morningEmployee, eveningEmployee));
+                        }
+                        if(day.getDayOfWeek()==DayOfWeek.SATURDAY){
+                            sb3.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", morningEmployee, eveningEmployee));
+                        }
+                        if(day.getDayOfWeek()==DayOfWeek.WEDNESDAY||day.getDayOfWeek()==DayOfWeek.TUESDAY||day.getDayOfWeek()==DayOfWeek.FRIDAY){
+                            sb2.append(String.format(" %-" + shiftWidth + "s | %-" + shiftWidth + "s |", morningEmployee, eveningEmployee));
+                        }
                     }
                 }
-                sb.append("\n");
+                sb1.append("\n");
+                sb2.append("\n");
+                sb3.append("\n");
             }
             // Separator line after each job row
-            sb.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * DayInWEEK.size() + DayInWEEK.size() + 3, "-"))).append("\n");
+            sb1.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 3+shiftWidth+3, "-"))).append("\n");
+            sb2.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 3+shiftWidth+3, "-"))).append("\n");
+            sb3.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 1+shiftWidth-9, "-"))).append("\n");
         }
 
-        return sb.toString();
+        return sb1.toString() + "\n" + sb2.toString() + "\n" + sb3.toString();
     }
+
 }
 

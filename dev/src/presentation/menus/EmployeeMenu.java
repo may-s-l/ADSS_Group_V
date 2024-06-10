@@ -25,8 +25,16 @@ public class EmployeeMenu {
             System.out.println("3. Show shifts");
             System.out.println("4. Back to Login menu");
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+
+            int choice = -1;
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // clear the buffer
+                continue;
+            }
 
             switch (choice) {
                 case 1:
@@ -59,8 +67,16 @@ public class EmployeeMenu {
             System.out.println("3. View constraints");
             System.out.println("4. Back to employee menu");
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+
+            int choice = -1;
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // clear the buffer
+                continue;
+            }
 
             switch (choice) {
                 case 1:
