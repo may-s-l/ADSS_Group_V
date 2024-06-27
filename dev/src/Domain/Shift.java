@@ -46,6 +46,7 @@ public abstract class Shift {
         NumberofWorkersPerPositionDifult.put(job,quantity);
         return true;
     }
+
     public void ChangingTheNumberOfemployeesPerJobInShift(Job job,int quantity){
         if(this.NumberofWorkersPerJob==null){
             this.NumberofWorkersPerJob =new MyMap<Job,Integer>();
@@ -54,7 +55,7 @@ public abstract class Shift {
             }
         }
         if (quantity==0){
-            this.NumberofWorkersPerJob.remove(job);
+            this.NumberofWorkersPerJob.put(job,0);
             if(!getallEmployeePerJob(job).isEmpty()){
                 for (Employee e:getallEmployeePerJob(job)){
                     removeEmployeeFromShift(e);
@@ -103,6 +104,7 @@ public abstract class Shift {
         }
         return (this.NumberofWorkersPerJob.get(job)==employeeList.size());
     }
+
     public ShiftType getShiftType() {
         return shiftType;
     }

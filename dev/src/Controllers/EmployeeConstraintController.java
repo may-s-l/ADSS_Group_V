@@ -86,9 +86,9 @@ public class EmployeeConstraintController {
         }
 
         Constraint newConstraint = new Constraint(employee, date, shiftType);
-        if (constraints.get(date) != null && constraints.get(date).equals(newConstraint)) {
-            throw new IllegalArgumentException("Constraint already exists.");
-        }
+//        if (constraints.get(date) != null && constraints.get(date).equals(newConstraint)) {
+//            throw new IllegalArgumentException("Constraint already exists.");
+//        }
 
         constraints.put(date, newConstraint);
     }

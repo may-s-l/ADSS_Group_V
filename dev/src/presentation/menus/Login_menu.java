@@ -7,8 +7,7 @@ import dev.src.Domain.ManagerEmployee;
 import dev.src.service.EmployeeService;
 import dev.src.service.HRManagerService;
 import java.io.*;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.Scanner;
 import java.util.Objects;
 
@@ -18,13 +17,17 @@ public class Login_menu {
         MasterController MC = new MasterController();
         EmployeeService ES = new EmployeeService(MC);
         HRManagerService HRS = new HRManagerService(MC);
-        dataupload(MC);
+        System_manger_set_up(MC);
         Scanner scanner = new Scanner(System.in);
-
+        int flag_can_uplodata=0;
         while (true) {
+
             System.out.println("Login Menu");
             System.out.println("1. Login");
             System.out.println("2. Exit");
+            if(flag_can_uplodata==0) {
+                System.out.println("3. Lode demo data");
+            }
             System.out.print("Enter your choice: ");
             int choice = getValidChoice(scanner);
 
@@ -33,7 +36,7 @@ public class Login_menu {
                 case 1:
                     System.out.print("Enter ID: ");
                     String password = scanner.nextLine();
-                    res = MC.checkLoginEmployee(password);
+                    res = MC.checkLoginEmployee(password);//password=id
                     if (Objects.equals(res, "HR-MANAGER")) {
                         new SystemManagerMenu(HRS);
                     } else if (Objects.equals(res, "Employee")) {
@@ -46,6 +49,13 @@ public class Login_menu {
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
+
+                case 3:
+                    if(flag_can_uplodata==0) {
+                        dataupload(MC);
+                        flag_can_uplodata += 1;
+                    }
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -76,7 +86,7 @@ public class Login_menu {
         String branchFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Branchs.csv";
         String jobFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Jobs.csv";
         String employeeFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Employees.csv";
-        uploadBranchData(MC, branchFile);
+        //uploadBranchData(MC, branchFile);
         uploadJobData(MC, jobFile);
         uploadEmployeeData(MC, employeeFile);
 
@@ -171,6 +181,13 @@ public class Login_menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void System_manger_set_up(MasterController MC){
+        MC.getHR_Employee().createManagementJob("HR-MANAGER");
+        MC.getHR_Employee().createBranch("SuperLee Main","BGU");
+        MC.getHR_Employee().createManagmentEmployee("SHLAT","111111","95135748","SuperLee Main",14,"2024-06-06",10000,"FULL","GLOBAL","HR-MANAGER");
     }
 
 }

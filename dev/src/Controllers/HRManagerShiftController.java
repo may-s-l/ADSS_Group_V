@@ -17,10 +17,8 @@ public class HRManagerShiftController {
     private List<Job> Employeejobs_temp_database;
     private MyMap<String, Employee> Employees_temp_database;//String key ID
     private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
-
     private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
     private MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> CurrentSchedule;
-
     public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database,MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
         this.Employees_temp_database=Employees_temp_database;
         this.Branch_temp_database=Branch_temp_database;
@@ -321,7 +319,7 @@ public class HRManagerShiftController {
                 }
             }
         }
-        if(S.isEmpty()){
+        if(S.isEmpty()&&isDriverandStorkeeperInShift()){
             String weekstring=week.weekInTableToShow();
             Set<Employee> EMP=week.getDayOfWeek(week.getStart_date()).getShiftsInDay()[0].getEmployeeinshiftSet();
             List<Employee> myList = new ArrayList<>(EMP);
@@ -336,9 +334,13 @@ public class HRManagerShiftController {
                 this.History_Shifts_temp_database.put(branchNum,dateWeekMyMap);
             }
 
-            return "All positions have been filled";
+            return "All positions have been filled \n" +toStringforweekANDemlpoyeeinbanc(week,CurrentSchedule.getSecond());
         }
-        return S;
+        if(!isDriverandStorkeeperInShift()){
+            S+="A driver MUST receive service from STOREKEEPER. Please schedule warehousemen on days when there are drivers \n";
+
+        }
+        return S+=toStringforweekANDemlpoyeeinbanc(week,CurrentSchedule.getSecond());
     }
     public String addEmployeetoall_Shiftinweek(Integer employeeNum,String jobname,String shiftype) throws IllegalArgumentException{
         Week week=this.CurrentSchedule.getFirst();
@@ -395,7 +397,6 @@ public class HRManagerShiftController {
         return S += "\n"+toStringforweekANDemlpoyeeinbanc(week,this.CurrentSchedule.getSecond());
 
     }
-
     private boolean istenextSunday(LocalDate startday_sc){
         LocalDate today=LocalDate.now();
         if(today.getDayOfWeek()==SUNDAY){
@@ -406,6 +407,30 @@ public class HRManagerShiftController {
         }
         if(startday_sc.isEqual(today)){
             return true;
+        }
+        return false;
+    }
+    private boolean isDriverandStorkeeperInShift() {
+        Week week = this.CurrentSchedule.getFirst();
+        LocalDate strat_day = week.getStart_date();
+        for (int i = 0; i < 7; i++) {
+            Day day = week.getDayOfWeek(strat_day.plusDays(i));
+            if (day.isIsdayofrest()) {
+                continue;
+            }
+            Shift[] shifts = day.getShiftsInDay();
+            for (int j = 0; j <= shifts.length - 1; j++) {
+                Shift shift = shifts[j];
+                for (Job job : shift.getAllJobInShift()) {
+                    if (job.getJobName().equals("DRIVER") && shift.getNumberofWorkersPerJob(job)>=1){
+                        for (Job jobpassto : shift.getAllJobInShift()) {
+                            if(jobpassto.getJobName().equals("STOREKEEPER") && shift.getNumberofWorkersPerJob(jobpassto)>=1){
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
         }
         return false;
     }
@@ -451,7 +476,7 @@ public class HRManagerShiftController {
             }
         }
         shift.ChangingTheNumberOfemployeesPerJobInShift(job,numworker);
-        return "The number of worker for "+jobname+" is change to "+numworker;
+        return "The number of worker for "+jobname+" is change to "+numworker+"\n"+toStringforweekANDemlpoyeeinbanc(week,CurrentSchedule.getSecond());
 
     }
 
