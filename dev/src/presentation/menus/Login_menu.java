@@ -83,9 +83,9 @@ public class Login_menu {
 
 
     private void dataupload(MasterController MC) {
-        String branchFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Branchs.csv";
-        String jobFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Jobs.csv";
-        String employeeFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\תיקיית פרוייקט\\ADSS_Group_V\\dev\\src\\DataToupload\\Employees.csv";
+        String branchFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\ADSS_V\\ADSS_Group_V\\dev\\src\\DataToupload\\Branchs.csv";
+        String jobFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\ADSS_V\\ADSS_Group_V\\dev\\src\\DataToupload\\Jobs.csv";
+        String employeeFile = "C:\\Users\\mayal\\Downloads\\לימודים מאי לוי\\ניתוץ - ניתוך ותכנון מערכות\\ADSS_V\\ADSS_Group_V\\dev\\src\\DataToupload\\Employees.csv";
         //uploadBranchData(MC, branchFile);
         uploadJobData(MC, jobFile);
         uploadEmployeeData(MC, employeeFile);
