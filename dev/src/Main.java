@@ -1,15 +1,9 @@
 package dev.src;
 
-import dev.src.Controllers.*;
-import dev.src.Domain.*;
-import dev.src.Domain.DAO.DBConnection;
-import dev.src.presentation.menus.Login_menu;
+import dev.src.Data.DAO.DBConnection;
 //import dev.src.presentation.menus.Login_menu;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 //    public static void main(String[] args) {

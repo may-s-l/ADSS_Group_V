@@ -1,4 +1,4 @@
-package dev.src.Domain.DAO;
+package dev.src.Data.DAO;
 
 import org.sqlite.SQLiteConfig;
 import java.io.File;
