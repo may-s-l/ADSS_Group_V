@@ -2,6 +2,7 @@ package dev.src.Domain.Repository;
 
 import dev.src.Data.DAO.ConstraintDao;
 import dev.src.Data.DAO.EmployeeDao;
+import dev.src.Data.DAO.JobDao;
 import dev.src.Data.DAO.TermsOfEmploymentDao;
 import dev.src.Domain.Constraint;
 import dev.src.Domain.Employee;
@@ -11,11 +12,12 @@ import java.time.LocalDate;
 
 public class EmployeeRep implements IRep<Employee,String> {
 
-
     private MyMap<String, Employee> map ;
     private ConstraintDao constraintDao;
     private TermsOfEmploymentDao termsOfEmploymentDao;
     private EmployeeDao employeeDao;
+    private JobDao jobDao;
+
 
 
     public EmployeeRep() {
@@ -23,6 +25,7 @@ public class EmployeeRep implements IRep<Employee,String> {
         constraintDao = ConstraintDao.getInstance();
         termsOfEmploymentDao = TermsOfEmploymentDao.getInstance();
         employeeDao = EmployeeDao.getInstance();
+        jobDao = JobDao.getInstance();
     }
 
     @Override
@@ -33,15 +36,10 @@ public class EmployeeRep implements IRep<Employee,String> {
             Employee C =EmployeeDao.getInstance().select(Key);
             if(C == null){
                 EmployeeDao.getInstance().insert(obj);
-                TermsOfEmploymentDao.getInstance().insert(obj.getTerms());
-
             }
         }
 
         return "s";
-
-
-        return "";
     }
 
     @Override
@@ -58,4 +56,6 @@ public class EmployeeRep implements IRep<Employee,String> {
     public String delete(String s) {
         return "";
     }
+
+
 }

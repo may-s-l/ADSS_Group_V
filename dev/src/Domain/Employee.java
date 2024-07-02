@@ -1,6 +1,7 @@
 package dev.src.Domain;
 
 import dev.src.Domain.Repository.ConstraintRep;
+import dev.src.Domain.Repository.Jobrep;
 
 import java.security.Key;
 import java.time.LocalDate;
@@ -15,9 +16,10 @@ public class Employee {
     private Branch Branch;
     private int employeeNum;
     private TermsOfEmployment terms;
-    private List<Job> Jobs;
+    //private List<Job> Jobs;
     //private MyMap<LocalDate, Constraint> constraintMyMap;
     private ConstraintRep constraintMyMap;
+    private Jobrep Jobs;
 
 
     //constructor- gets all the data for employee
@@ -27,7 +29,7 @@ public class Employee {
         Bank_account = bank_account;
         Branch = branch;
         this.terms = terms;
-        Jobs = new ArrayList<Job>();
+        Jobs = new Jobrep();
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
@@ -41,23 +43,24 @@ public class Employee {
         Bank_account = bank_account;
         Branch = branch;
         this.terms = new TermsOfEmployment(vacationDay,start_date,salary,job_type,Salary_type);
-        Jobs = new ArrayList<Job>();
+        Jobs = new Jobrep();
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
         constraintMyMap=null;
     }
 
-    public Employee(String name, String ID,int EMP_NUM ,String bank_account, Branch branch) {
+    public Employee(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms,int employeeNum,Jobrep jobrep) {
         Name = name;
         this.ID = ID;
         Bank_account = bank_account;
         Branch = branch;
-        this.terms =null;
-        Jobs = null;
-        this.employeeNum =EMP_NUM;
+        this.terms = terms;
+        this.Jobs =jobrep;
+        this.employeeNum =employeeNum;
         constraintMyMap=null;
     }
+
 
     public String getName() {
         return Name;
@@ -120,12 +123,12 @@ public class Employee {
         return true;
     }
 
-    public List<Job> getJobs() {
+    public Jobrep getJobs() {
         return Jobs;
     }
 
-    public boolean setJobs(List<Job> jobs) {
-        if(jobs==null||jobs.isEmpty()){
+    public boolean setJobs(Jobrep jobs) {
+        if(jobs==null||jobs.getsize()==0){
             return false;
         }
         Jobs = jobs;

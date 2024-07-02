@@ -1,23 +1,23 @@
 package dev.src.Domain.Repository;
 
-import dev.src.Data.DAO.ConstraintDao;
 import dev.src.Data.DAO.EmployeeDao;
 import dev.src.Data.DAO.JobDao;
 import dev.src.Domain.Employee;
 import dev.src.Domain.Job;
-import dev.src.Domain.MyMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jobrep implements IRep<Job,String>{
+public class EJobsRep implements IRep<Job, Employee>{
 
+    String EDI;
     List<Job> jobs;
     private JobDao JobDao;
     private EmployeeDao EmployeeDao;
 
 
-    public Jobrep() {
+    public void EJobRep(String EID) {
+        EDI = EID;
         jobs = new ArrayList<Job>();
         JobDao = JobDao.getInstance();
         EmployeeDao = EmployeeDao.getInstance();
@@ -27,9 +27,8 @@ public class Jobrep implements IRep<Job,String>{
     public String add(Job obj) {
         if(!jobs.contains(obj)) {
             jobs.add(obj);
-            if (JobDao.select(obj.getJobName()) == null) {
-                JobDao.insert(obj);
-            }
+            EmployeeDao.getAlljobsforemployee(EDI);
+            if()
             return "s";
         }
         return "s";
