@@ -1,101 +1,58 @@
 package dev.src.Data.DAO;
 
-import dev.src.Data.DBConnection;
-import dev.src.Domain.*;
-import dev.src.Domain.Enums.*;
-import java.sql.*;
+import dev.src.Domain.Constraint;
+import dev.src.repostory.Constraintrep;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
-public class ConstraintDao implements IDao<Constraint,String> {
+import static java.lang.System.load;
 
-
+public class ConstraintDAO {
     DBConnection DB;
-    private static ConstraintDao instance;
+    Constraintrep CR;
 
-
-
-    public static ConstraintDao getInstance() {
-        if (instance == null) {
-            instance = new ConstraintDao();
-        }
-        return instance;
-    }
-
-    public ConstraintDao() {
-        DB=DBConnection.getInstance();
+    public ConstraintDAO(DBConnection DB, Constraintrep CR) {
+        this.DB=DB;
+        this.CR=CR;
     }
 
     @Override
-    public void insert(Constraint obj) {
-        String sql ="INSERT INTO EmployeeConstraints VALUES (?,?,?)";
-        PreparedStatement pstmt = null;
+    public void put(Constraint constraint) {
+        PreparedStatement ps=null;
+        String sql="INSERT INTO Constraint (empID,ConstraintDate,ConstraintShiftType) VALUES(?,?,?)";
         try {
-            pstmt =DB.getConnection().prepareStatement(sql);
-            pstmt.setString(1,obj.getEmp().getID());
-            pstmt.setString(2,obj.getShiftDate().toString());
-            pstmt.setString(3,obj.getShiftType().toString().toUpperCase());
-            pstmt.execute();
-        }
-        catch (SQLException e) {
-            throw new RuntimeException();
+            ps=DB.getConnection().prepareStatement(sql);
+            ps.setString(1,constraint.getEmp().getID());
+            ps.setString(2, String.valueOf(Date.valueOf(constraint.getShiftDate())));
+            ps.setString(3, String.valueOf(constraint.getShiftType()));
+        } catch (SQLException e) {
+            throw new IllegalArgumentException();
         }
     }
 
     @Override
-    public Constraint select(String KEY) {
-        String[] KEYS=KEY.split(",");
-        String sql ="SELECT * FROM EmployeeConstraints WHERE  EID=? AND ShiftDate=? ";
-        PreparedStatement pstmt = null;
+    public Constraint select(LocalDate date) {
+        String sql = "SELECT * FROM Constraint WHERE date=?";
+        Constraint constraint = CR.getConstraint(date);
+        if (constraint != null) {
+            return constraint;
+        }
         ResultSet rs = null;
-        Constraint constraint =null;
+        PreparedStatement ps = null;
         try {
-            pstmt=DB.getConnection().prepareStatement(sql);
-            pstmt.setString(1,KEYS[0]);
-            pstmt.setString(2,KEYS[1]);
-            rs= pstmt.executeQuery();
-            if (rs.next()) {
-                constraint = load(rs);
-                return constraint;
-            } else {
-                return null;
-            }
+            ps = DB.getConnection().prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(date));
+            rs = ps.executeQuery();
+            rs.next();
+            constraint = load(rs);
+            CR.addConstraint(date, constraint);
+            return constraint;
+        } catch (SQLException e) {
+            throw new IllegalArgumentException();
         }
-        catch (SQLException e) {
-            throw new RuntimeException();
-        }
-
-    }
-
-
-    @Override
-    public void update(Constraint obj) {
-        String keys = obj.getShiftDate().toString()+","+obj.getShiftType().toString().toUpperCase();
-        delete(keys);
-        insert(obj);
-    }
-
-
-    @Override
-    public void delete(String KEY) {
-        String[] KEYS=KEY.split(",");
-        String sql ="DELETE FROM users WHERE EID=? AND ShiftDate=?";
-        PreparedStatement pstmt = null;
-        try {
-            pstmt=DB.getConnection().prepareStatement(sql);
-            pstmt.setString(1,KEYS[0]);
-            pstmt.setString(2,KEYS[1]);
-            pstmt.execute();
-        }
-        catch (SQLException e) {
-            throw new RuntimeException();
-        }
-    }
-
-    private Constraint load(ResultSet rs) throws SQLException {
-        Employee Emp = EmployeeDao.getInstance().select(rs.getString(1));
-        LocalDate ShiftDate = LocalDate.parse(rs.getString(2));
-        ShiftType shiftType = ShiftType.valueOf(rs.getString(3));
-        return new Constraint(Emp,ShiftDate,shiftType);
     }
 }

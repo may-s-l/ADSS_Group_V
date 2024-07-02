@@ -37,6 +37,11 @@ public class Constraint {
     public void setShiftType(ShiftType shiftType) {
         this.shiftType = shiftType;
     }
+
+    public Employee getEmp() {
+        return emp;
+    }
+
     @Override
     public String toString() {
         return "can't work on "+this.date+" "+this.date.getDayOfWeek()+" "+this.shiftType.toString();
