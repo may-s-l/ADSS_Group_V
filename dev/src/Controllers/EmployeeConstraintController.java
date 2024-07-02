@@ -2,6 +2,7 @@ package dev.src.Controllers;
 
 import dev.src.Domain.*;
 import dev.src.Domain.Enums.*;
+import dev.src.Domain.Repository.ConstraintRep;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
@@ -79,18 +80,18 @@ public class EmployeeConstraintController {
 
 
         // Check if the constraint already exists
-        MyMap<LocalDate, Constraint> constraints = employee.getConstraintMyMap();
+        ConstraintRep constraints = employee.getConstraintMyMap();
         if (constraints == null) {
-            constraints = new MyMap<>();
+            constraints = new ConstraintRep();
             employee.setConstraintMyMap(constraints);
         }
 
         Constraint newConstraint = new Constraint(employee, date, shiftType);
-//        if (constraints.get(date) != null && constraints.get(date).equals(newConstraint)) {
-//            throw new IllegalArgumentException("Constraint already exists.");
-//        }
-
-        constraints.put(date, newConstraint);
+        if (employee.getConstraintByDate(date) != null) {
+            constraints.update(newConstraint);
+            throw new IllegalArgumentException("Constraint exists update");
+        }
+        constraints.add(newConstraint);
     }
 
     public void removeConstraint(String employeeID, String sdate, String sshiftType) throws IllegalArgumentException {
@@ -120,32 +121,26 @@ public class EmployeeConstraintController {
             throw new IllegalArgumentException("Employee not found.");
         }
 
-        MyMap<LocalDate, Constraint> constraints = employee.getConstraintMyMap();
-        if (constraints == null || constraints.get(date) == null || !constraints.get(date).getShiftType().equals(shiftType)) {
+        ConstraintRep constraints = employee.getConstraintMyMap();
+        String key =employeeID+","+date.toString();
+        if (constraints == null || constraints.find(key) == null) {
             throw new IllegalArgumentException("Constraint not found.");
         }
 
-        constraints.remove(date);
+        constraints.delete(key);
     }
 
     public String getConstraintFromToday(String employeeID) {
-        MyMap<LocalDate, Constraint> constraintMyMap=employeesTempDatabase.get(employeeID).getConstraintMyMap();
+        MyMap<LocalDate, Constraint> constraintMyMap=employeesTempDatabase.get(employeeID).getFutureConstraintMap();
 
         if (constraintMyMap == null || constraintMyMap.size()==0) {
             return "No constraints found for this employee.";
         }
 
-        LocalDate today = LocalDate.now();
-        MyMap<LocalDate, Constraint> futureConstraints = new MyMap<>();
         String stringFutureConstraints="";
+
         for (LocalDate date : constraintMyMap.getKeys()) {
-            if (!date.isBefore(today)) {
-                futureConstraints.put(date, constraintMyMap.get(date));
                 stringFutureConstraints=constraintMyMap.get(date).toString() + "\n";
-            }
-        }
-        if (futureConstraints == null) {
-            return "No constraints found for this employee.";
         }
         return stringFutureConstraints;
     }

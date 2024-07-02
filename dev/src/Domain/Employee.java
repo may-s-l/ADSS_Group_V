@@ -1,5 +1,8 @@
 package dev.src.Domain;
 
+import dev.src.Domain.Repository.ConstraintRep;
+
+import java.security.Key;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,8 @@ public class Employee {
     private int employeeNum;
     private TermsOfEmployment terms;
     private List<Job> Jobs;
-    private MyMap<LocalDate, Constraint> constraintMyMap;
+    //private MyMap<LocalDate, Constraint> constraintMyMap;
+    private ConstraintRep constraintMyMap;
 
 
     //constructor- gets all the data for employee
@@ -41,6 +45,17 @@ public class Employee {
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
+        constraintMyMap=null;
+    }
+
+    public Employee(String name, String ID,int EMP_NUM ,String bank_account, Branch branch) {
+        Name = name;
+        this.ID = ID;
+        Bank_account = bank_account;
+        Branch = branch;
+        this.terms =null;
+        Jobs = null;
+        this.employeeNum =EMP_NUM;
         constraintMyMap=null;
     }
 
@@ -132,22 +147,46 @@ public class Employee {
         return employeeNum;
     }
 
-    public MyMap<LocalDate, Constraint> getConstraintMyMap() {
-        return constraintMyMap;
+//    public MyMap<LocalDate, Constraint> getConstraintMyMap() {
+//        return constraintMyMap;
+//    }
+//
+//    public void setConstraintMyMap(MyMap<LocalDate, Constraint> constraintMyMap) {
+//        this.constraintMyMap = constraintMyMap;
+//    }
+
+    public ConstraintRep getConstraintMyMap() {
+    return constraintMyMap;
     }
 
-    public void setConstraintMyMap(MyMap<LocalDate, Constraint> constraintMyMap) {
+    public void setConstraintMyMap(ConstraintRep constraintMyMap) {
         this.constraintMyMap = constraintMyMap;
     }
+
 
     public Constraint getConstraintByDate(LocalDate date) {
         if (this.constraintMyMap==null){
             return null;
         }
-        if(!constraintMyMap.containsKey(date)){
-            return null;
+        String key = this.getID()+","+date.toString();
+        Constraint c =constraintMyMap.find(key);
+        return c;
+    }
+
+    public MyMap<LocalDate,Constraint> getFutureConstraintMap(){
+        LocalDate today = LocalDate.now();
+        MyMap<LocalDate,Constraint> MAP = new MyMap<>();
+        LocalDate until = today.plusDays(31);
+        String key = this.getID()+","+today.toString();
+        while (today!=until) {
+            Constraint C =this.constraintMyMap.find(key);
+            if (C!=null) {
+                MAP.put(today, C);
+            }
+            today.plusDays(1);
+            key = this.getID() + "," + today.toString();
         }
-        return constraintMyMap.get(date);
+        return MAP;
     }
 
 

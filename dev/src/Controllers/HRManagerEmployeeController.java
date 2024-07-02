@@ -80,6 +80,7 @@ public class HRManagerEmployeeController {
         //-------------------create------------------//
         TermsOfEmployment terms = new TermsOfEmployment(vacationDay, date, salary, job_type, salary_type);
         Employee NEWemployee = new Employee(name, ID, bank_account, branch_to_emp, terms, job_to_emp);
+        terms.setEmp(NEWemployee);
         this.Employees_temp_database.put(ID, NEWemployee);
         branch_to_emp.addEmployeeToBranch(NEWemployee);
         return "Employee successfully created";
@@ -147,6 +148,7 @@ public class HRManagerEmployeeController {
         //-------------------create------------------//
         TermsOfEmployment terms=new TermsOfEmployment(vacationDay,date,salary,job_type,salary_type);
         ManagerEmployee NEWemployee=new ManagerEmployee(name,ID,bank_account,branch_to_emp,terms,(ManagementJob) job_to_emp);
+        terms.setEmp(NEWemployee);
         this.Employees_temp_database.put(ID,NEWemployee);
         return "Employee successfully created";
 

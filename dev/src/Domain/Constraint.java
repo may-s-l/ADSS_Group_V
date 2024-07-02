@@ -26,6 +26,14 @@ public class Constraint {
         return shiftType;
     }
 
+    public Employee getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Employee emp) {
+        this.emp = emp;
+    }
+
     public void setShiftType(ShiftType shiftType) {
         this.shiftType = shiftType;
     }

@@ -1,4 +1,4 @@
-package dev.src.Data.DAO;
+package dev.src.Data;
 
 import org.sqlite.SQLiteConfig;
 import java.io.File;
@@ -82,8 +82,6 @@ public class DBConnection {
                         "    \"Name\"\tVARCHAR(25),\n" +
                         "    \"BankAccountNumber\"\tVARCHAR(8),\n" +
                         "    \"BranchID\"\tVARCHAR(25),\n" +
-                        "    \"Terms\"\tVARCHAR(25),\n" +
-                        "    \"EmployeeJob\"\tVARCHAR(25),\n" +
                         "    PRIMARY KEY(\"ID\")\n" +
                         ");\n" +
                         "CREATE TABLE IF NOT EXISTS \"EmployeeJobs\" (\n" +
@@ -107,7 +105,17 @@ public class DBConnection {
                         "    \"EmployeeJob\"\tVARCHAR(25),\n" +
                         "    FOREIGN KEY(\"ShiftDate\",\"ShiftType\",\"BranchAddress\") REFERENCES \"Shift\"(\"ShiftDate\",\"ShiftType\",\"BranchAddress\"),\n" +
                         "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\")\n" +
-                        ");\n";
+                        ");\n"+
+                        "CREATE TABLE IF NOT EXISTS \"EmployeesTerm\" (\n" +
+                        "    \"EID\"\tVARCHAR(6),\n" +
+                        "    \"vacationDay\"\tDOUBLE,\n" +
+                        "    \"Start_date\"\tVARCHAR(25),\n" +
+                        "    \"End_date\"\tVARCHAR(8),\n" +
+                        "    \"Salary\"\tDOUBLE,\n" +
+                        "    \"JobType\"\tVARCHAR(25),\n" +
+                        "    \"SalaryType\"\tVARCHAR(25),\n" +
+                        "    PRIMARY KEY(\"EID\")\n"+
+                        ");";
         String[] queries = script.split(";\n");
         for (String query : queries) {
             try (PreparedStatement ps = conn.prepareStatement(query)) {

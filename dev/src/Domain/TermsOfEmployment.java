@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public class TermsOfEmployment {
 
+    private Employee emp;
     private double vacationDay;
     private LocalDate Start_date;
     private LocalDate End_date;
@@ -21,6 +22,26 @@ public class TermsOfEmployment {
         Salary = salary;
         this.jt = JobType.valueOf(jt);
         this.st = SalaryType.valueOf(st);
+        this.emp = null;
+    }
+
+    public TermsOfEmployment(double vacationday, LocalDate start_date, LocalDate END_date, double salary, String jt, String st) {
+        this.vacationDay = vacationday;
+        Start_date = start_date;
+        End_date = END_date;
+        Salary = salary;
+        this.jt = JobType.valueOf(jt);
+        this.st = SalaryType.valueOf(st);
+        this.emp = null;
+    }
+
+    public Employee getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Employee emp) {
+        if(this.emp==null)
+            this.emp = emp;
     }
 
     public double getVacationDay() {
