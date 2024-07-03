@@ -1,6 +1,7 @@
 package dev.src.Controllers;
 import dev.src.Domain.*;
 import dev.src.Domain.Enums.ShiftType;
+import dev.src.Domain.Repository.BranchRep;
 import dev.src.Domain.Repository.EmployeeRep;
 import dev.src.Domain.Repository.JobRep;
 
@@ -16,7 +17,7 @@ import static java.time.DayOfWeek.*;
 
 public class HRManagerShiftController {
 
-    private MyMap<String, Branch> Branch_temp_database;//String key address
+    private BranchRep Branch_temp_database;//String key address
     private JobRep Employeejobs_temp_database;
 //    private MyMap<String, Employee> Employees_temp_database;//String key ID
     private EmployeeRep Employees_temp_database;
@@ -31,7 +32,7 @@ public class HRManagerShiftController {
 //        this.History_Shifts_temp_database=History_Shifts_temp_database;
 //    }
 
-    public HRManagerShiftController(JobRep Employeejobs_temp_database, MyMap<String, Branch> Branch_temp_database, EmployeeRep Employees_temp_database, MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
+    public HRManagerShiftController(JobRep Employeejobs_temp_database, BranchRep Branch_temp_database, EmployeeRep Employees_temp_database, MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
         this.Employees_temp_database=Employees_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employeejobs_temp_database=Employeejobs_temp_database;
@@ -266,7 +267,7 @@ public class HRManagerShiftController {
         Set<String>Brenchskey=this.Branch_temp_database.getKeys();
         List<Branch> Allbranch=new ArrayList<Branch>();
         for(String b:Brenchskey){
-            Allbranch.add(this.Branch_temp_database.get(b));
+            Allbranch.add(this.Branch_temp_database.find(b));
         }
         return Allbranch;
     }

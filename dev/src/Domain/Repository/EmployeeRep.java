@@ -5,6 +5,8 @@ import dev.src.Domain.Branch;
 import dev.src.Domain.Employee;
 import dev.src.Domain.MyMap;
 
+import java.util.Set;
+
 public class EmployeeRep implements IRep<Employee,String> {
 
     private EmployeeJobsTDao employeeJobsTDao;
@@ -91,7 +93,9 @@ public class EmployeeRep implements IRep<Employee,String> {
         employeeDao.getALLEmpActiveByBranch(A,rep);
     }
 
-
+    public Set<String> getKeys(){
+        return map.getKeys();
+    }
 
 
 

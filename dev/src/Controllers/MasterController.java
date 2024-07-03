@@ -1,6 +1,7 @@
 package dev.src.Controllers;
 
 import dev.src.Domain.*;
+import dev.src.Domain.Repository.BranchRep;
 import dev.src.Domain.Repository.EmployeeRep;
 import dev.src.Domain.Repository.JobRep;
 
@@ -20,7 +21,7 @@ public class MasterController {
 //    private HRManagerShiftController HR_Shift;
 //    private EmployeeConstraintController Employee_Constraint;
 
-    private MyMap<String, Branch> Branch_temp_database;//String key address
+    private BranchRep Branch_temp_database;//String key address
     private JobRep Employeejobs_temp_database;//-V2-
     private EmployeeRep Employees_temp_database;//String key ID----V2-
     private MyMap<Integer, MyMap<LocalDate, String>> History_Shifts_temp_database;//int branch num
@@ -32,7 +33,7 @@ public class MasterController {
     public MasterController() {
         this.Employees_temp_database = new EmployeeRep();
         this.Employeejobs_temp_database = new JobRep();
-        this.Branch_temp_database = new MyMap<String, Branch>();
+        this.Branch_temp_database = new BranchRep();
         this.History_Shifts_temp_database = new MyMap<Integer, MyMap<LocalDate, String>>();
         this.HR_Shift = new HRManagerShiftController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database, History_Shifts_temp_database);
         this.HR_Employee = new HRManagerEmployeeController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database);

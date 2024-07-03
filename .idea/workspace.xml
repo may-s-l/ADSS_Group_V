@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="jobRep">
-      <change afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/JobRep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_18_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_18_11__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/Jobrep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/Jobrep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/BranchRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/BranchRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/EmployeeRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/EmployeeRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/JobRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/JobRep.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +70,20 @@
     ]
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Login_menu">
+    <configuration name="Login_menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dev.src.presentation.menus.Login_menu" />
+      <module name="assignments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.src.presentation.menus.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dev.src.Main" />
       <module name="assignments" />
@@ -87,7 +99,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Login_menu" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
@@ -199,7 +211,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1717776906956</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎-00014" summary="jobRep">
+      <created>1720013403002</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720013403002</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,23 +260,10 @@
     <MESSAGE value="little changing" />
     <MESSAGE value="little chang" />
     <MESSAGE value="done" />
-    <option name="LAST_COMMIT_MESSAGE" value="done" />
+    <MESSAGE value="jobRep" />
+    <option name="LAST_COMMIT_MESSAGE" value="jobRep" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="empMAP" />

@@ -9,6 +9,7 @@ import dev.src.Domain.Job;
 import dev.src.Domain.MyMap;
 
 import java.util.List;
+import java.util.Set;
 
 public class BranchRep implements IRep<Branch,String>{
 
@@ -65,5 +66,8 @@ public class BranchRep implements IRep<Branch,String>{
         return "";
     }
 
+    public Set<String> getKeys(){
+        return Branchs.getKeys();
+    }
 
 }

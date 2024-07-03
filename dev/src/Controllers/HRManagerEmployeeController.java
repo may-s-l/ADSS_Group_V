@@ -1,15 +1,17 @@
 package dev.src.Controllers;
 
 import dev.src.Domain.*;
+import dev.src.Domain.Repository.BranchRep;
 import dev.src.Domain.Repository.EmployeeRep;
+import dev.src.Domain.Repository.JobRep;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class HRManagerEmployeeController {
 
-    private List<Job> Employeejobs_temp_database;
-    private MyMap<String,Branch> Branch_temp_database;
+    private JobRep Employeejobs_temp_database;
+    private BranchRep Branch_temp_database;
     //private MyMap<String, Employee> Employees_temp_database; //-V1-
     private EmployeeRep Employees_temp_database;//-V2-
 
@@ -20,7 +22,7 @@ public class HRManagerEmployeeController {
 //
 //    }
 
-        public HRManagerEmployeeController(List<Job> Employeejobs_temp_database,MyMap<String,Branch> Branch_temp_database,EmployeeRep Employees_temp_database) {
+        public HRManagerEmployeeController(JobRep Employeejobs_temp_database, BranchRep Branch_temp_database, EmployeeRep Employees_temp_database) {
         this.Employeejobs_temp_database=Employeejobs_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employees_temp_database=Employees_temp_database;
@@ -48,7 +50,8 @@ public class HRManagerEmployeeController {
         //-------job-------//
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
-        for (Job j : this.Employeejobs_temp_database) {
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (j.getJobName().equals(jobname)) {
                 job_to_emp = j;
                 break;
@@ -116,7 +119,8 @@ public class HRManagerEmployeeController {
         //-------job-------//
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
-        for (Job j : this.Employeejobs_temp_database) {
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (j.getJobName().trim().equals(jobname)&&j instanceof ManagementJob) {
                 job_to_emp = j;
                 break;
@@ -375,7 +379,8 @@ public class HRManagerEmployeeController {
         }
         Jobname=Jobname.toUpperCase();
         Job job;
-        for(Job j : this.Employeejobs_temp_database){
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if(Objects.equals(j.getJobName(), Jobname)){
                 job=j;
                 return job;
@@ -388,7 +393,7 @@ public class HRManagerEmployeeController {
         Set<String>Brenchskey=this.Branch_temp_database.getKeys();
         List<Branch> Allbranch=new ArrayList<Branch>();
         for(String b:Brenchskey){
-            Allbranch.add(this.Branch_temp_database.get(b));
+            Allbranch.add(this.Branch_temp_database.find(b));
         }
         return Allbranch;
     }
@@ -398,7 +403,8 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("Name can not be NULL");
         }
         name=name.toUpperCase();
-        for (Job j: this.Employeejobs_temp_database){
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if(Objects.equals(j.getJobName(), name)){
                 throw new IllegalArgumentException("The job already exists");
             }
@@ -412,7 +418,8 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("Name can not be NULL");
         }
         name=name.toUpperCase();
-        for (Job j: this.Employeejobs_temp_database){
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if(Objects.equals(j.getJobName(), name)){
                 throw new IllegalArgumentException("The job already exists");
             }
@@ -426,7 +433,7 @@ public class HRManagerEmployeeController {
         if (name == null||address == null || ManagerID == null){
             throw new IllegalArgumentException("Argument's can't be NULL");
         }
-        Branch branch=Branch_temp_database.get(address);
+        Branch branch=Branch_temp_database.find(address);
         if(branch!=null){
             throw new IllegalArgumentException("There is already a branch at this address");
         }
@@ -436,7 +443,7 @@ public class HRManagerEmployeeController {
         }
         if (employee instanceof ManagerEmployee){
             Branch newbranch = new Branch(name,address,(ManagerEmployee) employee);
-            this.Branch_temp_database.put(address,newbranch);
+            this.Branch_temp_database.add(newbranch);
             return "Branch successfully created";
         }
         throw new IllegalArgumentException("Branch must be managed by a managerial employee");
@@ -446,12 +453,12 @@ public class HRManagerEmployeeController {
         if (name == null||address == null){
             throw new IllegalArgumentException("Argument's can't be NULL");
         }
-        Branch branch=this.Branch_temp_database.get(address);
+        Branch branch=this.Branch_temp_database.find(address);
         if(branch!=null){
             throw new IllegalArgumentException("There is already a branch at this address");
         }
         Branch newbranch = new Branch(name, address);
-        this.Branch_temp_database.put(address,newbranch);
+        this.Branch_temp_database.add(newbranch);
         return "Branch successfully created";
     }
 
