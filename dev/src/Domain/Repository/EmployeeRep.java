@@ -61,15 +61,33 @@ public class EmployeeRep implements IRep<Employee,String> {
     @Override
     public String update(Employee obj) {
         if(map.containsKey(obj.getID())){
-
-
+            Employee C = employeeDao.select(obj.getID());
+            if(C == null){
+                return null;
+            }
+            try {
+                employeeDao.update(obj);
+            }
+            catch(Exception e){
+                new IllegalArgumentException("employee update failed");
+            }
+            map.put(obj.getID(), obj);
+            return "employee updated";
         };
+        return "employee updated --emp rep update";
     }
 
     @Override
     public String delete(String s) {
-        return "";
+        if(map.containsKey(s)){
+            map.remove(s);
+            return "employee deleted";
+        }
+        return "employee not delete from --rep employee";
     }
+
+
+
 
 
 }

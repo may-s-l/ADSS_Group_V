@@ -1,43 +1,64 @@
 package dev.src.Domain.Repository;
 
-import dev.src.Data.DAONotToUes.EmployeeDao;
-import dev.src.Data.DAONotToUes.JobDao;
+
+import dev.src.Data.DaoM.EmployeeJobsTDao;
+import dev.src.Data.DaoM.EmployeeTDao;
+import dev.src.Data.DaoM.JobsTDao;
 import dev.src.Domain.Employee;
 import dev.src.Domain.Job;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EJobsRep implements IRep<Job, Employee>{
+public class EJobsRep implements IRep<Job, String>{
 
     String EDI;
     List<Job> jobs;
-    private JobDao JobDao;
-    private EmployeeDao EmployeeDao;
+    private JobsTDao JobDao;
+    private EmployeeTDao EmployeeDao;
+    private EmployeeJobsTDao EmployeeJobsDao;
 
 
-    public void EJobRep(String EID) {
+
+    public EJobsRep (String EID) {
         EDI = EID;
         jobs = new ArrayList<Job>();
         JobDao = JobDao.getInstance();
         EmployeeDao = EmployeeDao.getInstance();
+        EmployeeJobsDao = EmployeeJobsDao.getInstance();
     }
 
     @Override
     public String add(Job obj) {
+        String key = obj.getJobName()+","+EDI;
         if(!jobs.contains(obj)) {
+            String J = EmployeeJobsDao.select(key) ;
+            if(J == null) {
+                EmployeeJobsDao.insert(key);
+            }
             jobs.add(obj);
-            EmployeeDao.getAlljobsforemployee(EDI);
-            if()
-            return "s";
+            return "S";
         }
-        return "s";
+        return "S";
     }
 
 
     @Override
     public Job find(String s) {
-        return null;
+        String Key = EDI+","+s;
+        Job J = JobDao.select(s);
+        if(J != null) {
+            if(!jobs.contains(J)){
+                if (EmployeeJobsDao.select(Key)==null) {
+                    return null;
+                } else {
+                    jobs.add(J);
+                    return J;
+                }
+            }
+            return J;
+        }
+        throw new IllegalArgumentException("job not exist");
     }
 
     @Override

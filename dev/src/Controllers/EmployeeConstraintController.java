@@ -3,6 +3,7 @@ package dev.src.Controllers;
 import dev.src.Domain.*;
 import dev.src.Domain.Enums.*;
 import dev.src.Domain.Repository.ConstraintRep;
+import dev.src.Domain.Repository.EmployeeRep;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
@@ -16,9 +17,13 @@ import java.util.stream.Collectors;
 public class EmployeeConstraintController {
 
     //private ConstraintMenu constraintMenu;
-    private MyMap<String, Employee> employeesTempDatabase;
+    //private MyMap<String, Employee> employeesTempDatabase;//-V1-
+    private EmployeeRep employeesTempDatabase;//-V2-
 
-    public EmployeeConstraintController(MyMap<String, Employee> Employees_temp_database) {
+//    public EmployeeConstraintController(MyMap<String, Employee> Employees_temp_database) {
+//        this.employeesTempDatabase=Employees_temp_database;
+//    }
+    public EmployeeConstraintController(EmployeeRep Employees_temp_database) {
         this.employeesTempDatabase=Employees_temp_database;
     }
 

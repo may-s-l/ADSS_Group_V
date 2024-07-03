@@ -1,6 +1,6 @@
 package dev.src.Domain.Repository;
 
-import dev.src.Data.DAONotToUes.ConstraintDao;
+import dev.src.Data.DaoM.EmployeeConstraintTDao;
 import dev.src.Domain.Constraint;
 import dev.src.Domain.MyMap;
 
@@ -9,12 +9,12 @@ import java.time.LocalDate;
 public class ConstraintRep implements IRep<Constraint, String> {
 
     private MyMap<LocalDate, Constraint> map ;
-    private ConstraintDao constraintDao;
+    private EmployeeConstraintTDao constraintDao;
 
 
     public ConstraintRep() {
         map = new MyMap<>();
-        constraintDao = ConstraintDao.getInstance();
+        constraintDao = EmployeeConstraintTDao.getInstance();
     }
 
     @Override
@@ -25,6 +25,7 @@ public class ConstraintRep implements IRep<Constraint, String> {
             if(C == null){
                 constraintDao.insert(obj);
             }
+            update(obj);
         }
         map.put(obj.getShiftDate(),obj);
         return "s";
@@ -54,7 +55,7 @@ public class ConstraintRep implements IRep<Constraint, String> {
     public String update(Constraint obj) {
         constraintDao.update(obj);
         map.put(obj.getShiftDate(),obj);
-        return "s";
+        return "S";
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ConstraintRep implements IRep<Constraint, String> {
             map.remove(LocalDate.parse(s));
             constraintDao.delete(s);
         }
-        return "s";
+        return "S";
     }
 
     public int size(){

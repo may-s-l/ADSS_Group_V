@@ -2,7 +2,7 @@ package dev.src.Domain;
 
 import dev.src.Domain.Repository.ConstraintRep;
 import dev.src.Domain.Repository.EJobsRep;
-import dev.src.Domain.Repository.Jobrep;
+
 
 import java.security.Key;
 import java.time.LocalDate;
@@ -30,7 +30,7 @@ public class Employee {
         Bank_account = bank_account;
         Branch = branch;
         this.terms = terms;
-        Jobs = new EJobsRep();
+        Jobs = new EJobsRep(ID);
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
@@ -44,7 +44,7 @@ public class Employee {
         Bank_account = bank_account;
         Branch = branch;
         this.terms = new TermsOfEmployment(vacationDay,start_date,salary,job_type,Salary_type);
-        Jobs = new EJobsRep();
+        Jobs = new EJobsRep(ID);
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
@@ -129,11 +129,12 @@ public class Employee {
         if(job==null){
             return false;
         }
-        return Jobs.add(job);
+        String S =Jobs.add(job);
+        return S.equals("S");
     }
 
     public boolean employeeCanbe(Job job){
-        return this.Jobs.contains(job);
+        return this.Jobs.find(job.getJobName())!=null;
     }
 
     public int getEmployeeNum() {

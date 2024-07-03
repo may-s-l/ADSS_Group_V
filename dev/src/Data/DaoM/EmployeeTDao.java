@@ -76,6 +76,7 @@ public class EmployeeTDao implements IDao<Employee,String> {
     @Override
     public void update(Employee obj) {
         delete(obj.getID());
+        EmployeeTermsTDao.getInstance().update(obj.getTerms());
         insert(obj);
 
     }

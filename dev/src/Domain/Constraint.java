@@ -38,9 +38,6 @@ public class Constraint {
         this.shiftType = shiftType;
     }
 
-    public Employee getEmp() {
-        return emp;
-    }
 
     @Override
     public String toString() {
