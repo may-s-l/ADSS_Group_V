@@ -2,6 +2,7 @@ package dev.src.Controllers;
 
 import dev.src.Domain.*;
 import dev.src.Domain.Repository.EmployeeRep;
+import dev.src.Domain.Repository.JobRep;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -20,8 +21,8 @@ public class MasterController {
 //    private EmployeeConstraintController Employee_Constraint;
 
     private MyMap<String, Branch> Branch_temp_database;//String key address
-    private List<Job> Employeejobs_temp_database;
-    private EmployeeRep Employees_temp_database;//String key ID----
+    private JobRep Employeejobs_temp_database;//-V2-
+    private EmployeeRep Employees_temp_database;//String key ID----V2-
     private MyMap<Integer, MyMap<LocalDate, String>> History_Shifts_temp_database;//int branch num
     private HRManagerEmployeeController HR_Employee;
     private HRManagerShiftController HR_Shift;
@@ -30,7 +31,7 @@ public class MasterController {
 
     public MasterController() {
         this.Employees_temp_database = new EmployeeRep();
-        this.Employeejobs_temp_database = new ArrayList<Job>();
+        this.Employeejobs_temp_database = new JobRep();
         this.Branch_temp_database = new MyMap<String, Branch>();
         this.History_Shifts_temp_database = new MyMap<Integer, MyMap<LocalDate, String>>();
         this.HR_Shift = new HRManagerShiftController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database, History_Shifts_temp_database);
@@ -52,8 +53,8 @@ public class MasterController {
     }
 
     public String checkLoginEmployee(String ID){
-        if(this.Employees_temp_database.containsKey(ID)){
-            Employee employee = this.Employees_temp_database.get(ID);
+        if(this.Employees_temp_database.find(ID)!=null){
+            Employee employee = this.Employees_temp_database.find(ID);
             if(employee instanceof ManagerEmployee){
                 return "HR-MANAGER";
             }

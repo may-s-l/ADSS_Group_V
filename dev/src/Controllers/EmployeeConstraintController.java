@@ -28,7 +28,7 @@ public class EmployeeConstraintController {
     }
 
     public String returnEmployeeDetails(String id) {
-        return employeesTempDatabase.get(id).toStringfullinfo();
+        return employeesTempDatabase.find(id).toStringfullinfo();
     }
 
     public void addConstraint(String employeeID, String sdate, String sshiftType) throws IllegalArgumentException {
@@ -49,7 +49,7 @@ public class EmployeeConstraintController {
             throw new IllegalArgumentException("Invalid shift type. Valid types are: MORNING, EVENING, FULLDAY.");
         }
 
-        Employee employee = employeesTempDatabase.get(employeeID);
+        Employee employee = employeesTempDatabase.find(employeeID);
 
         if (employee == null) {
             throw new IllegalArgumentException("Employee not found.");
@@ -120,7 +120,7 @@ public class EmployeeConstraintController {
             throw new IllegalArgumentException("Invalid shift type. Valid types are: MORNING, EVENING.");
         }
 
-        Employee employee = employeesTempDatabase.get(employeeID);
+        Employee employee = employeesTempDatabase.find(employeeID);
 
         if (employee == null) {
             throw new IllegalArgumentException("Employee not found.");
@@ -136,7 +136,7 @@ public class EmployeeConstraintController {
     }
 
     public String getConstraintFromToday(String employeeID) {
-        MyMap<LocalDate, Constraint> constraintMyMap=employeesTempDatabase.get(employeeID).getFutureConstraintMap();
+        MyMap<LocalDate, Constraint> constraintMyMap=employeesTempDatabase.find(employeeID).getFutureConstraintMap();
 
         if (constraintMyMap == null || constraintMyMap.size()==0) {
             return "No constraints found for this employee.";

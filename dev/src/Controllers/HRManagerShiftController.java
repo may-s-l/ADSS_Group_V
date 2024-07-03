@@ -1,6 +1,9 @@
 package dev.src.Controllers;
 import dev.src.Domain.*;
 import dev.src.Domain.Enums.ShiftType;
+import dev.src.Domain.Repository.EmployeeRep;
+import dev.src.Domain.Repository.JobRep;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,17 +17,25 @@ import static java.time.DayOfWeek.*;
 public class HRManagerShiftController {
 
     private MyMap<String, Branch> Branch_temp_database;//String key address
-    private List<Job> Employeejobs_temp_database;
-    private MyMap<String, Employee> Employees_temp_database;//String key ID
+    private JobRep Employeejobs_temp_database;
+//    private MyMap<String, Employee> Employees_temp_database;//String key ID
+    private EmployeeRep Employees_temp_database;
     private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
     private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
     private MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> CurrentSchedule;
-    public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database,MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
+//    public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database,MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
+//        this.Employees_temp_database=Employees_temp_database;
+//        this.Branch_temp_database=Branch_temp_database;
+//        this.Employeejobs_temp_database=Employeejobs_temp_database;
+//        this.BranchWeek_temp_database=new MyMap<Integer,MyMap<LocalDate,Week>>();
+//        this.History_Shifts_temp_database=History_Shifts_temp_database;
+//    }
+
+    public HRManagerShiftController(JobRep Employeejobs_temp_database, MyMap<String, Branch> Branch_temp_database, EmployeeRep Employees_temp_database, MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
         this.Employees_temp_database=Employees_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employeejobs_temp_database=Employeejobs_temp_database;
         this.BranchWeek_temp_database=new MyMap<Integer,MyMap<LocalDate,Week>>();
-
         this.History_Shifts_temp_database=History_Shifts_temp_database;
     }
 
@@ -178,7 +189,7 @@ public class HRManagerShiftController {
     public String toStringforweekANDemlpoyeeinbanc(Week week,List<List<Object>> employeeTable){
         return toStringEmployeeConstraintJobTable(employeeTable)+week.weekInTableToShow();
     }
-    private List<List<Object>> createEmployeeConstraintJobTable(MyMap<String, Employee> employeeInBranch, String date,MyMap<Integer, Employee>BranchemployeeBYemployeeNUM) {
+    private List<List<Object>> createEmployeeConstraintJobTable(EmployeeRep employeeInBranch, String date,MyMap<Integer, Employee>BranchemployeeBYemployeeNUM) {
         List<List<Object>> employeesWithConstraints = new ArrayList<>();
         List<List<Object>> employeesWithoutConstraints = new ArrayList<>();
         Set<String> employeeIDs = employeeInBranch.getKeys();
@@ -187,7 +198,7 @@ public class HRManagerShiftController {
         if (startDay.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
             for (String id : employeeIDs) {
                 List<Constraint> constraintList = new ArrayList<>();
-                Employee emp = employeeInBranch.get(id);
+                Employee emp = employeeInBranch.find(id);
 
                 for (int i = 0; i < 7; i++) {
                     LocalDate constraintDate = startDay.plusDays(i);
@@ -224,7 +235,8 @@ public class HRManagerShiftController {
             for (int i = 0; i < 7; i++) {
                 day = week.getDayOfWeek(Ldate.plusDays(i));
                 if (!day.isIsdayofrest()) {
-                    for (Job j : Employeejobs_temp_database) {
+                    for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+                        Job j=Employeejobs_temp_database.getJobByIndex(z);
                         if (!(j instanceof ManagementJob)) {
                             day.getShiftsInDay()[0].addJobToShift(j);
                             day.getShiftsInDay()[1].addJobToShift(j);
@@ -461,7 +473,8 @@ public class HRManagerShiftController {
         }
         Shift shift=week.getDayOfWeek(dateToCheck).getShiftsInDay()[i];
         Job job = null;
-        for (Job j : this.Employeejobs_temp_database) {
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (Objects.equals(j.getJobName(), jobname)) {
                 job = j;
                 break;
@@ -555,7 +568,8 @@ public class HRManagerShiftController {
         }
 
         Job job = null;
-        for (Job j : this.Employeejobs_temp_database) {
+        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+            Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (j.getJobName().equals(jobname)) {
                 job = j;
                 break;

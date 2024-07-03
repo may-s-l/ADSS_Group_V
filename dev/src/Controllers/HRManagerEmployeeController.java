@@ -1,6 +1,7 @@
 package dev.src.Controllers;
 
 import dev.src.Domain.*;
+import dev.src.Domain.Repository.EmployeeRep;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -9,9 +10,17 @@ public class HRManagerEmployeeController {
 
     private List<Job> Employeejobs_temp_database;
     private MyMap<String,Branch> Branch_temp_database;
-    private MyMap<String, Employee> Employees_temp_database;
+    //private MyMap<String, Employee> Employees_temp_database; //-V1-
+    private EmployeeRep Employees_temp_database;//-V2-
 
-    public HRManagerEmployeeController(List<Job> Employeejobs_temp_database,MyMap<String,Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database) {
+//    public HRManagerEmployeeController(List<Job> Employeejobs_temp_database,MyMap<String,Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database) {
+//        this.Employeejobs_temp_database=Employeejobs_temp_database;
+//        this.Branch_temp_database=Branch_temp_database;
+//        this.Employees_temp_database=Employees_temp_database;
+//
+//    }
+
+        public HRManagerEmployeeController(List<Job> Employeejobs_temp_database,MyMap<String,Branch> Branch_temp_database,EmployeeRep Employees_temp_database) {
         this.Employeejobs_temp_database=Employeejobs_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employees_temp_database=Employees_temp_database;
@@ -29,7 +38,7 @@ public class HRManagerEmployeeController {
         //-------ID-------//
         if (ID.length() != 6 || ID.contains("[0-9]+"))
             throw new IllegalArgumentException("ID must be 6 numeric characters long");
-        if(this.Employees_temp_database.get(ID) != null) {
+        if(this.Employees_temp_database.find(ID) != null) {
             throw new IllegalArgumentException("Employee is already exist");
         }
         //-------Bank-------//
@@ -81,7 +90,7 @@ public class HRManagerEmployeeController {
         TermsOfEmployment terms = new TermsOfEmployment(vacationDay, date, salary, job_type, salary_type);
         Employee NEWemployee = new Employee(name, ID, bank_account, branch_to_emp, terms, job_to_emp);
         terms.setEmp(NEWemployee);
-        this.Employees_temp_database.put(ID, NEWemployee);
+        this.Employees_temp_database.add(NEWemployee);
         branch_to_emp.addEmployeeToBranch(NEWemployee);
         return "Employee successfully created";
     }
@@ -97,7 +106,7 @@ public class HRManagerEmployeeController {
         if (ID.length() != 6 || ID.contains("[a-z,A-Z]+")) {
             throw new IllegalArgumentException("ID must be 6 numeric characters long");
         }
-        if(this.Employees_temp_database.get(ID) != null) {
+        if(this.Employees_temp_database.find(ID) != null) {
             throw new IllegalArgumentException("Employee is already exist");
         }
         //-------Bank-------//
@@ -149,7 +158,7 @@ public class HRManagerEmployeeController {
         TermsOfEmployment terms=new TermsOfEmployment(vacationDay,date,salary,job_type,salary_type);
         ManagerEmployee NEWemployee=new ManagerEmployee(name,ID,bank_account,branch_to_emp,terms,(ManagementJob) job_to_emp);
         terms.setEmp(NEWemployee);
-        this.Employees_temp_database.put(ID,NEWemployee);
+        this.Employees_temp_database.add(NEWemployee);
         return "Employee successfully created";
 
     }
@@ -165,7 +174,7 @@ public class HRManagerEmployeeController {
         if (ID.length() != 6 || ID.contains("[a-z,A-Z]+")) {
             throw new IllegalArgumentException("ID must be 6 numeric characters long");
         }
-        Employee empToUpdate = this.Employees_temp_database.get(ID);
+        Employee empToUpdate = this.Employees_temp_database.find(ID);
         if(empToUpdate!=null){
             empToUpdate.setName(name);
             return "The employee name has been successfully changed";
@@ -176,7 +185,7 @@ public class HRManagerEmployeeController {
         if(ID==null|end_date==null){
             throw new IllegalArgumentException("Arguments can not be NULL");
         }
-        Employee empToUpdate = this.Employees_temp_database.get(ID);
+        Employee empToUpdate = this.Employees_temp_database.find(ID);
         if(empToUpdate!=null){
             LocalDate end_date_toUP = LocalDate.parse(end_date);
             LocalDate start_date=empToUpdate.getTerms().getStart_date();
@@ -200,7 +209,7 @@ public class HRManagerEmployeeController {
         if(salery<30) {
             throw new IllegalArgumentException("Minimum salary is 30");
         }
-        Employee empToUpdate = this.Employees_temp_database.get(ID);
+        Employee empToUpdate = this.Employees_temp_database.find(ID);
         if(empToUpdate!=null){
             empToUpdate.getTerms().setSalary(salery);
             return "Salary is successfully updated for employee - "+ID;
@@ -342,19 +351,19 @@ public class HRManagerEmployeeController {
             if(empToUpdate instanceof ManagerEmployee||!(jobToUpdat instanceof ManagementJob)){
                 return false;
             }
-            this.Employees_temp_database.remove(ID);
+            this.Employees_temp_database.delete(ID);
             ManagerEmployee empToUpdateASmaneger =new ManagerEmployee(empToUpdate.getName(),ID,empToUpdate.getBank_account(),empToUpdate.getBranch(),empToUpdate.getTerms(),(ManagementJob) jobToUpdat);
             if (empToUpdateASmaneger==null){
                 return false;
             }
-            this.Employees_temp_database.put(ID,(Employee)empToUpdateASmaneger);
+            this.Employees_temp_database.update((Employee)empToUpdateASmaneger);
         }
         return false;
     }
 
     public Employee getEmployeeByID(String ID) {
-        if (this.Employees_temp_database.containsKey(ID)) {
-            Employee emp = this.Employees_temp_database.get(ID);
+        if (this.Employees_temp_database.find(ID)!=null) {
+            Employee emp = this.Employees_temp_database.find(ID);
             return emp;
         }
         return null;
@@ -421,7 +430,7 @@ public class HRManagerEmployeeController {
         if(branch!=null){
             throw new IllegalArgumentException("There is already a branch at this address");
         }
-        Employee employee=this.Employees_temp_database.get(ManagerID);
+        Employee employee=this.Employees_temp_database.find(ManagerID);
         if(employee==null){
             throw new IllegalArgumentException("This employee does not exist in the system");
         }
