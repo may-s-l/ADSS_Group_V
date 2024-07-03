@@ -236,7 +236,7 @@ public class HRManagerShiftController {
             for (int i = 0; i < 7; i++) {
                 day = week.getDayOfWeek(Ldate.plusDays(i));
                 if (!day.isIsdayofrest()) {
-                    for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+                    for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
                         Job j=Employeejobs_temp_database.getJobByIndex(z);
                         if (!(j instanceof ManagementJob)) {
                             day.getShiftsInDay()[0].addJobToShift(j);
@@ -474,7 +474,7 @@ public class HRManagerShiftController {
         }
         Shift shift=week.getDayOfWeek(dateToCheck).getShiftsInDay()[i];
         Job job = null;
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (Objects.equals(j.getJobName(), jobname)) {
                 job = j;
@@ -569,7 +569,7 @@ public class HRManagerShiftController {
         }
 
         Job job = null;
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (j.getJobName().equals(jobname)) {
                 job = j;

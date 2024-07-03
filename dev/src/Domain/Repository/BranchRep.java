@@ -67,6 +67,9 @@ public class BranchRep implements IRep<Branch,String>{
     }
 
     public Set<String> getKeys(){
+        if (Branchs.getKeys().isEmpty()){
+            Branchs=BranchDao.selectAllBranchs();
+        }
         return Branchs.getKeys();
     }
 

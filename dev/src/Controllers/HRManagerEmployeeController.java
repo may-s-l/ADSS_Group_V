@@ -22,7 +22,7 @@ public class HRManagerEmployeeController {
 //
 //    }
 
-        public HRManagerEmployeeController(JobRep Employeejobs_temp_database, BranchRep Branch_temp_database, EmployeeRep Employees_temp_database) {
+    public HRManagerEmployeeController(JobRep Employeejobs_temp_database, BranchRep Branch_temp_database, EmployeeRep Employees_temp_database) {
         this.Employeejobs_temp_database=Employeejobs_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employees_temp_database=Employees_temp_database;
@@ -50,7 +50,7 @@ public class HRManagerEmployeeController {
         //-------job-------//
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (j.getJobName().equals(jobname)) {
                 job_to_emp = j;
@@ -119,7 +119,7 @@ public class HRManagerEmployeeController {
         //-------job-------//
         jobname=jobname.toUpperCase();
         Job job_to_emp = null;
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if (j.getJobName().trim().equals(jobname)&&j instanceof ManagementJob) {
                 job_to_emp = j;
@@ -164,7 +164,6 @@ public class HRManagerEmployeeController {
         terms.setEmp(NEWemployee);
         this.Employees_temp_database.add(NEWemployee);
         return "Employee successfully created";
-
     }
 
     // UPDATE all String name, String bank_account, Branch branch, double vacationDay, LocalDate start_date, double salary, String job_type, String Salary_type,Job job) for all employees
@@ -379,7 +378,7 @@ public class HRManagerEmployeeController {
         }
         Jobname=Jobname.toUpperCase();
         Job job;
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if(Objects.equals(j.getJobName(), Jobname)){
                 job=j;
@@ -403,7 +402,7 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("Name can not be NULL");
         }
         name=name.toUpperCase();
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if(Objects.equals(j.getJobName(), name)){
                 throw new IllegalArgumentException("The job already exists");
@@ -418,7 +417,7 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("Name can not be NULL");
         }
         name=name.toUpperCase();
-        for (int z=0;z>=Employeejobs_temp_database.getsize();z++) {
+        for (int z=0;z<Employeejobs_temp_database.getsize();z++) {
             Job j=Employeejobs_temp_database.getJobByIndex(z);
             if(Objects.equals(j.getJobName(), name)){
                 throw new IllegalArgumentException("The job already exists");

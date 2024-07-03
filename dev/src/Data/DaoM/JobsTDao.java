@@ -3,10 +3,14 @@ package dev.src.Data.DaoM;
 
 import dev.src.Data.DBConnection;
 import dev.src.Domain.Job;
+import dev.src.Domain.ManagementJob;
+import dev.src.Domain.Repository.JobRep;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JobsTDao implements IDao<Job,String>{
 
@@ -72,5 +76,28 @@ public class JobsTDao implements IDao<Job,String>{
     private Job load(ResultSet rs) throws SQLException {
         String name = rs.getString("Name");
         return new Job(name);
+    }
+
+    private ManagementJob loadMJob(ResultSet rs) throws SQLException {
+        String name = rs.getString("Name");
+        return new ManagementJob(name);
+    }
+
+    public ArrayList<Job> selectAllJobs() {
+        String sql = "SELECT * FROM Jobs";
+        try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+            ArrayList<Job> jobs=new ArrayList<Job>();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getString(1).equals("HR-MANAGER")){
+                    jobs.add(loadMJob(rs));
+                } else {
+                    jobs.add(load(rs));
+                }
+            }
+            return jobs;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

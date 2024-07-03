@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JobRep implements IRep<Job,String>{
 
-    List<Job> jobs;
+    private List<Job> jobs;
     private JobsTDao JobDao;
 
 
@@ -90,6 +90,9 @@ public class JobRep implements IRep<Job,String>{
     }
 
     public int getsize() {
+        if (jobs.size()==0){
+            this.jobs=JobDao.selectAllJobs();
+        }
         return jobs.size();
     }
 
