@@ -1,31 +1,26 @@
 package dev.src.Domain.Repository;
 
-import dev.src.Data.DAO.ConstraintDao;
-import dev.src.Data.DAO.EmployeeDao;
-import dev.src.Data.DAO.JobDao;
-import dev.src.Data.DAO.TermsOfEmploymentDao;
-import dev.src.Domain.Constraint;
+import dev.src.Data.DaoM.*;
 import dev.src.Domain.Employee;
 import dev.src.Domain.MyMap;
 
-import java.time.LocalDate;
-
 public class EmployeeRep implements IRep<Employee,String> {
 
+    private EmployeeJobsTDao employeeJobsTDao;
     private MyMap<String, Employee> map ;
-    private ConstraintDao constraintDao;
-    private TermsOfEmploymentDao termsOfEmploymentDao;
-    private EmployeeDao employeeDao;
-    private JobDao jobDao;
-
+    private EmployeeConstraintTDao constraintDao;
+    private EmployeeTermsTDao termsOfEmploymentDao;
+    private EmployeeTDao employeeDao;
+    private JobsTDao jobDao;
 
 
     public EmployeeRep() {
-        map = new MyMap<>();
-        constraintDao = ConstraintDao.getInstance();
-        termsOfEmploymentDao = TermsOfEmploymentDao.getInstance();
-        employeeDao = EmployeeDao.getInstance();
-        jobDao = JobDao.getInstance();
+        this.map = new MyMap<String,Employee>();
+        this.constraintDao = EmployeeConstraintTDao.getInstance();
+        this.termsOfEmploymentDao = EmployeeTermsTDao.getInstance();
+        this.employeeDao = EmployeeTDao.getInstance();
+        this.employeeJobsTDao = EmployeeJobsTDao.getInstance();
+        this.jobDao = JobsTDao.getInstance();
     }
 
     @Override
@@ -33,23 +28,42 @@ public class EmployeeRep implements IRep<Employee,String> {
         String Key;
         if(!map.containsKey(obj.getID())){
             Key = obj.getID();
-            Employee C =EmployeeDao.getInstance().select(Key);
+            Employee C = employeeDao.select(Key);
             if(C == null){
-                EmployeeDao.getInstance().insert(obj);
+                employeeDao.insert(obj);
+                termsOfEmploymentDao.insert(obj.getTerms());
+//                if(obj.getJobs() != null){
+//
+//                }
+//                if(obj.getConstraintMyMap() != null){
+//
+//                }
             }
+            map.put(Key, obj);
+            return "employee added";
         }
-
-        return "s";
+        return "employee already exist";
     }
 
     @Override
     public Employee find(String s) {
-        return null;
+        if(map.containsKey(s)){
+            return map.get(s);
+        }
+        Employee E =employeeDao.select(s);
+        if(E == null){
+            return null;
+        }
+        map.put(s, E);
+        return E;
     }
 
     @Override
     public String update(Employee obj) {
-        return "";
+        if(map.containsKey(obj.getID())){
+
+
+        };
     }
 
     @Override

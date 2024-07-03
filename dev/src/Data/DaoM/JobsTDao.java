@@ -1,4 +1,5 @@
-package dev.src.Data.DAO;
+package dev.src.Data.DaoM;
+
 
 import dev.src.Data.DBConnection;
 import dev.src.Domain.Job;
@@ -7,20 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JobDao implements IDao<Job,String>{
+public class JobsTDao implements IDao<Job,String>{
 
 
-
-    private static JobDao instance;
+    private static JobsTDao instance;
     private DBConnection db;
 
-    private JobDao() {
+    private JobsTDao() {
         db = DBConnection.getInstance();
     }
 
-    public static JobDao getInstance() {
+    public static JobsTDao getInstance() {
         if (instance == null) {
-            instance = new JobDao();
+            instance = new JobsTDao();
         }
         return instance;
     }
@@ -74,4 +74,3 @@ public class JobDao implements IDao<Job,String>{
         return new Job(name);
     }
 }
-

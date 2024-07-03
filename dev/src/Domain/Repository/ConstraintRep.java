@@ -1,6 +1,6 @@
 package dev.src.Domain.Repository;
 
-import dev.src.Data.DAO.ConstraintDao;
+import dev.src.Data.DAONotToUes.ConstraintDao;
 import dev.src.Domain.Constraint;
 import dev.src.Domain.MyMap;
 

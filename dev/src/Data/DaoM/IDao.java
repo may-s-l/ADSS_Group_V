@@ -1,6 +1,4 @@
-package dev.src.Data.DAO;
-
-import java.sql.ResultSet;
+package dev.src.Data.DaoM;
 
 public interface IDao<T,ID> {
 

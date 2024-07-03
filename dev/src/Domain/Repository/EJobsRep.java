@@ -1,7 +1,7 @@
 package dev.src.Domain.Repository;
 
-import dev.src.Data.DAO.EmployeeDao;
-import dev.src.Data.DAO.JobDao;
+import dev.src.Data.DAONotToUes.EmployeeDao;
+import dev.src.Data.DAONotToUes.JobDao;
 import dev.src.Domain.Employee;
 import dev.src.Domain.Job;
 

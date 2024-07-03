@@ -46,4 +46,11 @@ public class Constraint {
     public String toString() {
         return "can't work on "+this.date+" "+this.date.getDayOfWeek()+" "+this.shiftType.toString();
     }
+
+    /////FOR DATABASE////
+
+    public Constraint(LocalDate date, ShiftType shiftType) {
+        this.date = date;
+        this.shiftType = shiftType;
+    }
 }

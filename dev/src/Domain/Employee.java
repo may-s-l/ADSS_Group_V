@@ -1,6 +1,7 @@
 package dev.src.Domain;
 
 import dev.src.Domain.Repository.ConstraintRep;
+import dev.src.Domain.Repository.EJobsRep;
 import dev.src.Domain.Repository.Jobrep;
 
 import java.security.Key;
@@ -19,7 +20,7 @@ public class Employee {
     //private List<Job> Jobs;
     //private MyMap<LocalDate, Constraint> constraintMyMap;
     private ConstraintRep constraintMyMap;
-    private Jobrep Jobs;
+    private EJobsRep Jobs;
 
 
     //constructor- gets all the data for employee
@@ -29,7 +30,7 @@ public class Employee {
         Bank_account = bank_account;
         Branch = branch;
         this.terms = terms;
-        Jobs = new Jobrep();
+        Jobs = new EJobsRep();
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
@@ -43,21 +44,10 @@ public class Employee {
         Bank_account = bank_account;
         Branch = branch;
         this.terms = new TermsOfEmployment(vacationDay,start_date,salary,job_type,Salary_type);
-        Jobs = new Jobrep();
+        Jobs = new EJobsRep();
         Jobs.add(job);
         this.employeeNum =EmployeeNUM;
         EmployeeNUM+=1;
-        constraintMyMap=null;
-    }
-
-    public Employee(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms,int employeeNum,Jobrep jobrep) {
-        Name = name;
-        this.ID = ID;
-        Bank_account = bank_account;
-        Branch = branch;
-        this.terms = terms;
-        this.Jobs =jobrep;
-        this.employeeNum =employeeNum;
         constraintMyMap=null;
     }
 
@@ -123,11 +113,11 @@ public class Employee {
         return true;
     }
 
-    public Jobrep getJobs() {
+    public EJobsRep getJobs() {
         return Jobs;
     }
 
-    public boolean setJobs(Jobrep jobs) {
+    public boolean setJobs(EJobsRep jobs) {
         if(jobs==null||jobs.getsize()==0){
             return false;
         }
@@ -216,5 +206,18 @@ public class Employee {
         }
         Employee othre = (Employee) o;
         return this.getID()==othre.getID();
+    }
+
+
+    //////////////forDATABASE///////////
+    public Employee (String name, String ID, String bank_account, Branch branch,int employeeNum,TermsOfEmployment termsOfEmployment) {
+        Name = name;
+        this.ID = ID;
+        Bank_account = bank_account;
+        Branch = branch;
+        this.employeeNum =employeeNum;
+        constraintMyMap=null;
+        this.terms =null;
+        this.Jobs =null;
     }
 }
