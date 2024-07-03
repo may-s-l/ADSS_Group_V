@@ -54,7 +54,7 @@ public class EmployeeTDao implements IDao<Employee,String> {
 
     @Override
     public Employee select(String s) {
-        String sql ="SELECT * FROM EmployeeConstraints WHERE  EID=? ";
+        String sql ="SELECT * FROM Employee WHERE  EID=? ";
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Employee employee =null;

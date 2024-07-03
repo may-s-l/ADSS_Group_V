@@ -10,12 +10,14 @@ import java.util.stream.Collectors;
 
 public class Week {
     private int weekNUM;
+    private Branch branch;
     private LocalDate start_date;
     private LocalDate end_date;
     private MyMap<LocalDate, Day> DayInWEEK;
 
 
-    public Week(LocalDate start_date) {
+    public Week(LocalDate start_date,Branch B) {
+        this.branch=B;
         this.start_date = start_date;
         this.DayInWEEK = new MyMap<LocalDate, Day>();
         LocalDate date = start_date;
@@ -35,6 +37,14 @@ public class Week {
             }
             date = date.plusDays(1);
         }
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     public int getWeekNUM() {
@@ -248,6 +258,7 @@ public class Week {
 
         return sb1.toString() + "\n" + sb2.toString() + "\n" + sb3.toString();
     }
+
 
 }
 

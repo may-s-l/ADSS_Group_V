@@ -124,4 +124,24 @@ public class Branch {
         Branch othre = (Branch) o;
         return this.getBranchNum()==othre.getBranchNum();
     }
+    ///////constractor la datab
+
+    public Branch(String name, String address, ManagerEmployee managerEmployee, int branchNum) {
+        this.name = name;
+        this.address = address;
+        this.managerEmployee = managerEmployee;
+        this.branchNum = branchNum;
+        this.employees=new EmployeeRep();
+        this.employees.add(managerEmployee);
+
+    }
+
+    public Branch(String name, String address, int branchNum) {
+        this.name = name;
+        this.address = address;
+        this.branchNum = branchNum;
+        this.employees=new EmployeeRep();
+
+
+    }
 }

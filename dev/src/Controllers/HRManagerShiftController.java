@@ -53,7 +53,7 @@ public class HRManagerShiftController {
         Branch branch =getBranchByBranchNUM(branchNum);
         MyMap<Integer, Employee>BranchemployeeBYemployeeNUM = new MyMap<Integer, Employee>();
         List<List<Object>> TableofEmployeeandConstrin =createEmployeeConstraintJobTable(branch.getEmployeesInBranch(),date,BranchemployeeBYemployeeNUM);
-        Week Weekforassignment = createWeekforassignment(date);
+        Week Weekforassignment = createWeekforassignment(date,branch);
         if(this.BranchWeek_temp_database.containsKey(branchNum)){
             MyMap<LocalDate,Week> dateWeek= this.BranchWeek_temp_database.get(branchNum);
             dateWeek.put(Weekforassignment.getStart_date(),Weekforassignment);
@@ -228,10 +228,10 @@ public class HRManagerShiftController {
         Table.addAll(employeesWithoutConstraints);
         return Table;
     }
-    private Week createWeekforassignment(String date) {
+    private Week createWeekforassignment(String date,Branch branch) {
         LocalDate Ldate = LocalDate.parse(date);
         if (Ldate.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-            Week week = new Week(Ldate);
+            Week week = new Week(Ldate,branch);
             Day day;
             for (int i = 0; i < 7; i++) {
                 day = week.getDayOfWeek(Ldate.plusDays(i));

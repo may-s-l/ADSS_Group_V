@@ -57,6 +57,7 @@ public class DBConnection {
         String script =
                 "CREATE TABLE IF NOT EXISTS \"Branch\" (\n" +
                         "    \"Address\"\tVARCHAR(25),\n" +
+                        "    \"BranchNum\"\tINTEGER,\n" +
                         "    \"Name\"\tVARCHAR(25),\n" +
                         "    \"Manager\"\tVARCHAR(25),\n" +
                         "    PRIMARY KEY(\"Address\")\n" +
@@ -65,25 +66,13 @@ public class DBConnection {
                         "    \"Name\"\tVARCHAR(25),\n" +
                         "    PRIMARY KEY(\"Name\")\n" +
                         ");\n" +
-                        "CREATE TABLE IF NOT EXISTS \"Shift\" (\n" +
-                        "    \"ShiftDate\"\tTEXT,\n" +
-                        "    \"ShiftType\"\tVARCHAR(25),\n" +
-                        "    \"BranchAddress\"\tVARCHAR(25),\n" +
-                        "    \"StartTime\"\tVARCHAR(25),\n" +
-                        "    \"EndTime\"\tVARCHAR(25),\n" +
-                        "    \"Job\"\tVARCHAR(25),\n" +
-                        "    \"NumEmployeesForjob\"\tINTEGER,\n" +
-                        "    PRIMARY KEY(\"ShiftType\",\"ShiftDate\",\"BranchAddress\",\"Job\"),\n" +
-                        "    FOREIGN KEY(\"BranchAddress\") REFERENCES \"Branch\"(\"Address\")\n" +
-                        "    FOREIGN KEY(\"Job\") REFERENCES \"Jobs\"(\"Name\")\n" +
-                        ");\n" +
                         "CREATE TABLE IF NOT EXISTS \"Employee\" (\n" +
-                        "    \"ID\"\tVARCHAR(6),\n" +
+                        "    \"EID\"\tVARCHAR(6),\n" +
                         "    \"EmpNUM\"\tINTEGER,\n" +
                         "    \"Name\"\tVARCHAR(25),\n" +
                         "    \"BankAccountNumber\"\tVARCHAR(8),\n" +
                         "    \"BranchID\"\tVARCHAR(25),\n" +
-                        "    PRIMARY KEY(\"ID\")\n" +
+                        "    PRIMARY KEY(\"EID\")\n" +
                         ");\n" +
                         "CREATE TABLE IF NOT EXISTS \"EmployeeJobs\" (\n" +
                         "    \"EID\"\tVARCHAR(6),\n" +
@@ -98,15 +87,6 @@ public class DBConnection {
                         "    PRIMARY KEY(\"EID\",\"ConstraintDate\"),\n" +
                         "    FOREIGN KEY(\"EID\") REFERENCES \"Employee\"(\"ID\") ON UPDATE CASCADE ON DELETE CASCADE\n" +
                         ");\n" +
-                        "CREATE TABLE IF NOT EXISTS \"ShiftEmployees\" (\n" +
-                        "    \"ShiftDate\"\tTEXT,\n" +
-                        "    \"ShiftType\"\tVARCHAR(25),\n" +
-                        "    \"BranchAddress\"\tVARCHAR(25),\n" +
-                        "    \"EID\"\tINTEGER,\n" +
-                        "    \"EmployeeJob\"\tVARCHAR(25),\n" +
-                        "    FOREIGN KEY(\"ShiftDate\",\"ShiftType\",\"BranchAddress\") REFERENCES \"Shift\"(\"ShiftDate\",\"ShiftType\",\"BranchAddress\"),\n" +
-                        "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\")\n" +
-                        ");\n"+
                         "CREATE TABLE IF NOT EXISTS \"EmployeesTerm\" (\n" +
                         "    \"EID\"\tVARCHAR(6),\n" +
                         "    \"vacationDay\"\tDOUBLE,\n" +
@@ -116,7 +96,48 @@ public class DBConnection {
                         "    \"JobType\"\tVARCHAR(25),\n" +
                         "    \"SalaryType\"\tVARCHAR(25),\n" +
                         "    PRIMARY KEY(\"EID\")\n"+
-                        ");";
+                        ");\n"+
+                        "CREATE TABLE IF NOT EXISTS \"ShiftEmployees\" (\n" +
+                        "    \"ShiftDate\"\tTEXT,\n" +
+                        "    \"ShiftType\"\tVARCHAR(25),\n" +
+                        "    \"BranchAddress\"\tVARCHAR(25),\n" +
+                        "    \"EID\"\tINTEGER,\n" +
+                        "    \"EmployeeJob\"\tVARCHAR(25),\n" +
+                        "    FOREIGN KEY(\"ShiftDate\",\"ShiftType\",\"BranchAddress\") REFERENCES \"Shift\"(\"ShiftDate\",\"ShiftType\",\"BranchAddress\"),\n" +
+                        "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\")\n" +
+                        "    FOREIGN KEY(\"EID\") REFERENCES \"Employee\"(\"EID\"),\n" +
+                        "    FOREIGN KEY(\"EmployeeJob\") REFERENCES \"Jobs\"(\"NAME\"),\n" +
+                        ");\n"+
+                        "CREATE TABLE IF NOT EXISTS \"Shift\" (\n" +
+                        "    \"ShiftDate\"\tVARCHAR(25),\n" +
+                        "    \"ShiftType\"\tVARCHAR(25),\n" +
+                        "    \"BranchAddress\"\tVARCHAR(25),\n" +
+                        "    \"Job\"\tVARCHAR(25),\n" +
+                        "    \"StartTime\"\tVARCHAR(25),\n" +
+                        "    \"EndTime\"\tVARCHAR(25),\n" +
+                        "    \"NumEmployeesForjob\"\tINTEGER,\n" +
+                        "    PRIMARY KEY(\"ShiftType\",\"ShiftDate\",\"Job\",\"BranchAddress\"),\n" +
+                        "    FOREIGN KEY(\"BranchAddress\") REFERENCES \"Branch\"(\"Address\")\n" +
+                        "    FOREIGN KEY(\"Job\") REFERENCES \"Jobs\"(\"Name\")\n" +
+                        "    FOREIGN KEY(\"Job\") REFERENCES \"Jobs\"(\"Name\")\n" +
+                        ");\n"+
+                        "CREATE TABLE IF NOT EXISTS \"Week\" (\n" +
+                        "    \"WeekNum\"\tINTEGER,\n" +
+                        "    \"BranchAddress\"\tVARCHAR(25),\n" +
+                        "    \"StartDate\"\tVARCHAR(25),\n" +
+                        "    PRIMARY KEY(\"WeekNum\",\"BranchAddress\")\n" +
+                        ");\n"+
+                        "CREATE TABLE IF NOT EXISTS \"Days\" (\n" +
+                        "    \"WeekNum\"\tINTEGER,\n" +
+                        "    \"Date\"\tVARCHAR(25),\n" +
+                        "    \"BranchAddress\"\tVARCHAR(25),\n" +
+                        "    \"IsDayOf\"\tINTEGER,\n" +
+                        "    PRIMARY KEY(\"Date\",\"BranchAddress\")\n" +
+                        "    FOREIGN KEY(\"Date\") REFERENCES \"Shift\"(\"ShiftDate\")\n" +
+                        ");\n";
+
+
+
         String[] queries = script.split(";\n");
         for (String query : queries) {
             try (PreparedStatement ps = conn.prepareStatement(query)) {
