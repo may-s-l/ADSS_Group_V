@@ -92,25 +92,5 @@ public class BranchTDao implements IDao<Branch,String>{
         }
     }
 
-    private void getALLEmpByBranch(Branch branch){
-        String sql = "select * from Employee where BranchID = ?";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
 
-        try {
-            ps=DB.getConnection().prepareStatement(sql);
-            ps.setString(1,branch.getBranchAddress());
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                if(branch.getEmployeesInBranch().find(rs.getString("ID"))==null){
-                    Employee emp = employeeTDao.select.(rs.getString("ID"));
-                    branch.getEmployeesInBranch().add(emp);
-                }
-            }
-        }
-        catch (SQLException e) {
-            throw new IllegalArgumentException("Selection failed");
-        }
-
-    }
 }

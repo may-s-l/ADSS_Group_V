@@ -4,6 +4,7 @@ package dev.src.Data.DaoM;
 import dev.src.Data.DBConnection;
 import dev.src.Domain.Branch;
 import dev.src.Domain.Employee;
+import dev.src.Domain.Repository.EmployeeRep;
 import dev.src.Domain.TermsOfEmployment;
 
 
@@ -97,7 +98,6 @@ public class EmployeeTDao implements IDao<Employee,String> {
     }
 
 
-    //(String name, String ID, String bank_account, Branch branch, TermsOfEmployment terms,int employeeNum
     private Employee load(ResultSet rs) throws SQLException {
         String EmpID = rs.getString(1);
         int EmpNUM = rs.getInt(2);
@@ -105,7 +105,7 @@ public class EmployeeTDao implements IDao<Employee,String> {
         String Bank_account = rs.getString(4);
         Branch Branch_Address = BranchTDao.getInstance().select(rs.getString(5));
         TermsOfEmployment terms = employeeTermsTDao.select(rs.getString(1));
-        return new Employee(NAME,EmpID,Bank_account,Branch_Address,EmpNUM,TermsOfEmployment);
+        return new Employee(NAME,EmpID,Bank_account,Branch_Address,EmpNUM,terms);
     }
 
 //    public EJobsRep getAlljobsforemployee(String EID) {
@@ -126,5 +126,37 @@ public class EmployeeTDao implements IDao<Employee,String> {
 //        }
 //        return EJobRep;
 //    }
+    public EmployeeRep getALLEmpActiveByBranch(String A,EmployeeRep EPR){
+
+        String sql = "select * from Employee where BranchID = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        EmployeeRep employeeRep =EPR;
+        if (employeeRep==null) {
+            employeeRep= new EmployeeRep();
+        }
+        try {
+            ps=DB.getConnection().prepareStatement(sql);
+            ps.setString(1,A);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if(employeeRep.find(rs.getString("ID"))==null){
+                    Employee emp = select(rs.getString("ID"));
+                    if(emp.getTerms().getEnd_date()==null){
+                        employeeRep.add(emp);
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException("Selection failed");
+        }
+
+        return employeeRep;
+    }
+
+
+
+
 
 }

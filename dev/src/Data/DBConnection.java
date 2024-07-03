@@ -73,8 +73,9 @@ public class DBConnection {
                         "    \"EndTime\"\tVARCHAR(25),\n" +
                         "    \"Job\"\tVARCHAR(25),\n" +
                         "    \"NumEmployeesForjob\"\tINTEGER,\n" +
-                        "    PRIMARY KEY(\"ShiftType\",\"ShiftDate\",\"BranchAddress\"),\n" +
+                        "    PRIMARY KEY(\"ShiftType\",\"ShiftDate\",\"BranchAddress\",\"Job\"),\n" +
                         "    FOREIGN KEY(\"BranchAddress\") REFERENCES \"Branch\"(\"Address\")\n" +
+                        "    FOREIGN KEY(\"Job\") REFERENCES \"Jobs\"(\"Name\")\n" +
                         ");\n" +
                         "CREATE TABLE IF NOT EXISTS \"Employee\" (\n" +
                         "    \"ID\"\tVARCHAR(6),\n" +

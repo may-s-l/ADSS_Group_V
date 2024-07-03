@@ -67,6 +67,7 @@ public class Branch {
 //    }
 
     public EmployeeRep getEmployeesInBranch() {
+        this.employees.getALLEmpActiveByBranch(this.address,this.employees);
         return this.employees;
     }
 

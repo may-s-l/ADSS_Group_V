@@ -1,6 +1,7 @@
 package dev.src.Domain.Repository;
 
 import dev.src.Data.DaoM.*;
+import dev.src.Domain.Branch;
 import dev.src.Domain.Employee;
 import dev.src.Domain.MyMap;
 
@@ -84,6 +85,10 @@ public class EmployeeRep implements IRep<Employee,String> {
             return "employee deleted";
         }
         return "employee not delete from --rep employee";
+    }
+
+    public void getALLEmpActiveByBranch(String A,EmployeeRep rep){
+        employeeDao.getALLEmpActiveByBranch(A,rep);
     }
 
 
