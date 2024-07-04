@@ -60,14 +60,15 @@ public class ConstraintRep implements IRep<Constraint, String> {
 
     @Override
     public String delete(String s) {
-        if(!map.containsKey(LocalDate.parse(s))){
+        String[] keys = s.split(",");
+        if(!map.containsKey(LocalDate.parse(keys[1]))){
             Constraint C =constraintDao.select(s);
             if(C == null){
                 constraintDao.delete(s);
             }
         }
         else {
-            map.remove(LocalDate.parse(s));
+            map.remove(LocalDate.parse(keys[1]));
             constraintDao.delete(s);
         }
         return "S";

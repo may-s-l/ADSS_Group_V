@@ -1,0 +1,17 @@
+May Levy : 207939059
+Shilat Alon : 318287810
+
+To run the program run in cmd: java -jar adss2020_v02
+
+Some aspects of the software rely on the system clock (the computer's clock).
+You may need to change your system clock time (and date) to dates relative to
+the dummy data in order to check the functionality of said aspects.
+
+for more details see instructions.pdf.
+
+libraries:
+org.apache.maven.plugins maven-compiler-plugin
+org.xerial sqlite-jdbc
+org.junit.jupiter junit-jupiter-api
+org.junit.platform junit-platform-launcher
+org.junit.jupiter junit-jupiter-engine

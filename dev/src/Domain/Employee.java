@@ -172,12 +172,12 @@ public class Employee {
         MyMap<LocalDate,Constraint> MAP = new MyMap<>();
         LocalDate until = today.plusDays(31);
         String key = this.getID()+","+today.toString();
-        while (today!=until) {
+        while (!today.equals(until)) {
             Constraint C =this.constraintMyMap.find(key);
             if (C!=null) {
                 MAP.put(today, C);
             }
-            today.plusDays(1);
+            today=today.plusDays(1);
             key = this.getID() + "," + today.toString();
         }
         return MAP;

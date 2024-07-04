@@ -36,7 +36,7 @@ public class HRManagerEmployeeController {
         if (name == null || bank_account == null || ID == null || jobname == null || salary < 30 || vacationDay < 14 || branch == null || salary_type == null || job_type == null || start_date == null)
             throw new IllegalArgumentException("Argument's can't be NULL");
         //-------Name-------//
-        if(name.contains("[0-9]+")){
+        if (name.matches(".*\\d.*")) {
             throw new IllegalArgumentException("Name contain only alphabetic characters");
         }
         //-------ID-------//

@@ -91,7 +91,7 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
 
     @Override
     public void update(Constraint obj) {
-        String sql = "UPDATE EmployeeConstraints SET ConstraintShiftType = ? WHERE EID = ? AND ShiftDate = ?";
+        String sql = "UPDATE EmployeeConstraints SET ConstraintShiftType = ? WHERE EID = ? AND ConstraintDate = ?";
         PreparedStatement pstmt = null;
         try {
             pstmt = DB.getConnection().prepareStatement(sql);
@@ -122,7 +122,7 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
     @Override
     public void delete(String KEY) {
         String[] KEYS=KEY.split(",");
-        String sql ="DELETE FROM users WHERE EID=? AND ShiftDate=?";
+        String sql ="DELETE FROM EmployeeConstraints WHERE EID=? AND ConstraintDate=?";
         PreparedStatement pstmt = null;
         try {
             pstmt=DB.getConnection().prepareStatement(sql);
