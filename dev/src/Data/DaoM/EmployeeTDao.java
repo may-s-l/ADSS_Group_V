@@ -2,10 +2,8 @@ package dev.src.Data.DaoM;
 
 
 import dev.src.Data.DBConnection;
-import dev.src.Domain.Branch;
-import dev.src.Domain.Employee;
+import dev.src.Domain.*;
 import dev.src.Domain.Repository.EmployeeRep;
-import dev.src.Domain.TermsOfEmployment;
 
 
 import java.sql.PreparedStatement;
@@ -72,12 +70,16 @@ public class EmployeeTDao implements IDao<Employee,String> {
             pstmt=DB.getConnection().prepareStatement(sql);
             pstmt.setString(1,s);
             rs= pstmt.executeQuery();
-            if (rs.next()) {
-                employee = load(rs);
-                return employee;
-            } else {
-                return null;
+            ResultSet rs1 = rs;
+            if(rs.next()) {
+                if (EmployeeJobsTDao.getInstance().selectAllJobs(s).find("HR-MANAGER")!=null) {
+                    employee=loadM(rs1);
+                }
+                else {
+                    employee = load(rs1);
+                }
             }
+
         }
         catch (SQLException e) {
             throw new RuntimeException();
@@ -92,6 +94,8 @@ public class EmployeeTDao implements IDao<Employee,String> {
                 System.out.println(ex.getMessage());
             }
         }
+
+        return employee;
     }
 
     @Override
@@ -125,6 +129,7 @@ public class EmployeeTDao implements IDao<Employee,String> {
                 System.out.println(ex.getMessage());
             }
         }
+
     }
 
 
@@ -164,7 +169,17 @@ public class EmployeeTDao implements IDao<Employee,String> {
         return new Employee(NAME,EmpID,Bank_account,Branch_Address,EmpNUM,terms);
     }
 
-//    public EJobsRep getAlljobsforemployee(String EID) {
+    private ManagerEmployee loadM(ResultSet rs) throws SQLException {
+        String EmpID = rs.getString(1);
+        int EmpNUM = rs.getInt(2);
+        String NAME = rs.getString(3);
+        String Bank_account = rs.getString(4);
+        Branch Branch_Address = BranchTDao.getInstance().select(rs.getString(5));
+        TermsOfEmployment terms = employeeTermsTDao.select(rs.getString(1));
+        return new ManagerEmployee(NAME,EmpID,Bank_account,Branch_Address,EmpNUM,terms);
+    }
+
+    //    public EJobsRep getAlljobsforemployee(String EID) {
 //        EJobsRep EJobRep = new EJobsRep();
 //        String sql ="SELECT * FROM EmployeeJobs WHERE  EID=? ";
 //        PreparedStatement pstmt = null;
@@ -180,11 +195,11 @@ public class EmployeeTDao implements IDao<Employee,String> {
 //        catch (SQLException e) {
 //            throw new RuntimeException();
 //        }
-//        return EJobRep;
+//        return EJobRep;1
 //    }
     public EmployeeRep getALLEmpActiveByBranch(String A,EmployeeRep EPR){
 
-        String sql = "select * from Employee where BranchID = ?";
+        String sql = "SELECT * FROM Employee WHERE BranchID = ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
         EmployeeRep employeeRep =EPR;
@@ -203,20 +218,12 @@ public class EmployeeTDao implements IDao<Employee,String> {
                     }
                 }
             }
+            if(EPR==null){}
         }
         catch (SQLException e) {
             throw new IllegalArgumentException("Selection failed");
         }
-        finally {
-            try {
-                if (DB.getConnection() != null) {
-                    DB.getConnection().setAutoCommit(true);
-                    DB.getConnection().close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+
 
         return employeeRep;
     }

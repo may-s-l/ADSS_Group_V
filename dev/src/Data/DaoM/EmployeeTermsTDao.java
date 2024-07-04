@@ -21,9 +21,9 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
         return instance;
     }
 
-        public EmployeeTermsTDao() {
-            DB=DBConnection.getInstance();
-        }
+    public EmployeeTermsTDao() {
+        DB=DBConnection.getInstance();
+    }
 
 
     @Override
@@ -134,7 +134,7 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
         Double salary = rs.getDouble(5);
         String jt = rs.getString(6);
         String st = rs.getString(7);
-        if (end.isEmpty()){
+        if (end==null){
             terms = new TermsOfEmployment(VacationDay, start_date, salary, jt, st);
         }
         else {

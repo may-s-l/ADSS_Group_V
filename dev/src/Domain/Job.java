@@ -26,6 +26,6 @@ public class Job {
             return false;
         }
         Job other = (Job) o;
-        return this.getJobName()==other.getJobName();
+        return this.getJobName().equals(other.getJobName());
     }
 }

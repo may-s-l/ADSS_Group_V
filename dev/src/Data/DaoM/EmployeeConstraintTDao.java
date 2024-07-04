@@ -56,7 +56,7 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
     @Override
     public Constraint select(String KEY) {
         String[] KEYS=KEY.split(",");
-        String sql ="SELECT * FROM EmployeeConstraints WHERE  EID=? AND ShiftDate=? ";
+        String sql ="SELECT * FROM EmployeeConstraints WHERE EID=? AND ConstraintDate=? ";
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Constraint constraint =null;

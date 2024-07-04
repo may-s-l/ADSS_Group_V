@@ -57,6 +57,7 @@ public class EmployeeRep implements IRep<Employee,String> {
         if(E == null){
             return null;
         }
+        E.setJobs(employeeJobsTDao.selectAllJobs(s));
         map.put(s, E);
         return E;
     }

@@ -62,6 +62,10 @@ public class EJobsRep implements IRep<Job, String>{
         throw new IllegalArgumentException("job not exist");
     }
 
+    public String toString() {
+        return this.jobs.toString();
+    }
+
     @Override
     public String update(Job obj) {
         return "";
@@ -75,5 +79,6 @@ public class EJobsRep implements IRep<Job, String>{
     public int getsize() {
         return jobs.size();
     }
+
 
 }

@@ -94,7 +94,7 @@ public class HRManagerEmployeeController {
         Employee NEWemployee = new Employee(name, ID, bank_account, branch_to_emp, terms, job_to_emp);
         terms.setEmp(NEWemployee);
         this.Employees_temp_database.add(NEWemployee);
-        branch_to_emp.addEmployeeToBranch(NEWemployee);
+//        branch_to_emp.addEmployeeToBranch(NEWemployee);
         return "Employee successfully created";
     }
     public String createManagmentEmployee(String name, String ID, String bank_account, String branch, double vacationDay, String start_date, double salary, String job_type, String salary_type,String jobname){

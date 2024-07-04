@@ -62,9 +62,9 @@ public class EmployeeConstraintController {
         LocalDate cant = LocalDate.now();
         List<LocalDate>DAYS_OF_CORENT_WORK_WEEK=new ArrayList<LocalDate>();
         DAYS_OF_CORENT_WORK_WEEK.add(today);
-        if(today.getDayOfWeek()==DayOfWeek.THURSDAY||today.getDayOfWeek()==DayOfWeek.FRIDAY||today.getDayOfWeek()==DayOfWeek.SATURDAY){
-            throw new IllegalArgumentException("Constraints can only be added from Sunday to Thursday");
-        }
+//        if(today.getDayOfWeek()==DayOfWeek.THURSDAY||today.getDayOfWeek()==DayOfWeek.FRIDAY||today.getDayOfWeek()==DayOfWeek.SATURDAY){
+//            throw new IllegalArgumentException("Constraints can only be added from Sunday to Thursday");
+//        }
         if(today.getDayOfWeek()==DayOfWeek.SUNDAY){
             DAYS_OF_CORENT_WORK_WEEK.add(today);
             cant=cant.plusDays(1);
