@@ -74,22 +74,48 @@ public class BranchTDao implements IDao<Branch,String>{
         catch (SQLException e) {
             throw new IllegalArgumentException("Selection failed");
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
     public void update(Branch obj) {
+        String sql = "UPDATE Branch SET BranchNum = ?, Name = ?, Manager = ? WHERE Address = ?";
+        PreparedStatement ps = null;
         try {
-            delete(obj.getBranchAddress());
-            insert(obj);
-        }
-        catch (Exception e) {
+            ps = DB.getConnection().prepareStatement(sql);
+            ps.setInt(1, obj.getBranchNum());
+            ps.setString(2, obj.getBranchName());
+            ps.setString(3, obj.getManagerEmployee().getID());
+            ps.setString(4, obj.getBranchAddress());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new IllegalArgumentException("Update failed");
+        } finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
     @Override
     public void delete(String s) {
-        String sql = "DELETE FROM Branch WHERE branchAddress = ?";
+        String sql = "DELETE FROM Branch WHERE Address = ?";
         PreparedStatement ps = null;
         try {
             ps=DB.getConnection().prepareStatement(sql);

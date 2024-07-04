@@ -51,12 +51,15 @@ public class BranchRep implements IRep<Branch,String>{
 
     @Override
     public String update(Branch obj) {
-        if(!Branchs.containsKey(obj.getBranchAddress())) {
-            Branch B=BranchDao.select(obj.getBranchAddress());
-            if(B==null){
-                return null;
+        if(Branchs.containsKey(obj.getBranchAddress())) {
+            if(!Branchs.get(obj.getBranchAddress()).equals(obj)) {
+                Branch B=BranchDao.select(obj.getBranchAddress());
+                if(B==null){
+                    return null;
+                }
+                BranchDao.update(obj);
             }
-            BranchDao.update(obj);
+
         }
         return "";
     }

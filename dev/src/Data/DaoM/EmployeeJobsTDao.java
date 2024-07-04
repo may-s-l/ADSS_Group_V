@@ -29,12 +29,12 @@ public class EmployeeJobsTDao implements IDao<String,String> {
     @Override
     public void insert(String obj) {
         String[] keys = obj.split(",");
-        String sql = "insert into EmployeeJobsT values(?,?)";
+        String sql = "INSERT INTO EmployeeJobs VALUES (?,?)";
         PreparedStatement ps = null;
         try {
             ps = DB.getConnection().prepareStatement(sql);
-            ps.setString(1, keys[0]);
-            ps.setString(2, keys[1]);
+            ps.setString(1, keys[1]);
+            ps.setString(2, keys[0]);
             ps.executeUpdate();
         }
         catch (SQLException e) {
@@ -46,7 +46,7 @@ public class EmployeeJobsTDao implements IDao<String,String> {
     @Override
     public String select(String s) {
         String[] keys = s.split(",");
-        String sql = "select * from Branch where EID =? , Job =?";
+        String sql = "SELECT * FROM EmployeeJobs WHERE EID =? AND Job =?";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

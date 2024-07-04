@@ -77,8 +77,7 @@ public class DBConnection {
                         "CREATE TABLE IF NOT EXISTS \"EmployeeJobs\" (\n" +
                         "    \"EID\"\tVARCHAR(6),\n" +
                         "    \"Job\"\tVARCHAR(25),\n" +
-                        "    PRIMARY KEY(\"EID\",\"Job\"),\n" +
-                        "    FOREIGN KEY(\"EID\") REFERENCES \"Employee\"(\"ID\") ON UPDATE CASCADE ON DELETE CASCADE\n" +
+                        "    PRIMARY KEY(\"EID\",\"Job\")\n" +
                         ");\n" +
                         "CREATE TABLE IF NOT EXISTS \"EmployeeConstraints\" (\n" +
                         "    \"EID\"\tVARCHAR(6),\n" +

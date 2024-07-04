@@ -34,7 +34,7 @@ public class EmployeeRep implements IRep<Employee,String> {
             Employee C = employeeDao.select(Key);
             if(C == null){
                 employeeDao.insert(obj);
-                termsOfEmploymentDao.insert(obj.getTerms());
+
 //                if(obj.getJobs() != null){
 //
 //                }

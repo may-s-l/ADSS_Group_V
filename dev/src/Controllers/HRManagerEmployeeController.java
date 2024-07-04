@@ -162,6 +162,8 @@ public class HRManagerEmployeeController {
         TermsOfEmployment terms=new TermsOfEmployment(vacationDay,date,salary,job_type,salary_type);
         ManagerEmployee NEWemployee=new ManagerEmployee(name,ID,bank_account,branch_to_emp,terms,(ManagementJob) job_to_emp);
         terms.setEmp(NEWemployee);
+        branch_to_emp.setManagerEmployee(NEWemployee);
+        this.Branch_temp_database.update(branch_to_emp);
         this.Employees_temp_database.add(NEWemployee);
         return "Employee successfully created";
     }

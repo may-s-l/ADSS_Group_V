@@ -122,6 +122,7 @@ public class Branch {
             return false;
         }
         Branch othre = (Branch) o;
+        this.managerEmployee.equals(othre.getManagerEmployee());
         return this.getBranchNum()==othre.getBranchNum();
     }
     ///////constractor la datab

@@ -35,7 +35,12 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
             pstmt.setString(1,obj.getEmp().getID());
             pstmt.setDouble(2,obj.getVacationDay());
             pstmt.setString(3,obj.getStart_date().toString());
-            pstmt.setString(4,obj.getEnd_date().toString());
+            if(obj.getEnd_date()==null){
+                pstmt.setNull(4,java.sql.Types.DATE);
+            }
+            else {
+                pstmt.setString(4,obj.getEnd_date().toString());
+            }
             pstmt.setDouble(5,obj.getSalary());
             pstmt.setString(6,obj.getJt().toString());
             pstmt.setString(7,obj.getSt().toString());
