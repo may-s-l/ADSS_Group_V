@@ -76,8 +76,8 @@ public class BranchTDao implements IDao<Branch,String>{
 //                    branch=new Branch(rs.getString("Name"),rs.getString("Address"),Memp,rs.getInt(2));
 //                    return branch;
 //                } else {
-                branch=new Branch(rs.getString("Name"),rs.getString("Address"),rs.getInt(2));
-                return branch;
+                    branch=new Branch(rs.getString("Name"),rs.getString("Address"),rs.getInt(2));
+                    return branch;
 //                }
             }
             return branch;
@@ -121,12 +121,15 @@ public class BranchTDao implements IDao<Branch,String>{
         } catch (SQLException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("Update failed", e);
-        } finally {
+        }
+        finally {
             try {
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
         }
     }
@@ -183,16 +186,7 @@ public class BranchTDao implements IDao<Branch,String>{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        finally {
-            try {
-                if (DB.getConnection() != null) {
-                    DB.getConnection().setAutoCommit(true);
-                    DB.getConnection().close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+
     }
 
     public Branch getBRANCHbyNum(int num) {
@@ -213,17 +207,9 @@ public class BranchTDao implements IDao<Branch,String>{
         catch (SQLException e) {
             throw new IllegalArgumentException("Get Branch failed");
         }
-        finally {
-            try {
-                if (DB.getConnection() != null) {
-                    DB.getConnection().setAutoCommit(true);
-                    DB.getConnection().close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+
     }
+
     public void branchHaveManager(Branch branch){
         String sql = "SELECT * FROM Branch WHERE Address = ?";
         PreparedStatement ps = null;
@@ -255,4 +241,5 @@ public class BranchTDao implements IDao<Branch,String>{
         }
 
     }
+
 }

@@ -39,8 +39,8 @@ public class MasterController {
         this.HR_Shift = new HRManagerShiftController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database, History_Shifts_temp_database);
         this.HR_Employee = new HRManagerEmployeeController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database);
         this.Employee_Constraint = new EmployeeConstraintController(Employees_temp_database);
-
     }
+
 
     public HRManagerEmployeeController getHR_Employee() {
         return HR_Employee;

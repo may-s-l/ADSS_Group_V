@@ -1,25 +1,30 @@
 //package dev.src.TEST;
 //import dev.src.Controllers.*;
 //import dev.src.Domain.*;
+//import dev.src.Domain.Repository.BranchRep;
+//import dev.src.Domain.Repository.EmployeeRep;
+//import dev.src.Domain.Repository.JobRep;
 //import org.junit.*;
 //import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.BeforeEach;
 //
 //import java.util.*;
-//import static org.junit.Assert.*;
+////import static org.junit.Assert.*;
 //import static org.junit.jupiter.api.Assertions.*;
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //
 //public class SystemTest {
 //
-//    private MyMap<String, Employee> employeeDatabase= new MyMap<>();
-//    private List<Job> jobDatabase= new ArrayList<>();;
-//    private MyMap<String, Branch>branchDatabase=new MyMap<>();
+//    private EmployeeRep employeeDatabase= new EmployeeRep();
+//    private JobRep jobDatabase= new JobRep();;
+//    private BranchRep branchDatabase=new BranchRep();
 //    private HRManagerEmployeeController controller = new HRManagerEmployeeController(jobDatabase, branchDatabase, employeeDatabase);
 //    Job J1=new Job("Cashier");
 //    Job J2=new Job("Stock");
 //    Job J3=new ManagementJob("HRManager");
 //    Branch B = new Branch("Main Branch", "123 Main St");
-//    @Before
+//
+//    @BeforeEach
 //    public  void set(){
 //        this.jobDatabase.add(J1);
 //        this.jobDatabase.add(J2);

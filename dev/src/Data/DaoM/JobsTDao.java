@@ -78,8 +78,6 @@ public class JobsTDao implements IDao<Job,String>{
 
     @Override
     public void update(Job obj) {
-        delete(obj.getJobName());
-        insert(obj);
     }
 
     @Override

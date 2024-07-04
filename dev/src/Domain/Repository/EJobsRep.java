@@ -30,7 +30,7 @@ public class EJobsRep implements IRep<Job, String>{
 
     @Override
     public String add(Job obj) {
-        String key = obj.getJobName()+","+EDI;
+        String key = EDI+","+obj.getJobName();
         if(!jobs.contains(obj)) {
             /////
             String J = EmployeeJobsDao.select(key) ;

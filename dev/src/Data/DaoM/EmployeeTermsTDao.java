@@ -94,10 +94,40 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
 
     @Override
     public void update(TermsOfEmployment obj) {
-        this.delete(obj.getEmp().getID());
-        this.insert(obj);
+        String sql = "UPDATE EmployeesTerm SET VacationDay=?, Start_date=?, End_date=?, Salary=?, JT=?, ST=? WHERE EID=?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.getConnection().prepareStatement(sql);
+            pstmt.setDouble(1, obj.getVacationDay());
+            pstmt.setString(2, obj.getStart_date().toString());
+            if (obj.getEnd_date() == null) {
+                pstmt.setNull(3, java.sql.Types.DATE);
+            } else {
+                pstmt.setString(3, obj.getEnd_date().toString());
+            }
+            pstmt.setDouble(4, obj.getSalary());
+            pstmt.setString(5, obj.getJt().toString());
+            pstmt.setString(6, obj.getSt().toString());
+            pstmt.setString(7, obj.getEmp().getID());
 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating terms of employment for employee ID: " + obj.getEmp().getID(), e);
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
+
 
     @Override
     public void delete(String s) {

@@ -179,7 +179,7 @@ public class EmployeeTDao implements IDao<Employee,String> {
         return new ManagerEmployee(NAME,EmpID,Bank_account,Branch_Address,EmpNUM,terms);
     }
 
-    //    public EJobsRep getAlljobsforemployee(String EID) {
+//    public EJobsRep getAlljobsforemployee(String EID) {
 //        EJobsRep EJobRep = new EJobsRep();
 //        String sql ="SELECT * FROM EmployeeJobs WHERE  EID=? ";
 //        PreparedStatement pstmt = null;

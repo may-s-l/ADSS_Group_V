@@ -34,13 +34,6 @@ public class EmployeeRep implements IRep<Employee,String> {
             Employee C = employeeDao.select(Key);
             if(C == null){
                 employeeDao.insert(obj);
-
-//                if(obj.getJobs() != null){
-//
-//                }
-//                if(obj.getConstraintMyMap() != null){
-//
-//                }
             }
             map.put(Key, obj);
             return "employee added";

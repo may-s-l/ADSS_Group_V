@@ -43,6 +43,7 @@ public class BranchRep implements IRep<Branch,String>{
             if(B==null){
                 return null;
             }
+            BranchDao.branchHaveManager(B);
             Branchs.put(s,B);
             return B;
         }
