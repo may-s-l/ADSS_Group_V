@@ -101,12 +101,12 @@ public class DBConnection {
                         "    \"ShiftDate\"\tTEXT,\n" +
                         "    \"ShiftType\"\tVARCHAR(25),\n" +
                         "    \"BranchAddress\"\tVARCHAR(25),\n" +
-                        "    \"EID\"\tINTEGER,\n" +
+                        "    \"EID\"\tVARCHAR(6),\n" +
                         "    \"EmployeeJob\"\tVARCHAR(25),\n" +
                         "    FOREIGN KEY(\"ShiftDate\",\"ShiftType\",\"BranchAddress\") REFERENCES \"Shift\"(\"ShiftDate\",\"ShiftType\",\"BranchAddress\"),\n" +
-                        "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\")\n" +
+                        "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\"),\n" +
                         "    FOREIGN KEY(\"EID\") REFERENCES \"Employee\"(\"EID\"),\n" +
-                        "    FOREIGN KEY(\"EmployeeJob\") REFERENCES \"Jobs\"(\"NAME\"),\n" +
+                        "    FOREIGN KEY(\"EmployeeJob\") REFERENCES \"Jobs\"(\"Name\")\n" +
                         ");\n"+
                         "CREATE TABLE IF NOT EXISTS \"Shift\" (\n" +
                         "    \"ShiftDate\"\tVARCHAR(25),\n" +
