@@ -3,6 +3,7 @@ package dev.src.Data;
 import org.sqlite.SQLiteConfig;
 import java.io.File;
 import java.sql.*;
+import java.util.Properties;
 
 
 public class DBConnection {
@@ -29,8 +30,11 @@ public class DBConnection {
 
     public Connection getConnection() throws SQLException {
         SQLiteConfig config = new SQLiteConfig();
-        config.enforceForeignKeys(true);
-        return DriverManager.getConnection("jdbc:sqlite:" + dbFileName, config.toProperties());
+//        config.enforceForeignKeys(true); //
+        Properties props = new Properties();
+        props.setProperty("trace", "true"); // הדפסה של שאילתות
+//        return DriverManager.getConnection("jdbc:sqlite:" + dbFileName,config.toProperties());
+        return DriverManager.getConnection("jdbc:sqlite:" + dbFileName, props);
     }
 
     private boolean isNewDb() {

@@ -41,6 +41,16 @@ public class EmployeeJobsTDao implements IDao<String,String> {
             throw new IllegalArgumentException("Insertion failed");
 
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
@@ -62,6 +72,16 @@ public class EmployeeJobsTDao implements IDao<String,String> {
         }
         catch (Exception e) {
             throw new IllegalArgumentException("Select failed");
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 

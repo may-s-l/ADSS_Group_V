@@ -49,6 +49,16 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
         catch (SQLException e) {
             throw new RuntimeException();
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
 
@@ -70,6 +80,16 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
         catch (SQLException e) {
             throw new RuntimeException();
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
@@ -90,6 +110,16 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
         }
         catch (SQLException e) {
             throw new RuntimeException();
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
 
 

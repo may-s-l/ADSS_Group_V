@@ -38,6 +38,16 @@ public class JobsTDao implements IDao<Job,String>{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        finally {
+            try {
+                if (db.getConnection() != null) {
+                    db.getConnection().setAutoCommit(true);
+                    db.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
@@ -53,6 +63,16 @@ public class JobsTDao implements IDao<Job,String>{
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                if (db.getConnection() != null) {
+                    db.getConnection().setAutoCommit(true);
+                    db.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
@@ -70,6 +90,16 @@ public class JobsTDao implements IDao<Job,String>{
             pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                if (db.getConnection() != null) {
+                    db.getConnection().setAutoCommit(true);
+                    db.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
@@ -98,6 +128,16 @@ public class JobsTDao implements IDao<Job,String>{
             return jobs;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                if (db.getConnection() != null) {
+                    db.getConnection().setAutoCommit(true);
+                    db.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }

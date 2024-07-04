@@ -42,10 +42,20 @@ public class BranchTDao implements IDao<Branch,String>{
             } else {
                 ps.setNull(4, java.sql.Types.VARCHAR);
             }
-            ps.executeUpdate();
+            ps.execute();
         }
         catch (SQLException e) {
             throw new IllegalArgumentException("Insertion failed");
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
@@ -90,28 +100,36 @@ public class BranchTDao implements IDao<Branch,String>{
     public void update(Branch obj) {
         String sql = "UPDATE Branch SET BranchNum = ?, Name = ?, Manager = ? WHERE Address = ?";
         PreparedStatement ps = null;
+        Connection conn = null;
         try {
-            ps = DB.getConnection().prepareStatement(sql);
+            conn = DB.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, obj.getBranchNum());
             ps.setString(2, obj.getBranchName());
-            ps.setString(3, obj.getManagerEmployee().getID());
+            if (obj.getManagerEmployee() != null) {
+                ps.setString(3, obj.getManagerEmployee().getID());
+            } else {
+                ps.setNull(3, java.sql.Types.VARCHAR);
+            }
             ps.setString(4, obj.getBranchAddress());
 
-            ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Update failed, no rows affected.");
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new IllegalArgumentException("Update failed");
+            e.printStackTrace();
+            throw new IllegalArgumentException("Update failed", e);
         } finally {
             try {
-                if (DB.getConnection() != null) {
-                    DB.getConnection().setAutoCommit(true);
-                    DB.getConnection().close();
-                }
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
             } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
         }
     }
+
 
     @Override
     public void delete(String s) {
@@ -120,11 +138,21 @@ public class BranchTDao implements IDao<Branch,String>{
         try {
             ps=DB.getConnection().prepareStatement(sql);
             ps.setString(1, s);
-            ps.executeUpdate();
+            ps.execute();
 
         }
         catch (SQLException e) {
             throw new IllegalArgumentException("Deletion failed");
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
@@ -154,6 +182,16 @@ public class BranchTDao implements IDao<Branch,String>{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     public Branch getBRANCHbyNum(int num) {
@@ -174,9 +212,16 @@ public class BranchTDao implements IDao<Branch,String>{
         catch (SQLException e) {
             throw new IllegalArgumentException("Get Branch failed");
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
-
-
-
 
 }

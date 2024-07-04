@@ -103,6 +103,16 @@ public class WeekTDao implements IDao<Week,String> {
         catch (Exception e) {
             throw new IllegalArgumentException("SQL Error: " + e.getMessage());
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
 
 
 
@@ -198,6 +208,16 @@ public class WeekTDao implements IDao<Week,String> {
         catch (Exception e) {
             throw new IllegalArgumentException("SQL Error: " + e.getMessage());
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
@@ -228,6 +248,16 @@ public class WeekTDao implements IDao<Week,String> {
         }
         catch (Exception e) {
             throw new IllegalArgumentException("SQL Error: " + e.getMessage());
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
 
     }

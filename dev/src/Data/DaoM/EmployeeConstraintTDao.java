@@ -41,6 +41,16 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
         catch (SQLException e) {
             throw new RuntimeException();
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
@@ -64,6 +74,16 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
         }
         catch (SQLException e) {
             throw new RuntimeException();
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
 
     }
@@ -90,6 +110,16 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
         }
         catch (SQLException e) {
             throw new RuntimeException();
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
