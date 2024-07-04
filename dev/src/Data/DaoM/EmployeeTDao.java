@@ -111,8 +111,6 @@ public class EmployeeTDao implements IDao<Employee,String> {
             pstmt.setString(5, obj.getID());
             pstmt.executeUpdate();
 
-            // Update terms of employment
-            EmployeeTermsTDao.getInstance().update(obj.getTerms());
 
         } catch (SQLException e) {
             throw new RuntimeException("Update failed", e);
@@ -197,28 +195,20 @@ public class EmployeeTDao implements IDao<Employee,String> {
 //        }
 //        return EJobRep;1
 //    }
-    public EmployeeRep getALLEmpActiveByBranch(String A,EmployeeRep EPR){
+    public EmployeeRep getALLEmpActiveByBranch(String A){
 
         String sql = "SELECT * FROM Employee WHERE BranchID = ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
-        EmployeeRep employeeRep =EPR;
-        if (employeeRep==null) {
-            employeeRep= new EmployeeRep();
-        }
+        EmployeeRep employeeRep = new EmployeeRep();
         try {
             ps=DB.getConnection().prepareStatement(sql);
             ps.setString(1,A);
             rs = ps.executeQuery();
             while (rs.next()) {
-                if(employeeRep.find(rs.getString("ID"))==null){
-                    Employee emp = select(rs.getString("ID"));
-                    if(emp.getTerms().getEnd_date()==null){
-                        employeeRep.add(emp);
-                    }
-                }
+                Employee E =load(rs);
+                employeeRep.add(E);
             }
-            if(EPR==null){}
         }
         catch (SQLException e) {
             throw new IllegalArgumentException("Selection failed");

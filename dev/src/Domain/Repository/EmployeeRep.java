@@ -83,8 +83,8 @@ public class EmployeeRep implements IRep<Employee,String> {
         return "employee not delete from --rep employee";
     }
 
-    public void getALLEmpActiveByBranch(String A,EmployeeRep rep){
-        employeeDao.getALLEmpActiveByBranch(A,rep);
+    public EmployeeRep getALLEmpActiveByBranch(String A){
+        return employeeDao.getALLEmpActiveByBranch(A);
     }
 
     public Set<String> getKeys(){

@@ -134,7 +134,7 @@ public class WeekTDao implements IDao<Week,String> {
             if(rs.next()){
                 week = new Week(LocalDate.parse(rs.getString("StartDate")),B);
                 if(week.getWeekNUM()!=rs.getInt("WeekNum")){
-                    System.out.println("WEEK NUMBER NOT MATCHED IN DATABASE WEEK SELECT");
+                    return null;
 
                 }
                 String sqlDays = "SELECT * FROM Days WHERE WeekNum = ? AND BranchAddress = ?";

@@ -1,5 +1,6 @@
 package dev.src.presentation.menus;
 import dev.src.Controllers.MasterController;
+import dev.src.Data.DaoM.JobsTDao;
 import dev.src.Domain.Branch;
 import dev.src.Domain.Employee;
 import dev.src.Domain.Job;
@@ -185,9 +186,11 @@ public class Login_menu {
 
 
     public void System_manger_set_up(MasterController MC){
-        MC.getHR_Employee().createManagementJob("HR-MANAGER");
-        MC.getHR_Employee().createBranch("SuperLee Main","BGU");
-        MC.getHR_Employee().createManagmentEmployee("SHLAT","111111","95135748","SuperLee Main",14,"2024-06-06",10000,"FULL","GLOBAL","HR-MANAGER");
+        if(JobsTDao.getInstance().select("HR-MANAGER")==null) {
+            MC.getHR_Employee().createManagementJob("HR-MANAGER");
+            MC.getHR_Employee().createBranch("SuperLee Main", "BGU");
+            MC.getHR_Employee().createManagmentEmployee("SHLAT", "111111", "95135748", "SuperLee Main", 14, "2024-06-06", 10000, "FULL", "GLOBAL", "HR-MANAGER");
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.src.Controllers;
 
+import dev.src.Data.DaoM.EmployeeTDao;
+import dev.src.Data.DaoM.EmployeeTermsTDao;
 import dev.src.Domain.*;
 import dev.src.Domain.Repository.BranchRep;
 import dev.src.Domain.Repository.EmployeeRep;
@@ -182,6 +184,7 @@ public class HRManagerEmployeeController {
         Employee empToUpdate = this.Employees_temp_database.find(ID);
         if(empToUpdate!=null){
             empToUpdate.setName(name);
+            EmployeeTDao.getInstance().update(empToUpdate);
             return "The employee name has been successfully changed";
         }
         throw new IllegalArgumentException("Employee is NOT exist");
@@ -199,6 +202,7 @@ public class HRManagerEmployeeController {
                     empToUpdate.getTerms().setEnd_date(end_date_toUP);
                     Branch branch=empToUpdate.getBranch();
                     branch.removEmployeeFromBranch(empToUpdate);
+                    EmployeeTermsTDao.getInstance().update(empToUpdate.getTerms());
                     return "departure date has been successfully updated for this employee - "+ID;
                 }
                 throw new IllegalArgumentException("The departure date has been updated for this employee");
@@ -217,6 +221,7 @@ public class HRManagerEmployeeController {
         Employee empToUpdate = this.Employees_temp_database.find(ID);
         if(empToUpdate!=null){
             empToUpdate.getTerms().setSalary(salery);
+            EmployeeTermsTDao.getInstance().update(empToUpdate.getTerms());
             return "Salary is successfully updated for employee - "+ID;
         }
         throw new IllegalArgumentException("Employee is NOT exist");
@@ -255,6 +260,7 @@ public class HRManagerEmployeeController {
             throw new IllegalArgumentException("Employee is NOT exist");
         }
         empToUpdate.setBank_account(bank_accuont);
+        EmployeeTDao.getInstance().update(empToUpdate);
         return "Bank account is successfully updated for employee - "+ID;
 
     }
@@ -292,6 +298,7 @@ public class HRManagerEmployeeController {
         }
         TermsOfEmployment term = empToUpdate.getTerms();
         term.setVacationDay(amount);
+        EmployeeTermsTDao.getInstance().update(empToUpdate.getTerms());
         return "Vacation Days is successfully updated for employee";
     }
     public String updateEmployeeSalary(String ID, double salary) throws IllegalArgumentException {
@@ -304,6 +311,7 @@ public class HRManagerEmployeeController {
         }
         TermsOfEmployment term = empToUpdate.getTerms();
         term.setSalary(salary);
+        EmployeeTermsTDao.getInstance().update(empToUpdate.getTerms());
         return "Salary is successfully updated for employee";
     }
     public String updateEmployeeJobType(String ID, String job_type) throws IllegalArgumentException {
@@ -316,6 +324,7 @@ public class HRManagerEmployeeController {
         }
         TermsOfEmployment term = empToUpdate.getTerms();
         term.setJt(job_type);
+        EmployeeTermsTDao.getInstance().update(empToUpdate.getTerms());
         return "JobType is successfully updated for employee";
     }
     public String updateEmployeeSalaryType(String ID, String salary_type) throws IllegalArgumentException {
@@ -328,6 +337,7 @@ public class HRManagerEmployeeController {
         }
         TermsOfEmployment term = empToUpdate.getTerms();
         term.setSt(salary_type);
+        EmployeeTermsTDao.getInstance().update(empToUpdate.getTerms());
         return "SalaryType is successfully updated for employee";
     }
     public boolean updateEmployeeTermsSalary(String ID,double salary, String job_type, String Salary_type){

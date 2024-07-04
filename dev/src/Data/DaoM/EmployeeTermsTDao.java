@@ -93,8 +93,8 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
     }
 
     @Override
-    public void update(TermsOfEmployment obj) {
-        String sql = "UPDATE EmployeesTerm SET VacationDay=?, Start_date=?, End_date=?, Salary=?, JT=?, ST=? WHERE EID=?";
+    public void update(TermsOfEmployment obj){
+        String sql = "UPDATE EmployeesTerm SET vacationDay=?, Start_date=?, End_date=?, Salary=?, JobType=?, SalaryType=? WHERE EID=?";
         PreparedStatement pstmt = null;
         try {
             pstmt = DB.getConnection().prepareStatement(sql);
