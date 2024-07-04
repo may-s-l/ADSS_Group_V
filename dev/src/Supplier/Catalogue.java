@@ -5,21 +5,21 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 public class Catalogue implements IPrintable, ISearchable{
-    private Dictionary<Item, Integer> suppliedItems;            // Item to SupplierItemID
-    private Dictionary<Item, Float> itemsPrices;                // Items to base price for each
+    private Dictionary<Item, String> suppliedItems;            // Item to SupplierItemID
+    private Dictionary<Item, Double> itemsPrices;                // Items to base price for each
     private QuantityForm quantityForm;
 
-    Catalogue() {
+    public Catalogue() {
         suppliedItems = new Hashtable<>();
-        itemsPrices = new Hashtable<>();
+        itemsPrices = new Hashtable<Item, Double>();
     }
 
-    Catalogue(Hashtable<Item, Integer> catalogueItems) {
+    Catalogue(Hashtable<Item, String> catalogueItems) {
         suppliedItems = catalogueItems;
-        itemsPrices = new Hashtable<>();
+        itemsPrices = new Hashtable<Item, Double>();
     }
 
-    public void add(Item item, int catalogueNumber, float basePrice) {
+    public void add(Item item, String catalogueNumber, Double basePrice) {
         suppliedItems.put(item, catalogueNumber);
         itemsPrices.put(item, basePrice);
     }
@@ -28,7 +28,7 @@ public class Catalogue implements IPrintable, ISearchable{
         suppliedItems.remove(item);
     }
 
-    public int getCatalogueItemNumber(Item item) {
+    public String getCatalogueItemNumber(Item item) {
         return suppliedItems.get(item);
     }
 
@@ -67,7 +67,7 @@ public class Catalogue implements IPrintable, ISearchable{
         return quantityForm;
     }
 
-    public float getItemBasePrice(Item item) {
+    public Double getItemBasePrice(Item item) {
         return itemsPrices.get(item);
     }
 }

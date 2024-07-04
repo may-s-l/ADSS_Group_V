@@ -23,7 +23,7 @@ public class ItemManagementSystem implements ISearchable{
         System.out.println("What is the name of the item you wish to add?");
         String itemName = scanner.next();
         System.out.println("What is the ID of " + itemName + "?");
-        int itemID = scanner.nextInt();
+        String itemID = scanner.next();
         add(new Item(itemName, itemID));
     }
 

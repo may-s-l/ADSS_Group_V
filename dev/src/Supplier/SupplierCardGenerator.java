@@ -1,13 +1,13 @@
 package Supplier;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class SupplierCardGenerator implements IObjectGenerator {
     @Override
     public SupplierCard generate() {
-        ContactGenerator contactGenerator = new ContactGenerator();
         String name, paymentMethod;
-        int firmID, bankAccount;
+        String firmID, bankAccount;
         int isConstant;
         AContract contract;
         Contact[] contacts = new Contact[20];
@@ -16,11 +16,11 @@ public class SupplierCardGenerator implements IObjectGenerator {
         System.out.println("Please enter name:");
         name = scanner.next();
         System.out.println("Please enter firmID:");
-        firmID = scanner.nextInt();
+        firmID = scanner.next();
         System.out.println("Please enter payment method:");
         paymentMethod = scanner.next();
         System.out.println("Please enter bank account number:");
-        bankAccount = scanner.nextInt();
+        bankAccount = scanner.next();
         System.out.println("Temporary(0) or fixed(1) supplier?");
         isConstant = scanner.nextInt();
 
@@ -40,6 +40,7 @@ public class SupplierCardGenerator implements IObjectGenerator {
         }
 
         // generating contacts
+        ContactGenerator contactGenerator = new ContactGenerator();
         int i = 0;
         while (true) {
             int brk;
@@ -50,6 +51,6 @@ public class SupplierCardGenerator implements IObjectGenerator {
             contacts[i++] = contactGenerator.generate();
         }
 
-        return new SupplierCard(name, firmID, bankAccount, paymentMethod, contacts, contract);
+        return new SupplierCard(name, firmID, bankAccount, paymentMethod, List.of(contacts), contract);
     }
 }

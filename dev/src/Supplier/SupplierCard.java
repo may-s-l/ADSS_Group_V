@@ -1,14 +1,16 @@
 package Supplier;
 
+import java.util.List;
+
 public class SupplierCard implements IPrintable {
     private String name;
-    private long firmID;
-    private long bankAccount;
+    private String firmID;
+    private String bankAccount;
     private String paymentMethod;
-    private Contact[] contacts;
+    private List<Contact> contacts;
     private AContract contract;
 
-    public SupplierCard(String name, int firmID, int bankAccount, String paymentMethod, Contact[] contacts, AContract contract) {
+    public SupplierCard(String name, String firmID, String bankAccount, String paymentMethod, List<Contact> contacts, AContract contract) {
         this.name = name;
         this.firmID = firmID;
         this.bankAccount = bankAccount;
@@ -23,11 +25,11 @@ public class SupplierCard implements IPrintable {
         return name;
     }
 
-    public long getFirmID() {
+    public String getFirmID() {
         return firmID;
     }
 
-    public long getBankAccount() {
+    public String getBankAccount() {
         return bankAccount;
     }
 
@@ -35,7 +37,7 @@ public class SupplierCard implements IPrintable {
         return paymentMethod;
     }
 
-    public Contact[] getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
@@ -47,11 +49,11 @@ public class SupplierCard implements IPrintable {
         this.name = name;
     }
 
-    public void setFirmID(int firmID) {
+    public void setFirmID(String firmID) {
         this.firmID = firmID;
     }
 
-    public void setBankAccount(int bankAccount) {
+    public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
 
@@ -59,7 +61,7 @@ public class SupplierCard implements IPrintable {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setContacts(Contact[] contacts) {
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 

@@ -2,10 +2,10 @@ package Supplier;
 
 public class Contact implements IPrintable {
     private String name;
-    private long ID;
+    private String ID;
     private String phoneNumber;
 
-    Contact(String name, long ID, String phoneNumber) {
+    public Contact(String name, String ID, String phoneNumber) {
         this.name = name;
         this.ID = ID;
         this.phoneNumber = phoneNumber;

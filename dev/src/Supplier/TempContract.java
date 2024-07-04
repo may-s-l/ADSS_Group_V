@@ -1,7 +1,7 @@
 package Supplier;
 
 public class TempContract extends AContract {
-    TempContract(Catalogue itemCatalogue) {
+    public TempContract(Catalogue itemCatalogue) {
         super(itemCatalogue);
     }
 

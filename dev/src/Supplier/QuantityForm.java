@@ -4,20 +4,20 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class QuantityForm {
-    Dictionary<Item, Float> discountPerItem;
-    Dictionary<Item, Float> maxDiscounts;
+    Dictionary<Item, Double> discountPerItem;
+    Dictionary<Item, Double> maxDiscounts;
 
-    QuantityForm() {
-        discountPerItem = new Hashtable<Item, Float>();
-        maxDiscounts = new Hashtable<Item, Float>();
+    public QuantityForm() {
+        discountPerItem = new Hashtable<Item, Double>();
+        maxDiscounts = new Hashtable<Item, Double>();
     }
 
-    QuantityForm(Hashtable<Item, Float> discounts, Hashtable<Item, Float> maxDiscounts) {
+    QuantityForm(Hashtable<Item, Double> discounts, Hashtable<Item, Double> maxDiscounts) {
         this.discountPerItem = discounts;
         this.maxDiscounts = maxDiscounts;
     }
 
-    public void add(Item item, Float discount, Float maxDiscount) {
+    public void add(Item item, Double discount, Double maxDiscount) {
         discountPerItem.put(item, discount);
         maxDiscounts.put(item, maxDiscount);
     }
@@ -27,7 +27,7 @@ public class QuantityForm {
         maxDiscounts.remove(item);
     }
 
-    public Float calculateDiscount(Item item, int amount) {
+    public Double calculateDiscount(Item item, int amount) {
         return Math.min(maxDiscounts.get(item), amount * discountPerItem.get(item));
     }
 }

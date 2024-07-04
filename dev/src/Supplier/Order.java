@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class Order implements IPrintable{
     Dictionary<Item, Integer> orderedItems;         // items : amount of each
-    Dictionary<Item, Float> discountsMapped;        // items : discounts for each
+    Dictionary<Item, Double> discountsMapped;        // items : discounts for each
     static long index = 1;
     SupplierCard supplierCard;
     long orderID;
@@ -26,7 +26,7 @@ public class Order implements IPrintable{
         amountOfDisctinctItems = 0;
     }
 
-    public void addItemToOrder(Item item, int amount, float discount) {
+    public void addItemToOrder(Item item, int amount, Double discount) {
         orderedItems.put(item, amount);
         discountsMapped.put(item, discount);
         finalPrice += supplierCard.getContract().getItemCatalogue().getItemBasePrice(item) * discount * amount;

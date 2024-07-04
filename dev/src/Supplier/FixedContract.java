@@ -1,9 +1,11 @@
 package Supplier;
 
+import java.util.Map;
+
 public class FixedContract extends AContract {
     private String[] daysOfDelivery;
 
-    FixedContract(Catalogue itemCatalogue, String[] days) {
+    public FixedContract(Catalogue itemCatalogue, String[] days) {
         super(itemCatalogue);
         daysOfDelivery = days;
     }

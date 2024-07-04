@@ -2,9 +2,9 @@ package Supplier;
 
 public class Item implements IPrintable {
     String itemName;
-    int itemID;
+    String itemID;
 
-    public Item(String itemName, int itemID) {
+    public Item(String itemName, String itemID) {
         this.itemName = itemName;
         this.itemID = itemID;
     }
@@ -24,6 +24,6 @@ public class Item implements IPrintable {
 
     @Override
     public String toString() {
-        return "{" + itemName + "," + itemID + "}";
+        return itemName + ":" + itemID;
     }
 }

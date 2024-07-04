@@ -1,12 +1,14 @@
 package Supplier;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class OrderManagementSystem {
     ArrayList<Order> orderHistory;
     SupplierManagementSystem supplierManagementSystem;
     ItemManagementSystem itemManagementSystem;
+
 
     OrderManagementSystem(SupplierManagementSystem SMS, ItemManagementSystem IMS) {
         orderHistory = new ArrayList<>();
@@ -47,6 +49,20 @@ public class OrderManagementSystem {
         supplier.getContract().getOrderHistory().add(newOrder);
         System.out.println("Success! the order has been created and added to the order history");
         newOrder.print();
+    }
+
+    private void order(Map<Item, Integer> listOfItems) {
+        // todo
+    }
+
+    // order overloading for automatic system
+    public void automaticOrder(Map<Item, Integer> listOfItems, boolean flag) {      // in case of lack of stock flag will be raised to true
+        if (flag) {
+            order(listOfItems);
+        }
+        else {
+            // make a new order from a fixed supplier
+        }
     }
 
     public void printOrderHistory() {
