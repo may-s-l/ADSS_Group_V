@@ -2,6 +2,7 @@ package dev.src.Data.DaoM;
 
 import dev.src.Data.DBConnection;
 import dev.src.Domain.Job;
+import dev.src.Domain.ManagementJob;
 import dev.src.Domain.Repository.EJobsRep;
 
 import java.sql.PreparedStatement;
@@ -34,8 +35,8 @@ public class EmployeeJobsTDao implements IDao<String,String> {
         PreparedStatement ps = null;
         try {
             ps = DB.getConnection().prepareStatement(sql);
-            ps.setString(1, keys[1]);
-            ps.setString(2, keys[0]);
+            ps.setString(1, keys[0]);
+            ps.setString(2, keys[1]);
             ps.executeUpdate();
         }
         catch (SQLException e) {
@@ -82,7 +83,14 @@ public class EmployeeJobsTDao implements IDao<String,String> {
             ps.setString(1, s);
             rs = ps.executeQuery();
             while (rs.next()) {
-                job=new Job(rs.getString("Job"));
+                String D=rs.getString("Job");
+                if (D.equals("HR-MANAGER")) {
+                    job = new ManagementJob(rs.getString("Job"));
+
+                } else{
+                    job = new Job(rs.getString("Job"));
+                }
+
                 eJobsRep.add(job);
             }
             return eJobsRep;

@@ -57,6 +57,7 @@ public class MasterController {
     public String checkLoginEmployee(String ID){
         if(this.Employees_temp_database.find(ID)!=null){
             Employee employee = this.Employees_temp_database.find(ID);
+
             if(employee instanceof ManagerEmployee){
                 return "HR-MANAGER";
             }

@@ -1,0 +1,45 @@
+Index: dev/src/presentation/Login_menu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package presentation;\r\nimport java.util.Scanner;\r\n\r\npublic class Login_menu {\r\n\r\n\r\n    public Login_menu() {\r\n        Scanner scanner = new Scanner(System.in);\r\n\r\n        while (true) {\r\n            System.out.println(\"Login Menu\");\r\n            System.out.println(\"1. Login\");\r\n            System.out.println(\"2. Exit\");\r\n            System.out.print(\"Enter your choice: \");\r\n            int choice = scanner.nextInt();\r\n            scanner.nextLine();\r\n\r\n            switch (choice) {\r\n                case 1:\r\n\r\n                    System.out.print(\"Enter username: \");\r\n                    String username = scanner.nextLine();\r\n                    System.out.print(\"Enter password: \");\r\n                    String password = scanner.nextLine();\r\n\r\n                    if()\r\n//\r\n//                    } else {\r\n//                        System.out.println(\"Invalid username or password. Please try again.\");\r\n//                    }\r\n//                    break;\r\n//                case 2:\r\n//                    System.out.println(\"Exiting...\");\r\n//                    scanner.close();\r\n//                    System.exit(0);\r\n//                default:\r\n//                    System.out.println(\"Invalid choice. Please try again.\");\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n
+===================================================================
+diff --git a/dev/src/presentation/Login_menu.java b/dev/src/presentation/Login_menu.java
+--- a/dev/src/presentation/Login_menu.java	
++++ b/dev/src/presentation/Login_menu.java	
+@@ -1,4 +1,4 @@
+-package presentation;
++package dev.src.presentation;
+ import java.util.Scanner;
+ 
+ public class Login_menu {
+@@ -23,7 +23,7 @@
+                     System.out.print("Enter password: ");
+                     String password = scanner.nextLine();
+ 
+-                    if()
++
+ //
+ //                    } else {
+ //                        System.out.println("Invalid username or password. Please try again.");
+@@ -38,5 +38,6 @@
+             }
+         }
+     }
++    }
+ 
+ 
+Index: dev/src/menus/SystemManagarMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\n\r\n\r\npublic class SystemManagarMenu{\r\n\r\n}
+===================================================================
+diff --git a/dev/src/menus/SystemManagarMenu.java b/dev/src/menus/SystemManagarMenu.java
+--- a/dev/src/menus/SystemManagarMenu.java	
++++ b/dev/src/menus/SystemManagarMenu.java	
+@@ -1,5 +1,4 @@
+-
+-
++package dev.src.menus;
+ 
+ 
+ public class SystemManagarMenu{
