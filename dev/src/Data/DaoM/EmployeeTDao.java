@@ -96,11 +96,37 @@ public class EmployeeTDao implements IDao<Employee,String> {
 
     @Override
     public void update(Employee obj) {
-        delete(obj.getID());
-        EmployeeTermsTDao.getInstance().update(obj.getTerms());
-        insert(obj);
+        String sql = "UPDATE Employee SET EmpNUM = ?, Name = ?, BankAccountNumber = ?, BranchID = ? WHERE EID = ?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.getConnection().prepareStatement(sql);
+            pstmt.setInt(1, obj.getEmployeeNum());
+            pstmt.setString(2, obj.getName());
+            pstmt.setString(3, obj.getBank_account());
+            pstmt.setString(4, obj.getBranch().getBranchAddress());
+            pstmt.setString(5, obj.getID());
+            pstmt.executeUpdate();
 
+            // Update terms of employment
+            EmployeeTermsTDao.getInstance().update(obj.getTerms());
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Update failed", e);
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
+
 
     @Override
     public void delete(String s) {

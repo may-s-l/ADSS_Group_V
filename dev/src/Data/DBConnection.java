@@ -30,11 +30,10 @@ public class DBConnection {
 
     public Connection getConnection() throws SQLException {
         SQLiteConfig config = new SQLiteConfig();
-//        config.enforceForeignKeys(true); //
         Properties props = new Properties();
         props.setProperty("trace", "true"); // הדפסה של שאילתות
-//        return DriverManager.getConnection("jdbc:sqlite:" + dbFileName,config.toProperties());
-        return DriverManager.getConnection("jdbc:sqlite:" + dbFileName, props);
+        Connection realConnection = DriverManager.getConnection("jdbc:sqlite:" + dbFileName, props);
+        return ConnectionProxy.newInstance(realConnection); // החזרת חיבור שנעטף בפרוקסי ConnectionProxy
     }
 
     private boolean isNewDb() {

@@ -53,13 +53,8 @@ public class BranchRep implements IRep<Branch,String>{
     public String update(Branch obj) {
         if(Branchs.containsKey(obj.getBranchAddress())) {
             if(!Branchs.get(obj.getBranchAddress()).equals(obj)) {
-                Branch B=BranchDao.select(obj.getBranchAddress());
-                if(B==null){
-                    return null;
-                }
                 BranchDao.update(obj);
             }
-
         }
         return "";
     }

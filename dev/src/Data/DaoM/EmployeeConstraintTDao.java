@@ -91,10 +91,32 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
 
     @Override
     public void update(Constraint obj) {
-        String keys = obj.getShiftDate().toString()+","+obj.getShiftType().toString().toUpperCase();
-        delete(keys);
-        insert(obj);
+        String sql = "UPDATE EmployeeConstraints SET ConstraintShiftType = ? WHERE EID = ? AND ShiftDate = ?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.getConnection().prepareStatement(sql);
+            pstmt.setString(1, obj.getShiftType().toString().toUpperCase());
+            pstmt.setString(2, obj.getEmp().getID());
+            pstmt.setString(3, obj.getShiftDate().toString());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Update failed", e);
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
+
 
 
     @Override
