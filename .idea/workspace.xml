@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="nnnn">
-      <change afterPath="$PROJECT_DIR$/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/TEST/HRManagerEmployeeControllerTest.java" afterDir="false" />
+    <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="test">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assignments.iml" beforeDir="false" afterPath="$PROJECT_DIR$/assignments.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Data/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeConstraintTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeConstraintTDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/ConstraintRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/ConstraintRep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/TEST/EmployeeConstraintControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/TEST/EmployeeConstraintControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/TEST/SystemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/TEST/SystemTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/TEST/HRManagerEmployeeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/TEST/HRManagerEmployeeControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/TEST/HRManagerShiftControllerTest.java" beforeDir="false" />
     </list>
     <list id="409e8c73-7a2c-4854-85ad-b379909bc98c" name="Changes by mayal" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +76,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="JUnit.HRManagerEmployeeControllerTest.testCreateEmployee_InvalidName">
+  <component name="RunManager" selected="JUnit.HRManagerEmployeeControllerTest">
     <configuration name="EmployeeConstraintControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="assignments" />
       <extension name="coverage">
@@ -95,22 +88,6 @@
       <option name="PACKAGE_NAME" value="dev.src.TEST" />
       <option name="MAIN_CLASS_NAME" value="dev.src.TEST.EmployeeConstraintControllerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EmployeeConstraintControllerTest.testAddConstraint_InvalidShiftType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="assignments" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dev.src.TEST.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="dev.src.TEST" />
-      <option name="MAIN_CLASS_NAME" value="dev.src.TEST.EmployeeConstraintControllerTest" />
-      <option name="METHOD_NAME" value="testAddConstraint_InvalidShiftType" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -130,7 +107,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HRManagerEmployeeControllerTest.testCreateEmployee_InvalidName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HRManagerEmployeeControllerTest.testCreateEmployee_EmployeeAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="assignments" />
       <extension name="coverage">
         <pattern>
@@ -140,7 +117,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="dev.src.TEST" />
       <option name="MAIN_CLASS_NAME" value="dev.src.TEST.HRManagerEmployeeControllerTest" />
-      <option name="METHOD_NAME" value="testCreateEmployee_InvalidName" />
+      <option name="METHOD_NAME" value="testCreateEmployee_EmployeeAlreadyExists" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HRManagerEmployeeControllerTest.testCreateEmployee_InvalidID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="assignments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.src.TEST.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.src.TEST" />
+      <option name="MAIN_CLASS_NAME" value="dev.src.TEST.HRManagerEmployeeControllerTest" />
+      <option name="METHOD_NAME" value="testCreateEmployee_InvalidID" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,11 +157,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HRManagerEmployeeControllerTest.testCreateEmployee_InvalidName" />
-        <item itemvalue="JUnit.HRManagerEmployeeControllerTest.testCreateEmployee_Success" />
         <item itemvalue="JUnit.HRManagerEmployeeControllerTest" />
+        <item itemvalue="JUnit.HRManagerEmployeeControllerTest.testCreateEmployee_InvalidID" />
+        <item itemvalue="JUnit.HRManagerEmployeeControllerTest.testCreateEmployee_EmployeeAlreadyExists" />
+        <item itemvalue="JUnit.HRManagerEmployeeControllerTest.testCreateEmployee_Success" />
         <item itemvalue="JUnit.EmployeeConstraintControllerTest" />
-        <item itemvalue="JUnit.EmployeeConstraintControllerTest.testAddConstraint_InvalidShiftType" />
       </list>
     </recent_temporary>
   </component>
@@ -297,7 +290,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1720103863501</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL‎-00017" summary="test">
+      <created>1720122397709</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL‎-00017" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1720122397709</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +342,8 @@
     <MESSAGE value="jobRep" />
     <MESSAGE value="controller" />
     <MESSAGE value="nnnn" />
-    <option name="LAST_COMMIT_MESSAGE" value="nnnn" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
