@@ -4,6 +4,7 @@ import dev.src.Domain.Enums.ShiftType;
 import dev.src.Domain.Repository.BranchRep;
 import dev.src.Domain.Repository.EmployeeRep;
 import dev.src.Domain.Repository.JobRep;
+import dev.src.Domain.Repository.WeekRep;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public class HRManagerShiftController {
 //    private MyMap<String, Employee> Employees_temp_database;//String key ID
     private EmployeeRep Employees_temp_database;
     private MyMap<Integer,MyMap<LocalDate, Week>> BranchWeek_temp_database;//INT keys BranchNUM
-    private MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database;
+    private WeekRep History_Shifts_temp_database;
     private MyTripel<Week,List<List<Object>>,MyMap<Integer, Employee>> CurrentSchedule;
 //    public HRManagerShiftController(List<Job> Employeejobs_temp_database,MyMap<String, Branch> Branch_temp_database,MyMap<String, Employee> Employees_temp_database,MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
 //        this.Employees_temp_database=Employees_temp_database;
@@ -32,7 +33,7 @@ public class HRManagerShiftController {
 //        this.History_Shifts_temp_database=History_Shifts_temp_database;
 //    }
 
-    public HRManagerShiftController(JobRep Employeejobs_temp_database, BranchRep Branch_temp_database, EmployeeRep Employees_temp_database, MyMap<Integer,MyMap<LocalDate, String>> History_Shifts_temp_database) {
+    public HRManagerShiftController(JobRep Employeejobs_temp_database, BranchRep Branch_temp_database, EmployeeRep Employees_temp_database, WeekRep History_Shifts_temp_database) {
         this.Employees_temp_database=Employees_temp_database;
         this.Branch_temp_database=Branch_temp_database;
         this.Employeejobs_temp_database=Employeejobs_temp_database;
@@ -337,15 +338,17 @@ public class HRManagerShiftController {
             Set<Employee> EMP=week.getDayOfWeek(week.getStart_date()).getShiftsInDay()[0].getEmployeeinshiftSet();
             List<Employee> myList = new ArrayList<>(EMP);
             int branchNum= myList.get(0).getBranch().getBranchNum();
-            if(this.History_Shifts_temp_database.containsKey(branchNum)){
-                MyMap<LocalDate,String> dateWeek= this.History_Shifts_temp_database.get(branchNum);
-                dateWeek.put(week.getStart_date(),weekstring);
+            String s=branchNum+","+week.getStart_date();
+            if(this.History_Shifts_temp_database.find(s)==null){
+//                Week dateWeek= this.History_Shifts_temp_database.find(s);
+//                dateWeek.put(week.getStart_date(),weekstring);
+                this.History_Shifts_temp_database.add(week);
             }
-            else {
-                MyMap<LocalDate, String> dateWeekMyMap = new MyMap<LocalDate, String>();
-                dateWeekMyMap.put(week.getStart_date(),weekstring);
-                this.History_Shifts_temp_database.put(branchNum,dateWeekMyMap);
-            }
+//            else {
+//                MyMap<LocalDate, String> dateWeekMyMap = new MyMap<LocalDate, String>();
+//                dateWeekMyMap.put(week.getStart_date(),weekstring);
+//                this.History_Shifts_temp_database.put(branchNum,dateWeekMyMap);
+//            }
 
             return "All positions have been filled \n" +toStringforweekANDemlpoyeeinbanc(week,CurrentSchedule.getSecond());
         }

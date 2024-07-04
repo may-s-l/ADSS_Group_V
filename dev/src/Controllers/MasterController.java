@@ -4,6 +4,7 @@ import dev.src.Domain.*;
 import dev.src.Domain.Repository.BranchRep;
 import dev.src.Domain.Repository.EmployeeRep;
 import dev.src.Domain.Repository.JobRep;
+import dev.src.Domain.Repository.WeekRep;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -24,7 +25,7 @@ public class MasterController {
     private BranchRep Branch_temp_database;//String key address
     private JobRep Employeejobs_temp_database;//-V2-
     private EmployeeRep Employees_temp_database;//String key ID----V2-
-    private MyMap<Integer, MyMap<LocalDate, String>> History_Shifts_temp_database;//int branch num
+    private WeekRep History_Shifts_temp_database;//int branch num---V2-
     private HRManagerEmployeeController HR_Employee;
     private HRManagerShiftController HR_Shift;
     private EmployeeConstraintController Employee_Constraint;
@@ -34,7 +35,7 @@ public class MasterController {
         this.Employees_temp_database = new EmployeeRep();
         this.Employeejobs_temp_database = new JobRep();
         this.Branch_temp_database = new BranchRep();
-        this.History_Shifts_temp_database = new MyMap<Integer, MyMap<LocalDate, String>>();
+        this.History_Shifts_temp_database = new WeekRep();
         this.HR_Shift = new HRManagerShiftController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database, History_Shifts_temp_database);
         this.HR_Employee = new HRManagerEmployeeController(Employeejobs_temp_database, Branch_temp_database, Employees_temp_database);
         this.Employee_Constraint = new EmployeeConstraintController(Employees_temp_database);
@@ -76,14 +77,14 @@ public class MasterController {
         } catch (DateTimeParseException e) {
             return "Invalid date format. Please use YYYY-MM-DD.";
         }
-
-        MyMap<LocalDate, String> branchHistory = History_Shifts_temp_database.get(branchNum);
+        String s=branchNum+","+dateStr;
+        Week branchHistory = History_Shifts_temp_database.find(s);
 
         if (branchHistory == null) {
             return "Branch not found or does not yet have a placement log";
         }
 
-        String weekHistory = branchHistory.get(date);
+        String weekHistory = branchHistory.weekInTableToShow();
 
         if (weekHistory == null) {
             return "No history found for the given week.";
