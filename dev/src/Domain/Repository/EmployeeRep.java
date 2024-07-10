@@ -1,9 +1,7 @@
 package dev.src.Domain.Repository;
 
 import dev.src.Data.DaoM.*;
-import dev.src.Domain.Branch;
-import dev.src.Domain.Employee;
-import dev.src.Domain.MyMap;
+import dev.src.Domain.*;
 
 import java.util.Set;
 
@@ -34,8 +32,16 @@ public class EmployeeRep implements IRep<Employee,String> {
             Employee C = employeeDao.select(Key);
             if(C == null){
                 employeeDao.insert(obj);
+                map.put(Key, obj);
+                return "employee added";
             }
-            map.put(Key, obj);
+            EJobsRep J = employeeJobsTDao.selectAllJobs(Key);
+            C.setJobs(J);
+            TermsOfEmployment t=termsOfEmploymentDao.select(Key);
+            C.setTerms(t);
+            ConstraintRep D= constraintDao.selectALLFEUTREconstrain(Key);
+            C.setConstraintMyMap(D);
+            map.put(Key, C);
             return "employee added";
         }
         return "employee already exist";
@@ -52,6 +58,12 @@ public class EmployeeRep implements IRep<Employee,String> {
         }
         EJobsRep J = employeeJobsTDao.selectAllJobs(s);
         E.setJobs(J);
+        TermsOfEmployment t=termsOfEmploymentDao.select(s);
+        E.setTerms(t);
+        t.setEmp(E);
+        ConstraintRep D= constraintDao.selectALLFEUTREconstrain(s);
+
+        E.setConstraintMyMap(D);
         map.put(s, E);
         return E;
     }

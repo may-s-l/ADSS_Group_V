@@ -32,7 +32,10 @@ public class WeekRep implements IRep<Week,String> {
         String keys = obj.getBranch().getBranchNum()+","+obj.getStart_date();
         if(!map.containsKey(keys)){
             if(!weekTDao.weekExists(keysDB)){
-                weekTDao.insert(obj);
+                weekTDao.insertWeek(obj);
+                weekTDao.insertDays(obj);
+                weekTDao.insertShifts(obj);
+                weekTDao.insertShiftEmployees(obj);
                 this.map.put(keys,obj);
             }
         }

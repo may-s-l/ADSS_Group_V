@@ -1,10 +1,7 @@
 package dev.src.Controllers;
 import dev.src.Domain.*;
 import dev.src.Domain.Enums.ShiftType;
-import dev.src.Domain.Repository.BranchRep;
-import dev.src.Domain.Repository.EmployeeRep;
-import dev.src.Domain.Repository.JobRep;
-import dev.src.Domain.Repository.WeekRep;
+import dev.src.Domain.Repository.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -286,7 +283,7 @@ public class HRManagerShiftController {
 
         for (List<Object> employeeData : employeeTable) {
             Employee employee = (Employee) employeeData.get(0);
-            List<Job> jobs = (List<Job>) employeeData.get(1);
+            EJobsRep jobs = (EJobsRep) employeeData.get(1);
             List<Constraint> constraints = (List<Constraint>) employeeData.get(2);
 
             String jobsString =  jobs.isEmpty() ? "None" : jobs.stream()
@@ -440,15 +437,18 @@ public class HRManagerShiftController {
                 for (Job job : shift.getAllJobInShift()) {
                     if (job.getJobName().equals("DRIVER") && shift.getNumberofWorkersPerJob(job)>=1){
                         for (Job jobpassto : shift.getAllJobInShift()) {
-                            if(jobpassto.getJobName().equals("STOREKEEPER") && shift.getNumberofWorkersPerJob(jobpassto)>=1){
-                                return true;
+                            if(jobpassto.getJobName().equals("STOREKEEPER")){
+                                if (shift.getNumberofWorkersPerJob(jobpassto) <1) {
+                                    return false;
+                                }
                             }
+                            continue;
                         }
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     //---------------------------Functions for changing default values for a specific shift-----------------------------------------//

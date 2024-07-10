@@ -1,7 +1,9 @@
 package dev.src.Domain.Repository;
 
 import dev.src.Data.DaoM.EmployeeConstraintTDao;
+import dev.src.Data.DaoM.EmployeeTDao;
 import dev.src.Domain.Constraint;
+import dev.src.Domain.Employee;
 import dev.src.Domain.MyMap;
 
 import java.time.LocalDate;
@@ -25,7 +27,6 @@ public class ConstraintRep implements IRep<Constraint, String> {
             if(C == null){
                 constraintDao.insert(obj);
             }
-            update(obj);
         }
         map.put(obj.getShiftDate(),obj);
         return "s";

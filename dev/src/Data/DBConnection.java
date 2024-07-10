@@ -33,8 +33,8 @@ public class DBConnection {
         Properties props = new Properties();
         props.setProperty("trace", "true"); // הדפסה של שאילתות
         Connection realConnection = DriverManager.getConnection("jdbc:sqlite:" + dbFileName, props);
-      //  return ConnectionProxy.newInstance(realConnection); // החזרת חיבור שנעטף בפרוקסי ConnectionProxy
-        return realConnection;
+        return ConnectionProxy.newInstance(realConnection); // החזרת חיבור שנעטף בפרוקסי ConnectionProxy
+        //return realConnection;
     }
 
 

@@ -4,11 +4,11 @@ package dev.src.Domain.Repository;
 import dev.src.Data.DaoM.EmployeeJobsTDao;
 import dev.src.Data.DaoM.EmployeeTDao;
 import dev.src.Data.DaoM.JobsTDao;
-import dev.src.Domain.Employee;
 import dev.src.Domain.Job;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class EJobsRep implements IRep<Job, String>{
 
@@ -78,6 +78,15 @@ public class EJobsRep implements IRep<Job, String>{
 
     public int getsize() {
         return jobs.size();
+    }
+
+    public boolean isEmpty(){
+        return jobs.isEmpty();
+    }
+
+
+    public Stream<Job> stream(){
+        return jobs.stream();
     }
 
 
