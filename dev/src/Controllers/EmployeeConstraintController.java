@@ -145,7 +145,7 @@ public class EmployeeConstraintController {
         String stringFutureConstraints="";
 
         for (LocalDate date : constraintMyMap.getKeys()) {
-                stringFutureConstraints=constraintMyMap.get(date).toString() + "\n";
+                stringFutureConstraints+=constraintMyMap.get(date).toString() + "\n";
         }
         return stringFutureConstraints;
     }

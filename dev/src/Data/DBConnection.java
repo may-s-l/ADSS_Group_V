@@ -88,8 +88,7 @@ public class DBConnection {
                         "    \"EID\"\tVARCHAR(6),\n" +
                         "    \"ConstraintDate\"\tTEXT,\n" +
                         "    \"ConstraintShiftType\"\tVARCHAR(10),\n" +
-                        "    PRIMARY KEY(\"EID\",\"ConstraintDate\"),\n" +
-                        "    FOREIGN KEY(\"EID\") REFERENCES \"Employee\"(\"ID\") ON UPDATE CASCADE ON DELETE CASCADE\n" +
+                        "    PRIMARY KEY(\"EID\",\"ConstraintDate\")\n" +
                         ");\n" +
                         "CREATE TABLE IF NOT EXISTS \"EmployeesTerm\" (\n" +
                         "    \"EID\"\tVARCHAR(6),\n" +
@@ -107,10 +106,7 @@ public class DBConnection {
                         "    \"BranchAddress\"\tVARCHAR(25),\n" +
                         "    \"EID\"\tVARCHAR(6),\n" +
                         "    \"EmployeeJob\"\tVARCHAR(25),\n" +
-                        "    FOREIGN KEY(\"ShiftDate\",\"ShiftType\",\"BranchAddress\") REFERENCES \"Shift\"(\"ShiftDate\",\"ShiftType\",\"BranchAddress\"),\n" +
-                        "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\"),\n" +
-                        "    FOREIGN KEY(\"EID\") REFERENCES \"Employee\"(\"EID\"),\n" +
-                        "    FOREIGN KEY(\"EmployeeJob\") REFERENCES \"Jobs\"(\"Name\")\n" +
+                        "    PRIMARY KEY(\"ShiftDate\",\"ShiftType\",\"EID\")\n" +
                         ");\n"+
                         "CREATE TABLE IF NOT EXISTS \"Shift\" (\n" +
                         "    \"ShiftDate\"\tVARCHAR(25),\n" +
@@ -120,10 +116,7 @@ public class DBConnection {
                         "    \"StartTime\"\tVARCHAR(25),\n" +
                         "    \"EndTime\"\tVARCHAR(25),\n" +
                         "    \"NumEmployeesForjob\"\tINTEGER,\n" +
-                        "    PRIMARY KEY(\"ShiftType\",\"ShiftDate\",\"Job\",\"BranchAddress\"),\n" +
-                        "    FOREIGN KEY(\"BranchAddress\") REFERENCES \"Branch\"(\"Address\")\n" +
-                        "    FOREIGN KEY(\"Job\") REFERENCES \"Jobs\"(\"Name\")\n" +
-                        "    FOREIGN KEY(\"Job\") REFERENCES \"Jobs\"(\"Name\")\n" +
+                        "    PRIMARY KEY(\"ShiftType\",\"ShiftDate\",\"Job\",\"BranchAddress\")\n" +
                         ");\n"+
                         "CREATE TABLE IF NOT EXISTS \"Week\" (\n" +
                         "    \"WeekNum\"\tINTEGER,\n" +
@@ -137,7 +130,6 @@ public class DBConnection {
                         "    \"BranchAddress\"\tVARCHAR(25),\n" +
                         "    \"IsDayOf\"\tINTEGER,\n" +
                         "    PRIMARY KEY(\"Date\",\"BranchAddress\")\n" +
-                        "    FOREIGN KEY(\"Date\") REFERENCES \"Shift\"(\"ShiftDate\")\n" +
                         ");\n";
 
 

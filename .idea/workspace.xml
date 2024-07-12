@@ -5,13 +5,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6af2913-206d-48db-9bfb-6d1c9ead1cba" name="Changes" comment="test">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_18_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_18_11__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/META-INF/Superlee.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/EmployeeConstraintController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/HRManagerShiftController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Controllers/MasterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/ConnectionProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/ConnectionProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/BranchTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/BranchTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeConstraintTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeConstraintTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeJobsTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeJobsTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeTermsTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/EmployeeTermsTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/IDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/IDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/JobsTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/JobsTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Data/DaoM/WeekTDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Data/DaoM/WeekTDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/DataToupload/Branchs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/DataToupload/Branchs.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/DataToupload/Employees.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/DataToupload/Employees.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/DataToupload/Jobs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/DataToupload/Jobs.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Branch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Constraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Constraint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Day.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Enums/JobType.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Enums/JobType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Enums/SalaryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Enums/SalaryType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Enums/ShiftType.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Enums/ShiftType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/EveningShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/EveningShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Job.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/ManagementJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/ManagementJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/ManagerEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/ManagerEmployee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/MorningShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/MorningShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/MyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/MyMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/MyTripel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/MyTripel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/BranchRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/BranchRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/ConstraintRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/ConstraintRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/EJobsRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/EJobsRep.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/EmployeeRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/EmployeeRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/IRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/IRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/JobRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/JobRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Repository/WeekRep.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Repository/WeekRep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/TermsOfEmployment.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/TermsOfEmployment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Domain/Week.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Domain/Week.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/TEST/EmployeeConstraintControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/TEST/EmployeeConstraintControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/TEST/HRManagerEmployeeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/TEST/HRManagerEmployeeControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/TEST/SystemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/TEST/SystemTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/EmployeeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/Login_menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/presentation/menus/SystemManagerMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/service/HRManagerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_18_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/.idea/shelf/Uncommitted_changes_before_Update_at_26_05_2024_18_11__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Domain/Repository/EmployeeRep.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Domain/Repository/EmployeeRep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Controllers/EmployeeConstraintController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Controllers/EmployeeConstraintController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DBConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/BranchTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/BranchTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeConstraintTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeConstraintTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeJobsTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeJobsTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeTermsTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/EmployeeTermsTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/JobsTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/JobsTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/WeekTDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Data/DaoM/WeekTDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/DataToupload/Branchs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/DataToupload/Branchs.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/DataToupload/Employees.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/DataToupload/Employees.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/DataToupload/Jobs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/DataToupload/Jobs.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Domain/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Domain/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Domain/Repository/ConstraintRep.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Domain/Repository/ConstraintRep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Domain/Repository/WeekRep.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Domain/Repository/WeekRep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Domain/Shift.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Domain/Shift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/Domain/Week.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/Domain/Week.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/src/presentation/menus/Login_menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/src/presentation/menus/Login_menu.class" afterDir="false" />
     </list>
     <list id="409e8c73-7a2c-4854-85ad-b379909bc98c" name="Changes by mayal" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,9 +101,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2gEiqGD2ieLv4JbBVCI4vKkiKMK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -49,7 +114,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.HRManagerEmployeeControllerTest.executor": "Run",
     "Repository.Attach.Annotations": "false",
@@ -366,6 +431,11 @@
           <line>138</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/src/Domain/Week.java</url>
+          <line>213</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -373,11 +443,5 @@
         <PinnedItemInfo parentTag="dev.src.Domain.TermsOfEmployment" memberName="emp" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="empMAP" />
-        <watch expression="empMAP" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

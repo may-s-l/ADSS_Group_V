@@ -53,6 +53,9 @@ public class EmployeeTDao implements IDao<Employee,String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -90,6 +93,12 @@ public class EmployeeTDao implements IDao<Employee,String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -114,14 +123,14 @@ public class EmployeeTDao implements IDao<Employee,String> {
 
         } catch (SQLException e) {
             throw new RuntimeException("Update failed", e);
-        } finally {
+        }finally {
             try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -148,6 +157,9 @@ public class EmployeeTDao implements IDao<Employee,String> {
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -177,24 +189,6 @@ public class EmployeeTDao implements IDao<Employee,String> {
         return new ManagerEmployee(NAME,EmpID,Bank_account,Branch_Address,EmpNUM,terms);
     }
 
-//    public EJobsRep getAlljobsforemployee(String EID) {
-//        EJobsRep EJobRep = new EJobsRep();
-//        String sql ="SELECT * FROM EmployeeJobs WHERE  EID=? ";
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        try {
-//            pstmt = DB.getConnection().prepareStatement(sql);
-//            pstmt.setString(1,EID);
-//            rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                EJobRep.add(JobDao.getInstance().select(rs.getString(1)));
-//            }
-//        }
-//        catch (SQLException e) {
-//            throw new RuntimeException();
-//        }
-//        return EJobRep;1
-//    }
     public EmployeeRep getALLEmpActiveByBranch(String A){
 
         String sql = "SELECT * FROM Employee WHERE BranchID = ?";
@@ -213,9 +207,59 @@ public class EmployeeTDao implements IDao<Employee,String> {
         catch (SQLException e) {
             throw new IllegalArgumentException("Selection failed");
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
 
 
         return employeeRep;
+    }
+
+    public int getMaxEmployeeNUM(){
+        String sql = "SELECT MAX(EmpNUM) FROM Employee";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int employeeNum = 0;
+        try {
+            ps=DB.getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                employeeNum = rs.getInt(1);
+            }
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException("Selection failed");
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return employeeNum;
     }
 
 

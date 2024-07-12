@@ -52,6 +52,9 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -87,6 +90,12 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -108,14 +117,15 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
 
         } catch (SQLException e) {
             throw new RuntimeException("Update failed", e);
-        } finally {
+        }
+        finally {
             try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -144,6 +154,9 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -184,35 +197,23 @@ public class EmployeeConstraintTDao implements IDao<Constraint,String> {
         catch (Exception e) {
             throw new IllegalArgumentException("Select failed");
         }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
 
     }
-
-//    public ConstraintRep selectALLFEUTREconstrain(String EID) {
-//        Employee E = employeeTDao.select(EID);
-//        String sql ="SELECT * FROM EmployeeConstraints WHERE EID=? AND ConstraintDate=? ";
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        ConstraintRep constraints =new ConstraintRep();
-//        LocalDate today = LocalDate.now();
-//        for(int i=0 ; i<18; i++) {
-//            String D=today.plusDays(i).toString();
-//            try {
-//                pstmt = DB.getConnection().prepareStatement(sql);
-//                pstmt.setString(1, EID);
-//                pstmt.setString(2, D);
-//                rs = pstmt.executeQuery();
-//                if (rs.next()) {
-//                    Constraint constraint = load(rs);
-//                    constraint.setEmp(E);
-//                    constraints.add(constraint);
-//                }
-//
-//            } catch (SQLException e) {
-//                throw new RuntimeException();
-//            }
-//        }
-//
-//        return constraints;
-//    }
 
 }

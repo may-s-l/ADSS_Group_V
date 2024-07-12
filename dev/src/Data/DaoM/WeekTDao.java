@@ -2,6 +2,7 @@ package dev.src.Data.DaoM;
 
 import dev.src.Data.DBConnection;
 import dev.src.Domain.*;
+import dev.src.Domain.Enums.ShiftType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,38 +31,6 @@ public class WeekTDao implements IDao<Week, String> {
 
     @Override
     public void insert(Week week) {
-//        Connection connection = null;
-//
-//        try {
-//            connection = DB.getConnection();
-//            connection.setAutoCommit(false); // התחלת טרנזקציה
-//
-//            insertWeek(week, connection);
-//            insertDays(week, connection);
-//            insertShifts(week, connection);
-//            insertShiftEmployees(week, connection);
-//
-//            connection.commit(); // סיום טרנזקציה
-//
-//        } catch (Exception e) {
-//            if (connection != null) {
-//                try {
-//                    connection.rollback(); // ביטול טרנזקציה במקרה של שגיאה
-//                } catch (SQLException ex) {
-//                    throw new IllegalArgumentException("Rollback Error: " + ex.getMessage());
-//                }
-//            }
-//            throw new IllegalArgumentException("SQL Error: " + e.getMessage());
-//        } finally {
-//            try {
-//                if (connection != null) {
-//                    connection.setAutoCommit(true); // החזרת מצב טרנזקציה לאוטומטי
-//                    connection.close(); // סגירת החיבור לבסיס הנתונים
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
-//        }
     }
 
     public void insertWeek(Week week) {
@@ -83,6 +52,9 @@ public class WeekTDao implements IDao<Week, String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (ps != null) {
+                    ps.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -90,16 +62,16 @@ public class WeekTDao implements IDao<Week, String> {
     }
 
     public void insertDays(Week week)  {
-        String sql = "INSERT INTO Days(WeekNum, BranchAddress, Date, IsDayOf) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Days(WeekNum,Date, BranchAddress,IsDayOf) VALUES(?,?,?,?)";
         PreparedStatement ps = null;
         try  {
             ps =DB.getConnection().prepareStatement(sql);
             for (LocalDate day : week.getDayInWEEK()) {
                 ps.setInt(1, week.getWeekNUM());
-                ps.setString(2, week.getBranch().getBranchAddress());
-                ps.setString(3, day.toString());
+                ps.setString(2, day.toString());
+                ps.setString(3, week.getBranch().getBranchAddress());
                 ps.setInt(4, week.getDayOfWeek(day).isIsdayofrest() ? 1 : 0);
-                ps.executeUpdate();
+                ps.execute();
             }
         }
         catch (SQLException e) {
@@ -111,6 +83,10 @@ public class WeekTDao implements IDao<Week, String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (ps != null) {
+                    ps.close();
+                }
+
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -134,7 +110,7 @@ public class WeekTDao implements IDao<Week, String> {
                         ps.setString(5, shift.getStart_time().toString());
                         ps.setString(6, shift.getEnd_time().toString());
                         ps.setInt(7, shift.getNumberofWorkersPerJob(job));
-                        ps.executeUpdate();
+                        ps.execute();
                     }
                 }
             }
@@ -147,6 +123,9 @@ public class WeekTDao implements IDao<Week, String> {
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -170,7 +149,7 @@ public class WeekTDao implements IDao<Week, String> {
                             ps.setString(3, week.getBranch().getBranchAddress());
                             ps.setString(4, employee.getID());
                             ps.setString(5, job.getJobName());
-                            ps.executeUpdate();
+                            ps.execute();
                         }
                     }
                 }
@@ -185,6 +164,9 @@ public class WeekTDao implements IDao<Week, String> {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (ps != null) {
+                    ps.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -198,7 +180,6 @@ public class WeekTDao implements IDao<Week, String> {
         Week week = null;
         PreparedStatement pstmtWeek = null;
         ResultSet rs = null;
-        Branch B = BranchTDao.getInstance().select(keys[1]);
         Connection connection = null;
 
         try {
@@ -209,7 +190,7 @@ public class WeekTDao implements IDao<Week, String> {
             rs = pstmtWeek.executeQuery();
 
             if (rs.next()) {
-                week = new Week(LocalDate.parse(rs.getString("StartDate")), B);
+                week = new Week(LocalDate.parse(rs.getString("StartDate")), BranchTDao.getInstance().select(keys[1]));
                 if (week.getWeekNUM() != rs.getInt("WeekNum")) {
                     return null;
                 }
@@ -218,54 +199,103 @@ public class WeekTDao implements IDao<Week, String> {
                 pstmtWeek = connection.prepareStatement(sqlDays);
                 pstmtWeek.setInt(1, week.getWeekNUM());
                 pstmtWeek.setString(2, keys[1]);
-                rs = pstmtWeek.executeQuery();
+                ResultSet rsDays = pstmtWeek.executeQuery();
 
-                while (rs.next()) {
-                    LocalDate date = LocalDate.parse(rs.getString("Date"));
-                    if (rs.getInt("IsDayOf") == 1) {
-                        week.getDayOfWeek(date).setIsdayofrest(true);
-                    } else {
-                        String sqlShifts = "SELECT * FROM Shift WHERE ShiftDate = ? AND BranchAddress = ?";
-                        pstmtWeek = connection.prepareStatement(sqlShifts);
-                        pstmtWeek.setString(1, date.toString());
-                        pstmtWeek.setString(2, keys[1]);
-                        ResultSet rsShifts = pstmtWeek.executeQuery();
+                while (rsDays.next()) {
+                    LocalDate date = LocalDate.parse(rsDays.getString("Date"));
+                    boolean isDayOf = rsDays.getInt("IsDayOf") == 1;
+                    week.getDayOfWeek(date).setIsdayofrest(isDayOf);
 
-                        while (rsShifts.next()) {
-                            Shift shift;
-                            if (rsShifts.getString("ShiftType").equals("MORNING")) {
-                                shift = week.getDayOfWeek(date).getShiftsInDay()[0];
-                            } else {
-                                shift = week.getDayOfWeek(date).getShiftsInDay()[1];
+                    if (!isDayOf) {
+                        String sqlMShifts = "SELECT * FROM Shift WHERE ShiftDate = ? AND BranchAddress = ? AND ShiftType = ?";
+                        PreparedStatement pstmtMShifts = connection.prepareStatement(sqlMShifts);
+                        pstmtMShifts.setString(1, date.toString());
+                        pstmtMShifts.setString(2, keys[1]);
+                        pstmtMShifts.setString(3, "MORNING");
+                        ResultSet rsShifts = pstmtMShifts.executeQuery();
+                        int flag =0;
+                        Shift Mshift=null;
+                        while (rsShifts.next()){
+                            if(flag==0){
+                                LocalTime startTime = LocalTime.parse(rsShifts.getString("StartTime"));
+                                LocalTime endTime = LocalTime.parse(rsShifts.getString("EndTime"));
+                                Mshift = new MorningShift(startTime, endTime,date);
+                                flag=1;
                             }
-
-                            shift.setStart_time(LocalTime.parse(rsShifts.getString("StartTime")));
-                            shift.setEnd_time(LocalTime.parse(rsShifts.getString("EndTime")));
-
                             Job job = JobsTDao.getInstance().select(rsShifts.getString("Job"));
-                            shift.ChangingTheNumberOfemployeesPerJobInShift(job, rsShifts.getInt("NumEmployeesForjob"));
-
+                            Mshift.ChangingTheNumberOfemployeesPerJobInShift(job, rsShifts.getInt("NumEmployeesForjob"));
                             String sqlEmployees = "SELECT * FROM ShiftEmployees WHERE ShiftDate = ? AND ShiftType = ? AND EmployeeJob = ?";
                             PreparedStatement pstmtEmployees = connection.prepareStatement(sqlEmployees);
                             pstmtEmployees.setString(1, date.toString());
-                            pstmtEmployees.setString(2, rsShifts.getString("ShiftType"));
+                            pstmtEmployees.setString(2, "MORNING");
                             pstmtEmployees.setString(3, job.getJobName());
                             ResultSet rsEmployees = pstmtEmployees.executeQuery();
-
                             while (rsEmployees.next()) {
                                 Employee employee = EmployeeTDao.getInstance().select(rsEmployees.getString("EID"));
-                                shift.addEmployeeToShift(employee, job);
+                                Mshift.addEmployeeToShift(employee, job);
                             }
-                            rsEmployees.close();
-                            pstmtEmployees.close();
+                            if(rsEmployees!=null){
+                                rsEmployees.close();
+                            }
+                            if (pstmtEmployees!=null){
+                                pstmtEmployees.close();
+                            }
                         }
-                        rsShifts.close();
+                        if (rsShifts!=null){
+                            rsShifts.close();
+                        }
+                        if (pstmtMShifts != null){
+                            pstmtMShifts.close();
+                        }
+                        String sqlEShifts = "SELECT * FROM Shift WHERE ShiftDate = ? AND BranchAddress = ? AND ShiftType = ?";
+                        PreparedStatement pstmtEShifts = connection.prepareStatement(sqlEShifts);
+                        pstmtEShifts.setString(1, date.toString());
+                        pstmtEShifts.setString(2, keys[1]);
+                        pstmtEShifts.setString(3, "EVENING");
+                        ResultSet rsEShifts = pstmtEShifts.executeQuery();
+                        flag =0;
+                        Shift Eshift=null;
+                        while (rsEShifts.next()){
+                            if(flag==0){
+                                LocalTime startTime = LocalTime.parse(rsEShifts.getString("StartTime"));
+                                LocalTime endTime = LocalTime.parse(rsEShifts.getString("EndTime"));
+                                Eshift = new EveningShift(startTime, endTime,date);
+                                flag=1;
+                            }
+                            Job job = JobsTDao.getInstance().select(rsEShifts.getString("Job"));
+                            Eshift.ChangingTheNumberOfemployeesPerJobInShift(job, rsEShifts.getInt("NumEmployeesForjob"));
+                            String sqlEmployees = "SELECT * FROM ShiftEmployees WHERE ShiftDate = ? AND ShiftType = ? AND EmployeeJob = ?";
+                            PreparedStatement pstmtEmployees = connection.prepareStatement(sqlEmployees);
+                            pstmtEmployees.setString(1, date.toString());
+                            pstmtEmployees.setString(2, "EVENING");
+                            pstmtEmployees.setString(3, job.getJobName());
+                            ResultSet rsEmployees = pstmtEmployees.executeQuery();
+                            while (rsEmployees.next()) {
+                                Employee employee = EmployeeTDao.getInstance().select(rsEmployees.getString("EID"));
+                                Eshift.addEmployeeToShift(employee, job);
+                            }
+                            if(rsEmployees!=null){
+                                rsEmployees.close();
+                            }
+                            if (pstmtEmployees!=null){
+                                pstmtEmployees.close();
+                            }
+                        }
+                        if (rsEShifts!=null){
+                            rsEShifts.close();
+                        }
+                        if (pstmtEShifts != null){
+                            pstmtEShifts.close();
+                        }
+                        Shift[] Shifts = new Shift[]{Mshift,Eshift};
+                        week.getDayOfWeek(date).setShiftsInDay(Shifts);
                     }
                 }
+                rsDays.close();
             }
             return week;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new IllegalArgumentException("SQL Error: " + e.getMessage());
         } finally {
             try {
@@ -277,6 +307,8 @@ public class WeekTDao implements IDao<Week, String> {
             }
         }
     }
+
+
 
     @Override
     public void update(Week obj) {
@@ -296,8 +328,8 @@ public class WeekTDao implements IDao<Week, String> {
 
         try  {
             pstmt = DB.getConnection().prepareStatement(sql);
-            pstmt.setString(1, keys[1]);
-            pstmt.setString(2, keys[0]);
+            pstmt.setInt(1,Integer.parseInt(keys[0]));
+            pstmt.setString(2, keys[1]);
             rs = pstmt.executeQuery();
             ResultSet rs1 = rs;
             if (rs.next()) {
@@ -306,10 +338,18 @@ public class WeekTDao implements IDao<Week, String> {
             return false;
         } catch (Exception e) {
             throw new IllegalArgumentException("SQL Error: " + e.getMessage());
-        } finally {
+        }finally {
             try {
-                if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }

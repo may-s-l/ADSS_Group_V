@@ -1,5 +1,6 @@
 package dev.src.Domain;
 
+import dev.src.Data.DaoM.EmployeeTDao;
 import dev.src.Domain.Repository.ConstraintRep;
 import dev.src.Domain.Repository.EJobsRep;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
-    private static int EmployeeNUM=1;
+    private static int EmployeeNUM= EmployeeTDao.getInstance().getMaxEmployeeNUM()+1;
     private String Name;
     private String ID;
     private String Bank_account;

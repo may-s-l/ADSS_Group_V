@@ -102,6 +102,7 @@ public class Week {
         sb1.append(String.format("| %-" + jobWidth + "s |", "Job"));
         sb2.append(String.format("| %-" + jobWidth + "s |", "Job"));
         sb3.append(String.format("| %-" + jobWidth + "s |", "Job"));
+
         for (LocalDate date : DayInWEEK.getKeys()) {
             Day day = DayInWEEK.get(date);
             if(day.getDayOfWeek()==DayOfWeek.SUNDAY||day.getDayOfWeek()==DayOfWeek.MONDAY||day.getDayOfWeek()==DayOfWeek.THURSDAY){
@@ -122,7 +123,7 @@ public class Week {
         sb1.append(String.format("| %-" + jobWidth + "s |", ""));
         sb2.append(String.format("| %-" + jobWidth + "s |", ""));
         sb3.append(String.format("| %-" + jobWidth + "s |", ""));
-
+        Set<Job> jobsToFilluplod=null;
         for (LocalDate date : DayInWEEK.getKeys()) {
             Day day = DayInWEEK.get(date);
             if (!day.isIsdayofrest()) {
@@ -132,6 +133,7 @@ public class Week {
                 String morningShiftHeader = String.format("Morning(%s-%s)",
                         morningShift.getStart_time().toString(),
                         morningShift.getEnd_time().toString());
+                        jobsToFilluplod=morningShift.getAllJobInShift();
 
                 String eveningShiftHeader = String.format("Evening(%s-%s)",
                         eveningShift.getStart_time().toString(),
@@ -168,6 +170,9 @@ public class Week {
         sb3.append(String.join("", Collections.nCopies(jobWidth + shiftWidth * 2 * 1+shiftWidth-9 , "-"))).append("\n");
 
         Set<Job> jobsToFill = Shift.getNumberofWorkersPerPositionDifult().getKeys(); // Assuming all days have the same jobs to fill
+        if(jobsToFill.size()==0&&jobsToFilluplod.size()>0){
+            jobsToFill=jobsToFilluplod;
+        }
 
         for (Job job : jobsToFill) {
             for (int row = 0; row < rowsPerJob; row++) {

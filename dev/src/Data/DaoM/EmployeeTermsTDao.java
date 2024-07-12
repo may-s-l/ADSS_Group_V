@@ -55,6 +55,10 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -86,6 +90,12 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -113,14 +123,15 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error updating terms of employment for employee ID: " + obj.getEmp().getID(), e);
-        } finally {
+        }
+        finally {
             try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -146,6 +157,9 @@ public class EmployeeTermsTDao implements IDao<TermsOfEmployment,String>{
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());

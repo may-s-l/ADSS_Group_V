@@ -156,11 +156,16 @@ public abstract class Shift {
         return this.NumberofWorkersPerJob.getKeys();
     }
 
+
     public int getNumberofWorkersPerJob(Job job){
         if(this.NumberofWorkersPerJob==null){
             return NumberofWorkersPerPositionDifult.get(job);
         }
-        return this.NumberofWorkersPerJob.get(job);
+        if(this.NumberofWorkersPerJob.containsKey(job)) {
+            int num=this.NumberofWorkersPerJob.get(job);
+            return num;
+        }
+        return 0;
     }
 
     @Override

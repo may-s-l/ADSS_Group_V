@@ -16,10 +16,10 @@ public class JobsTDao implements IDao<Job,String>{
 
 
     private static JobsTDao instance;
-    private DBConnection db;
+    private DBConnection DB;
 
     private JobsTDao() {
-        db = DBConnection.getInstance();
+        DB = DBConnection.getInstance();
     }
 
     public static JobsTDao getInstance() {
@@ -32,7 +32,9 @@ public class JobsTDao implements IDao<Job,String>{
     @Override
     public void insert(Job obj) {
         String sql = "INSERT INTO Jobs (Name) VALUES (?)";
-        try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+        PreparedStatement pstmt =null;
+        try {
+            pstmt = DB.getConnection().prepareStatement(sql);
             pstmt.setString(1, obj.getJobName());
             pstmt.execute();
         } catch (SQLException e) {
@@ -40,9 +42,12 @@ public class JobsTDao implements IDao<Job,String>{
         }
         finally {
             try {
-                if (db.getConnection() != null) {
-                    db.getConnection().setAutoCommit(true);
-                    db.getConnection().close();
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -53,9 +58,12 @@ public class JobsTDao implements IDao<Job,String>{
     @Override
     public Job select(String id) {
         String sql = "SELECT * FROM Jobs WHERE Name = ?";
-        try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try{
+            pstmt = DB.getConnection().prepareStatement(sql);
             pstmt.setString(1, id);
-            ResultSet rs = pstmt.executeQuery();
+            rs=pstmt.executeQuery();
             if (rs.next()) {
                 return load(rs);
             } else {
@@ -66,9 +74,15 @@ public class JobsTDao implements IDao<Job,String>{
         }
         finally {
             try {
-                if (db.getConnection() != null) {
-                    db.getConnection().setAutoCommit(true);
-                    db.getConnection().close();
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -83,7 +97,9 @@ public class JobsTDao implements IDao<Job,String>{
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM Jobs WHERE Name = ?";
-        try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.getConnection().prepareStatement(sql);
             pstmt.setString(1, id);
             pstmt.execute();
         } catch (SQLException e) {
@@ -91,9 +107,12 @@ public class JobsTDao implements IDao<Job,String>{
         }
         finally {
             try {
-                if (db.getConnection() != null) {
-                    db.getConnection().setAutoCommit(true);
-                    db.getConnection().close();
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -113,9 +132,12 @@ public class JobsTDao implements IDao<Job,String>{
 
     public ArrayList<Job> selectAllJobs() {
         String sql = "SELECT * FROM Jobs";
-        try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+        PreparedStatement pstmt=null;
+        ResultSet rs = null;
+        try{
+            pstmt = DB.getConnection().prepareStatement(sql);
             ArrayList<Job> jobs=new ArrayList<Job>();
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             while (rs.next()) {
                 if (rs.getString(1).equals("HR-MANAGER")){
                     jobs.add(loadMJob(rs));
@@ -129,9 +151,15 @@ public class JobsTDao implements IDao<Job,String>{
         }
         finally {
             try {
-                if (db.getConnection() != null) {
-                    db.getConnection().setAutoCommit(true);
-                    db.getConnection().close();
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());

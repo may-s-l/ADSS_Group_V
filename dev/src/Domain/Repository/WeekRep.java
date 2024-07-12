@@ -28,7 +28,7 @@ public class WeekRep implements IRep<Week,String> {
 
     @Override
     public String add(Week obj) {
-        String keysDB = obj.getBranch().getBranchAddress()+","+obj.getWeekNUM();
+        String keysDB = obj.getWeekNUM()+","+obj.getBranch().getBranchAddress();
         String keys = obj.getBranch().getBranchNum()+","+obj.getStart_date();
         if(!map.containsKey(keys)){
             if(!weekTDao.weekExists(keysDB)){
@@ -52,7 +52,7 @@ public class WeekRep implements IRep<Week,String> {
             Branch B = branchTDao.getBRANCHbyNum(Integer.parseInt(keys[0]));
             LocalDate date = LocalDate.parse(keys[1]).plusDays(3);
             int weekOfYear = date.get(WeekFields.ISO.weekOfWeekBasedYear());
-            String keysDB = B.getBranchAddress() + "," + weekOfYear;
+            String keysDB = weekOfYear+","+B.getBranchAddress();
             if (weekTDao.weekExists(keysDB)) {
                 Week w = weekTDao.select(keysDB);
                 map.put(s, w);

@@ -30,7 +30,7 @@ public class BranchTDao implements IDao<Branch,String>{
 
     @Override
     public void insert(Branch obj) {
-        String sql = "INSERT INTO branch VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Branch VALUES(?,?,?,?)";
         PreparedStatement ps = null;
         try {
             ps=DB.getConnection().prepareStatement(sql);
@@ -52,6 +52,9 @@ public class BranchTDao implements IDao<Branch,String>{
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (ps !=null){
+                    ps.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -91,6 +94,12 @@ public class BranchTDao implements IDao<Branch,String>{
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (ps !=null){
+                    ps.close();
+                }
+                if (rs !=null){
+                    rs.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -128,6 +137,9 @@ public class BranchTDao implements IDao<Branch,String>{
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (ps !=null){
+                    ps.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -154,6 +166,9 @@ public class BranchTDao implements IDao<Branch,String>{
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
                 }
+                if (ps !=null){
+                    ps.close();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -174,20 +189,39 @@ public class BranchTDao implements IDao<Branch,String>{
 
     public MyMap<String, Branch> selectAllBranchs() {
         String sql = "SELECT * FROM Branch";
-        Branch branch=null;
-        try (PreparedStatement pstmt = DB.getConnection().prepareStatement(sql)) {
-            MyMap<String, Branch> branchMyMap=new MyMap<String, Branch>();
-            ResultSet rs = pstmt.executeQuery();
+        Branch branch = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = DB.getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            MyMap<String, Branch> branchMyMap = new MyMap<String, Branch>();
             while (rs.next()) {
-                branch=load((rs));
-                branchMyMap.put(branch.getBranchAddress(),branch);
+                branch = load(rs);
+                branchMyMap.put(branch.getBranchAddress(), branch);
             }
             return branchMyMap;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
-
     }
+
 
     public Branch getBRANCHbyNum(int num) {
         String sql = "SELECT * FROM Branch WHERE BranchNum = ?";
@@ -206,6 +240,22 @@ public class BranchTDao implements IDao<Branch,String>{
         }
         catch (SQLException e) {
             throw new IllegalArgumentException("Get Branch failed");
+        }
+        finally {
+            try {
+                if (DB.getConnection() != null) {
+                    DB.getConnection().setAutoCommit(true);
+                    DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
 
     }
@@ -234,6 +284,12 @@ public class BranchTDao implements IDao<Branch,String>{
                 if (DB.getConnection() != null) {
                     DB.getConnection().setAutoCommit(true);
                     DB.getConnection().close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
